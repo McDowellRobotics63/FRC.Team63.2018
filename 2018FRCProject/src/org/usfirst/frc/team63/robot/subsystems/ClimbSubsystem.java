@@ -1,14 +1,15 @@
 package org.usfirst.frc.team63.robot.subsystems;
 
+import org.usfirst.frc.team63.robot.RobotMap;
+
+import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  *
  */
 public class ClimbSubsystem extends Subsystem {
-
-    // Put methods for controlling this subsystem
-    // here. Call these from Commands.
+	private Spark winchMotor = new Spark(RobotMap.CLIMBWINCH);
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.

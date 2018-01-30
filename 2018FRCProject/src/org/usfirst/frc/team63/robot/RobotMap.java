@@ -14,6 +14,18 @@ package org.usfirst.frc.team63.robot;
  * floating around.
  */
 public class RobotMap {
+	//Talon CAN IDs
+	public static final int DRIVELEFTMASTER = 0;
+	public static final int DRIVELEFTSLAVE = 0;
+	public static final int DRIVERIGHTMASTER = 0;
+	public static final int DRIVERIGHTSLAVE = 0;
+	
+	public static final int LIFT = 0;
+	
+	//Spark PWM Channels
+	public static final int CLAWLEFT = 0;
+	public static final int CLAWRIGHT = 0;
+	public static final int CLIMBWINCH = 0;
 	
 	public static final int XBOX_LEFT_X_AXIS = 0;
     public static final int XBOX_LEFT_Y_AXIS = 1;
