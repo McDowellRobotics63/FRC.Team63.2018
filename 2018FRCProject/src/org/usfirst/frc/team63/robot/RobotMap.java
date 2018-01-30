@@ -41,4 +41,5 @@ public class RobotMap {
     public static final int XBOX_RIGHT_BUMPER = 6;
     public static final int XBOX_BACK = 7;
     public static final int XBOX_START = 8;
+    public static final int kTimeoutMs = 10;
 }
