@@ -1,6 +1,7 @@
 #ignore the build folder
 build/**
-/build/
-/.metadata/**
-/.recommenders/**
+**/build/**
+**/.metadata/**
+**/.recommenders/**
+**/bin/**
 
