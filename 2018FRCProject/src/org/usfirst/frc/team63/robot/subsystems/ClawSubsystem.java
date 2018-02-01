@@ -14,8 +14,21 @@ public class ClawSubsystem extends Subsystem {
 	private Spark rightMotor = new Spark(RobotMap.CLAWRIGHT);
 	
     public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
+    	
+    }
+    
+    public void clawOpen() {
+    	
+    }
+    
+    public void clawClose() {
+    	
+    }
+    
+    public void clawPull(double speed) {
+    	//positive left speed is pull
+    	this.leftMotor.set(speed);
+    	rightMotor.set(-speed);
     }
 }
 
