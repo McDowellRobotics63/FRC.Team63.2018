@@ -56,5 +56,18 @@ public class DriveSubsystem extends Subsystem {
     	
     	LeftSlave.set(ControlMode.Follower, RobotMap.DRIVELEFTMASTER);
     	RightSlave.set(ControlMode.Follower, RobotMap.DRIVERIGHTMASTER);
+    	
+    	//Closed loop voltage output limits
+    	LeftMaster.configNominalOutputForward(0.0, 10);
+    	RightMaster.configNominalOutputForward(0.0, 10);
+    	
+    	LeftMaster.configNominalOutputReverse(-0.0, 10);
+    	RightMaster.configNominalOutputReverse(-0.0, 10);
+    	
+    	LeftMaster.configPeakOutputForward(12.0, 10);
+    	RightMaster.configPeakOutputForward(12.0, 10);
+    	
+    	LeftMaster.configPeakOutputReverse(-12.0, 10);
+    	RightMaster.configPeakOutputReverse(-12.0, 10);
     }
 }
