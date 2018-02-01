@@ -12,6 +12,10 @@ public class ClawSubsystem extends Subsystem {
 
 	private Spark leftMotor = new Spark(RobotMap.CLAWLEFT);
 	private Spark rightMotor = new Spark(RobotMap.CLAWRIGHT);
+
+	
+	public ClawSubsystem() {
+	}
 	
     public void initDefaultCommand() {
     	
@@ -27,7 +31,7 @@ public class ClawSubsystem extends Subsystem {
     
     public void clawPull(double speed) {
     	//positive left speed is pull
-    	this.leftMotor.set(speed);
+    	leftMotor.set(speed);
     	rightMotor.set(-speed);
     }
 }
