@@ -49,4 +49,9 @@ public class RobotMap {
 	public static final double kDriveEncoderFactor = 1440; //native units per rotation
 	public static final int kTimeoutMs = 10; //ms to wait for talon timeout, literally doesn't matter
 	public static final int kVelocityControlSlot = 0;
+
+	//Solenoid Mapping
+	public static final int PCMID = 0;
+	public static final int LEFTSHIPHTUR = 0; //PCM id of pneumatic gearbox thing
+	public static final int RIGHTSHIPHTUR = 0;
 }

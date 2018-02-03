@@ -6,6 +6,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
@@ -14,6 +15,8 @@ public class DriveSubsystem extends Subsystem {
 	 private WPI_TalonSRX rightMaster = new WPI_TalonSRX(RobotMap.DRIVERIGHTMASTER); 
 	 private WPI_TalonSRX leftSlave = new WPI_TalonSRX(RobotMap.DRIVELEFTSLAVE); 
 	 private WPI_TalonSRX rightSlave = new WPI_TalonSRX(RobotMap.DRIVERIGHTSLAVE);
+	 private Solenoid leftShiphtur = new Solenoid(RobotMap.PCMID, RobotMap.LEFTSHIPHTUR);
+	 private Solenoid rightShiphtur = new Solenoid(RobotMap.PCMID, RobotMap.RIGHTSHIPHTUR); 
 	 
 	 private DifferentialDrive differentialDrive;
 	 
@@ -90,6 +93,22 @@ public class DriveSubsystem extends Subsystem {
 
     	leftMaster.getSensorCollection(). setQuadraturePosition (RobotMap.kVelocityControlSlot, 10);
     	rightMaster.getSensorCollection(). setQuadraturePosition (RobotMap.kVelocityControlSlot, 10);
+    }
+    
+    /**
+     * 
+     * @return whether actually changed gearing
+     */
+    public boolean shiftHigh() {
+    	
+    }
+    
+    /**
+     * 
+     * @return whether actually changed gearing
+     */
+    public boolean shiftLow() {
+    	
     }
     
     private static double unitsToInches(double units) {
