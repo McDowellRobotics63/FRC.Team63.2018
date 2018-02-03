@@ -21,13 +21,11 @@ public class ClawSubsystem extends Subsystem {
     	
     }
     
-    public void clawOpen() {
+    public void clawGrab() {
+    	
     	
     }
     
-    public void clawClose() {
-    	
-    }
     
     public void clawPull(double speed) {
     	//positive left speed is pull
