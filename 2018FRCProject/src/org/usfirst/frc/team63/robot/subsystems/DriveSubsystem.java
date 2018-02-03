@@ -14,7 +14,6 @@ public class DriveSubsystem extends Subsystem {
 	 private WPI_TalonSRX rightMaster = new WPI_TalonSRX(RobotMap.DRIVERIGHTMASTER); 
 	 private WPI_TalonSRX leftSlave = new WPI_TalonSRX(RobotMap.DRIVELEFTSLAVE); 
 	 private WPI_TalonSRX rightSlave = new WPI_TalonSRX(RobotMap.DRIVERIGHTSLAVE);
-	 
 	 private DifferentialDrive differentialDrive;
 	 
 	 public DriveSubsystem() {
@@ -71,6 +70,22 @@ public class DriveSubsystem extends Subsystem {
 
     	leftMaster.getSensorCollection(). setQuadraturePosition (RobotMap.kVelocityControlSlot, 10);
     	rightMaster.getSensorCollection(). setQuadraturePosition (RobotMap.kVelocityControlSlot, 10);
+    }
+    
+    public void setMotionMagicLeft(double setpoint) {
+    	leftMaster.set(ControlMode.MotionMagic, inchesToUnits(setpoint));
+    }
+    
+    public void setMotionMagicRight(double setpoint) {
+    	leftMaster.set(ControlMode.MotionMagic, inchesToUnits(setpoint));
+    }
+    
+    public double getErrorLeft() {
+    	return leftMaster.getClosedLoopError(0);
+    }
+    
+    public double getErrorRight() {
+    	return rightMaster.getClosedLoopError(0);
     }
     
     private static double unitsToInches(double units) {

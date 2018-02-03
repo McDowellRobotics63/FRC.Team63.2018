@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class AutoDriveFixedDistance extends Command {
 	
-	private double setpoint; 
+	private double setpoint; //inches to go
 
     public AutoDriveFixedDistance() {
         requires(Robot.drive);
@@ -17,6 +17,8 @@ public class AutoDriveFixedDistance extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.drive.setMotionMagicLeft(setpoint);
+    	Robot.drive.setMotionMagicRight(setpoint);
     }
 
     // Called repeatedly when this Command is scheduled to run
