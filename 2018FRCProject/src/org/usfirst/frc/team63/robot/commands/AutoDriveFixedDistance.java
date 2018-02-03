@@ -8,6 +8,8 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class AutoDriveFixedDistance extends Command {
+	
+	private double setpoint; 
 
     public AutoDriveFixedDistance() {
         requires(Robot.drive);
@@ -33,5 +35,5 @@ public class AutoDriveFixedDistance extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    }
+    }  
 }
