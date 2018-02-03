@@ -51,17 +51,17 @@ public class OI {
 	 public OI()
 	 {
 			
-	 stick2_Y.whenPressed(new ShootUpClimbCommand());
-	 stick2_X.whenPressed(new LockClimbCommand());
-	 stick2_B.whileHeld(new ClimbCommand());
-	 stick2_A.whileHeld(new DescendCommand());
-	 stick2_LB.whenPressed(new OpenClawCommand());
-	 stick2_RB.whenPressed(new CloseClawCommand());
-	 stick2_dpadDown.whileHeld(new LiftUpCommand());
-	 stick2_dpadUp.whileHeld(new LiftDownCommand());
-	 
-	 stick1_X.whenPressed(new ResetGyroOriginCommand());
-	 }
+//	 stick2_Y.whenPressed(new ShootUpClimbCommand());
+//	 stick2_X.whenPressed(new LockClimbCommand());
+//	 stick2_B.whileHeld(new ClimbCommand());
+//	 stick2_A.whileHeld(new DescendCommand());
+//	 stick2_LB.whenPressed(new OpenClawCommand());
+//	 stick2_RB.whenPressed(new CloseClawCommand());
+//	 stick2_dpadDown.whileHeld(new LiftUpCommand());
+//	 stick2_dpadUp.whileHeld(new LiftDownCommand());
+//	 
+//	 stick1_X.whenPressed(new ResetGyroOriginCommand());
+//	 }
 	// Start the command when the button is released and let it run the command
 	// until it is finished as determined by it's isFinished method.
 	// button.whenReleased(new ExampleCommand());
