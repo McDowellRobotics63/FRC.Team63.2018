@@ -2,7 +2,6 @@ package org.usfirst.frc.team63.robot.commands;
 
 import org.usfirst.frc.team63.robot.Robot;
 import org.usfirst.frc.team63.robot.simple_commands.BoxPushClawCommand;
-import org.usfirst.frc.team63.robot.simple_commands.ClawOpenCommand;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 

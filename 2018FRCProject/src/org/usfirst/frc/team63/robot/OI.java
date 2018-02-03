@@ -8,6 +8,9 @@
 package org.usfirst.frc.team63.robot;
 
 import org.usfirst.frc.team63.robot.XboxDPadButton.DPAD_BUTTON;
+import org.usfirst.frc.team63.robot.commands.BoxDrop;
+import org.usfirst.frc.team63.robot.commands.BoxObtain;
+import org.usfirst.frc.team63.robot.commands.BoxShoot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -55,8 +58,9 @@ public class OI {
 //	 stick2_X.whenPressed(new LockClimbCommand());
 //	 stick2_B.whileHeld(new ClimbCommand());
 //	 stick2_A.whileHeld(new DescendCommand());
-//	 stick2_LB.whenPressed(new OpenClawCommand());
-//	 stick2_RB.whenPressed(new CloseClawCommand());
+	 stick2_LB.whenPressed(new BoxDrop());
+	 stick2_RB.whenPressed(new BoxObtain());
+	 stick1_LB.whenPressed(new BoxShoot());
 //	 stick2_dpadDown.whileHeld(new LiftUpCommand());
 //	 stick2_dpadUp.whileHeld(new LiftDownCommand());
 //	 
