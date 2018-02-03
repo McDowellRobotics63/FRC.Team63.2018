@@ -1,4 +1,4 @@
-package org.usfirst.frc.team63.robot.commands;
+package org.usfirst.frc.team63.robot.simple_commands;
 
 import org.usfirst.frc.team63.robot.Robot;
 import org.usfirst.frc.team63.robot.RobotMap;
@@ -8,9 +8,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class PushClawCommand extends Command {
+public class BoxPushClawCommand extends Command {
 
-    public PushClawCommand() {
+    public BoxPushClawCommand() {
     requires(Robot.claw);
     }
 

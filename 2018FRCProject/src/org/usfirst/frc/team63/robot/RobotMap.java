@@ -27,6 +27,12 @@ public class RobotMap {
 	public static final int CLAWRIGHT = 0;
 	public static final int CLIMBWINCH = 0;
 	
+	//Solenoid Map
+	public static final int LEFT_CLAW_SOLENOID = 0;
+	public static final int RIGHT_CLAW_SOLENOID = 0;
+	public static final int PCM_CANID = 0;
+	
+	//Controller Map
 	public static final int XBOX_LEFT_X_AXIS = 0;
     public static final int XBOX_LEFT_Y_AXIS = 1;
     public static final int XBOX_LEFT_TRIGGER_AXIS = 2;
@@ -42,5 +48,6 @@ public class RobotMap {
     public static final int XBOX_BACK = 7;
     public static final int XBOX_START = 8;
     public static final int kTimeoutMs = 10;
+
 	public static double desiredSpeed = 0;
 }
