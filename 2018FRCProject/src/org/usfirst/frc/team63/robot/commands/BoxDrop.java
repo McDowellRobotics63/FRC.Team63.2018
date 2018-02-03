@@ -1,5 +1,8 @@
 package org.usfirst.frc.team63.robot.commands;
 
+import org.usfirst.frc.team63.robot.Robot;
+import org.usfirst.frc.team63.robot.simple_commands.ClawOpenCommand;
+
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
@@ -8,10 +11,12 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class BoxDrop extends CommandGroup {
 
     public BoxDrop() {
+    	requires(Robot.claw);
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
         // these will run in order.
+    	addSequential(new ClawOpenCommand());
 
         // To run multiple commands at the same time,
         // use addParallel()

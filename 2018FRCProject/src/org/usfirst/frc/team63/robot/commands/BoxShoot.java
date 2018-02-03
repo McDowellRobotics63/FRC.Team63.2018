@@ -17,8 +17,7 @@ public class BoxShoot extends CommandGroup {
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
         // these will run in order.
-    	addParallel(new BoxPushClawCommand());
-    	addSequential(new ClawOpenCommand());
+    	addSequential(new BoxPushClawCommand());
     	
 
         // To run multiple commands at the same time,
