@@ -49,5 +49,6 @@ public class RobotMap {
     public static final int XBOX_START = 8;
     public static final int kTimeoutMs = 10;
 
-	public static double desiredSpeed = 0;
+    public static double BoxInputSpeed = 0;
+    public static double BoxOutputSpeed = 0;
 }
