@@ -74,7 +74,11 @@ public class DriveSubsystem extends Subsystem {
     }
     
     private static double unitsToInches(double units) {
-        return units * (RobotMap.kDriveWheelCircumference / RobotMap.kDriveEncoderFactor);
+        return units * RobotMap.kDriveWheelCircumference / RobotMap.kDriveEncoderFactor;
+    }
+    
+    private static double inchesToUnits(double inches) {
+    	return inches * RobotMap.kDriveEncoderFactor / RobotMap.kDriveWheelCircumference; 
     }
     
     /*Called in constructor to ensure correct drive talon settings*/
