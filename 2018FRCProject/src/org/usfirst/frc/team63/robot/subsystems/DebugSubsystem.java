@@ -81,13 +81,13 @@ public class DebugSubsystem extends Subsystem {
 			{
 				sb.append(_columnHeaders.get(i) + ", ");
 			}
-			sb.append(_columnHeaders.get(_columnHeaders.size() - 1) + "\n");
+			sb.append(_columnHeaders.get(_columnHeaders.size() - 1) + "\r\n");
 			
 			for (int i = 0; i < _data.get(0).size(); i++) {
 				for (int j = 0; j < _data.size() - 1; j++) {
 					sb.append(_data.get(j).get(i) + ", ");				
 				}
-				sb.append(_data.get(_data.size() - 1).get(i) + "\n");
+				sb.append(_data.get(_data.size() - 1).get(i) + "\r\n");
 			}
 	        
 		    _pw.write(sb.toString());	
@@ -116,13 +116,12 @@ public class DebugSubsystem extends Subsystem {
         	
         	//Loop through files
         	for (int i = 0; i < listOfFiles.length; i++) {
-        		if (listOfFiles[i].isFile()) {
-        			
-        			fileCount++;
+        		if (listOfFiles[i].isFile()) {        			        		
         			
         			//Sum file sizes until we reach our limit
         			if(fileSizeSum < MAX_DIRECTORY_SIZE && fileCount < MAX_FILE_COUNT)
         			{
+        				fileCount++;
         				fileSizeSum = fileSizeSum + listOfFiles[i].length();
         				
         				//Did this one take us over the limit?
