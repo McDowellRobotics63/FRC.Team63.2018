@@ -7,21 +7,22 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 public class DriveSubsystem extends Subsystem {
-	 private WPI_TalonSRX leftMaster = new WPI_TalonSRX(RobotMap.DRIVELEFTMASTER); 
-	 private WPI_TalonSRX rightMaster = new WPI_TalonSRX(RobotMap.DRIVERIGHTMASTER); 
-	 private WPI_TalonSRX leftSlave = new WPI_TalonSRX(RobotMap.DRIVELEFTSLAVE); 
-	 private WPI_TalonSRX rightSlave = new WPI_TalonSRX(RobotMap.DRIVERIGHTSLAVE);
-	 private DifferentialDrive differentialDrive;
+	 private TalonSRX leftMaster = new WPI_TalonSRX(RobotMap.DRIVELEFTMASTER); 
+	 private TalonSRX rightMaster = new WPI_TalonSRX(RobotMap.DRIVERIGHTMASTER); 
+	 private TalonSRX leftSlave = new WPI_TalonSRX(RobotMap.DRIVELEFTSLAVE); 
+	 private TalonSRX rightSlave = new WPI_TalonSRX(RobotMap.DRIVERIGHTSLAVE);
+//	 private DifferentialDrive differentialDrive;
 	 StringBuilder _sb = new StringBuilder();
 	 
 	 public DriveSubsystem() {
-		 differentialDrive = new DifferentialDrive(leftMaster, rightMaster);
+//		 differentialDrive = new DifferentialDrive(leftMaster, rightMaster);
 		 TalonConfig();
 	 }
 
@@ -38,7 +39,7 @@ public class DriveSubsystem extends Subsystem {
      *                  positive.
      */
     public void autoDrive(double xSpeed, double zRotation) {
-    	differentialDrive.arcadeDrive(xSpeed, zRotation, false);
+//    	differentialDrive.arcadeDrive(xSpeed, zRotation, false);
     }
     
     /**
@@ -49,7 +50,7 @@ public class DriveSubsystem extends Subsystem {
      *                  positive.
      */
     public void teleDrive(double xSpeed, double zRotation) {
-    	differentialDrive.arcadeDrive(xSpeed, zRotation);
+//    	differentialDrive.arcadeDrive(xSpeed, zRotation);
     }
     
     /**
@@ -58,6 +59,12 @@ public class DriveSubsystem extends Subsystem {
      */
     public double getLeftPosition() {
         return unitsToInches(leftMaster.getSelectedSensorPosition(0));
+    }
+    
+    public void stop()
+    {
+    	leftMaster.set(ControlMode.PercentOutput, 0.0);
+    	rightMaster.set(ControlMode.PercentOutput, 0.0);
     }
     
 	/**
@@ -77,13 +84,13 @@ public class DriveSubsystem extends Subsystem {
     }
     
     public void setMotionMagicLeft(double setpoint) {
-    	System.out.println("Left setpoint: " + setpoint);
+    	System.out.println("Left setpoint: " + inchesToUnits(setpoint));
     	leftMaster.set(ControlMode.MotionMagic, inchesToUnits(setpoint));
     }
     
     public void setMotionMagicRight(double setpoint) {
-    	System.out.println("Right setpoint: " + setpoint);
-    	leftMaster.set(ControlMode.MotionMagic, inchesToUnits(setpoint));
+    	System.out.println("Right setpoint: " + inchesToUnits(setpoint));
+    	rightMaster.set(ControlMode.MotionMagic, inchesToUnits(setpoint));
     }
     
     public double getErrorLeft() {
@@ -130,8 +137,14 @@ public class DriveSubsystem extends Subsystem {
     	rightMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, RobotMap.kTimeoutMs);
     	rightMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10, RobotMap.kTimeoutMs);
 		
+    	leftMaster.setSensorPhase(true);
+    	rightMaster.setSensorPhase(true);
+    	
     	leftMaster.setInverted(false);
+    	leftSlave.setInverted(false);
+    	
     	rightMaster.setInverted(true);
+    	rightSlave.setInverted(true);
     	
     	//Makes talons force zero voltage across when zero output to resist motion
     	leftMaster.setNeutralMode(NeutralMode.Brake);
@@ -164,16 +177,16 @@ public class DriveSubsystem extends Subsystem {
     
     public void DebugMotionMagic()
     {
-    	double motorOutput = leftMaster.getMotorOutputPercent();
+    	double motorOutput = rightMaster.getMotorOutputPercent();
 		/* prepare line to print */
 		_sb.append("\tOut%:");
 		_sb.append(motorOutput);
 		_sb.append("\tVel:");
-		_sb.append(leftMaster.getSelectedSensorVelocity(0));
+		_sb.append(rightMaster.getSelectedSensorVelocity(0));
 		
 		_sb.append("\terr:");
-		_sb.append(leftMaster.getClosedLoopError(0));
+		_sb.append(rightMaster.getClosedLoopError(0));
 		
-    	Instrum.Process(leftMaster, _sb);
+    	Instrum.Process(rightMaster, _sb);
     }
 }

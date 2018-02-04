@@ -15,10 +15,10 @@ package org.usfirst.frc.team63.robot;
  */
 public class RobotMap {
 	//Talon CAN IDs
-	public static final int DRIVELEFTMASTER = 1;
-	public static final int DRIVELEFTSLAVE = 2;
-	public static final int DRIVERIGHTMASTER = 4;
-	public static final int DRIVERIGHTSLAVE = 3;
+	public static final int DRIVELEFTMASTER = 2;
+	public static final int DRIVELEFTSLAVE = 1;
+	public static final int DRIVERIGHTMASTER = 3;
+	public static final int DRIVERIGHTSLAVE = 4;
 	
 	public static final int LIFT = 0;
 	
