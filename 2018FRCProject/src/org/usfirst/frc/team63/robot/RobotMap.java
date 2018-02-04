@@ -15,10 +15,10 @@ package org.usfirst.frc.team63.robot;
  */
 public class RobotMap {
 	//Talon CAN IDs
-	public static final int DRIVELEFTMASTER = 0;
-	public static final int DRIVELEFTSLAVE = 0;
-	public static final int DRIVERIGHTMASTER = 0;
-	public static final int DRIVERIGHTSLAVE = 0;
+	public static final int DRIVELEFTMASTER = 1;
+	public static final int DRIVELEFTSLAVE = 2;
+	public static final int DRIVERIGHTMASTER = 4;
+	public static final int DRIVERIGHTSLAVE = 3;
 	
 	public static final int LIFT = 0;
 	
@@ -44,7 +44,7 @@ public class RobotMap {
     public static final int XBOX_START = 8;
     
     //Drive constants
-	public static final double kDriveWheelDiameterInches = 69;
+	public static final double kDriveWheelDiameterInches = 5.5963;
 	public static final double kDriveWheelCircumference = kDriveWheelDiameterInches*Math.PI; //inches
 	public static final double kDriveEncoderFactor = 1440; //native units per rotation
 	public static final int kTimeoutMs = 10; //ms to wait for talon timeout, literally doesn't matter
