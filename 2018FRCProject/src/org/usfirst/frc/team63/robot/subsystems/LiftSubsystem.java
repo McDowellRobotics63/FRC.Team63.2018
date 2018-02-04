@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class LiftSubsystem extends Subsystem {
 
-	private WPI_TalonSRX liftMotor = new WPI_TalonSRX(RobotMap.LIFT);
+//	private WPI_TalonSRX liftMotor = new WPI_TalonSRX(RobotMap.LIFT);
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.

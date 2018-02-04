@@ -3,7 +3,9 @@ package org.usfirst.frc.team63.robot.subsystems;
 import org.usfirst.frc.team63.robot.RobotMap;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -68,8 +70,8 @@ public class DriveSubsystem extends Subsystem {
     	leftMaster.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
     	rightMaster.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
 
-    	leftMaster.getSensorCollection(). setQuadraturePosition (RobotMap.kVelocityControlSlot, 10);
-    	rightMaster.getSensorCollection(). setQuadraturePosition (RobotMap.kVelocityControlSlot, 10);
+    	leftMaster.getSensorCollection().setQuadraturePosition(RobotMap.kVelocityControlSlot, RobotMap.kTimeoutMs);
+    	rightMaster.getSensorCollection().setQuadraturePosition(RobotMap.kVelocityControlSlot, RobotMap.kTimeoutMs);
     }
     
     public void setMotionMagicLeft(double setpoint) {
@@ -110,6 +112,18 @@ public class DriveSubsystem extends Subsystem {
     
     /*Called in constructor to ensure correct drive talon settings*/
     private void TalonConfig() {
+    	leftMaster.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, RobotMap.kTimeoutMs);
+    	rightMaster.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, RobotMap.kTimeoutMs);
+		
+    	leftMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, RobotMap.kTimeoutMs);
+    	leftMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10, RobotMap.kTimeoutMs);
+    	
+    	rightMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, RobotMap.kTimeoutMs);
+    	rightMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10, RobotMap.kTimeoutMs);
+		
+    	leftMaster.setInverted(false);
+    	rightMaster.setInverted(true);
+    	
     	//Makes talons force zero voltage across when zero output to resist motion
     	leftMaster.setNeutralMode(NeutralMode.Brake);
     	leftSlave.setNeutralMode(NeutralMode.Brake);
@@ -120,16 +134,22 @@ public class DriveSubsystem extends Subsystem {
     	rightSlave.set(ControlMode.Follower, RobotMap.DRIVERIGHTMASTER);
     	
     	//Closed Loop Voltage Limits
-    	leftMaster.configNominalOutputForward(0.0, 10);
-    	rightMaster.configNominalOutputForward(0.0, 10);
+    	leftMaster.configNominalOutputForward(0.0, RobotMap.kTimeoutMs);
+    	rightMaster.configNominalOutputForward(0.0, RobotMap.kTimeoutMs);
     	
-    	leftMaster.configNominalOutputReverse(-0.0, 10);
-    	rightMaster.configNominalOutputReverse(-0.0, 10);
+    	leftMaster.configNominalOutputReverse(-0.0, RobotMap.kTimeoutMs);
+    	rightMaster.configNominalOutputReverse(-0.0, RobotMap.kTimeoutMs);
     	
-    	leftMaster.configPeakOutputForward(12.0, 10);
-    	rightMaster.configPeakOutputForward(12.0, 10);
+    	leftMaster.configPeakOutputForward(1.0, RobotMap.kTimeoutMs);
+    	rightMaster.configPeakOutputForward(1.0, RobotMap.kTimeoutMs);
     	
-    	leftMaster.configPeakOutputReverse(-12.0, 10);
-    	rightMaster.configPeakOutputReverse(-12.0, 10);
+    	leftMaster.configPeakOutputReverse(-1.0, RobotMap.kTimeoutMs);
+    	rightMaster.configPeakOutputReverse(-1.0, RobotMap.kTimeoutMs);
+    	
+    	leftMaster.configMotionCruiseVelocity(1000, RobotMap.kTimeoutMs);
+    	leftMaster.configMotionAcceleration(400, RobotMap.kTimeoutMs);
+		
+    	rightMaster.configMotionCruiseVelocity(1000, RobotMap.kTimeoutMs);
+    	rightMaster.configMotionAcceleration(400, RobotMap.kTimeoutMs);
     }
 }
