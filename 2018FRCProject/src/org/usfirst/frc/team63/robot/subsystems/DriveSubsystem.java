@@ -25,25 +25,6 @@ public class DriveSubsystem extends Subsystem {
 		 TalonConfig();
 	 }
 
-    	LeftMaster.configPeakOutputForward(+12.0, RobotMap.kTimeoutMs);    	    
-    	LeftMaster.configPeakOutputReverse(-12.0, RobotMap.kTimeoutMs);  
-    	
-    	LeftSlave.configNominalOutputForward(0.0, RobotMap.kTimeoutMs);
-    	LeftSlave.configNominalOutputReverse(-0.0, RobotMap.kTimeoutMs);
-    	LeftSlave.configPeakOutputForward(+12.0, RobotMap.kTimeoutMs);    	    
-    	LeftSlave.configPeakOutputReverse(-12.0, RobotMap.kTimeoutMs);   	    
-    	
-    	RightMaster.configNominalOutputForward(0.0, RobotMap.kTimeoutMs);
-    	RightMaster.configNominalOutputReverse(-0.0, RobotMap.kTimeoutMs);
-    	RightMaster.configPeakOutputForward(+12.0, RobotMap.kTimeoutMs);    	    
-    	RightMaster.configPeakOutputReverse(-12.0, RobotMap.kTimeoutMs);   	    
-    	
-    	RightSlave.configNominalOutputForward(0.0, RobotMap.kTimeoutMs);
-    	RightSlave.configNominalOutputReverse(-0.0, RobotMap.kTimeoutMs);
-    	RightSlave.configPeakOutputForward(+12.0, RobotMap.kTimeoutMs);    	    
-    	RightSlave.configPeakOutputReverse(-12.0, RobotMap.kTimeoutMs);    	    
-	}
-
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
@@ -95,19 +76,11 @@ public class DriveSubsystem extends Subsystem {
     	rightMaster.getSensorCollection(). setQuadraturePosition (RobotMap.kVelocityControlSlot, 10);
     }
     
-    /**
-     * 
-     * @return whether actually changed gearing
-     */
-    public boolean shiftHigh() {
+    public void shiftHigh() {
     	
     }
     
-    /**
-     * 
-     * @return whether actually changed gearing
-     */
-    public boolean shiftLow() {
+    public void shiftLow() {
     	
     }
     
@@ -142,5 +115,23 @@ public class DriveSubsystem extends Subsystem {
     	
     	leftMaster.configPeakOutputReverse(-12.0, 10);
     	rightMaster.configPeakOutputReverse(-12.0, 10);
+    	
+    	leftMaster.configPeakOutputForward(+12.0, RobotMap.kTimeoutMs);    	    
+    	leftMaster.configPeakOutputReverse(-12.0, RobotMap.kTimeoutMs);  
+    	
+    	leftSlave.configNominalOutputForward(0.0, RobotMap.kTimeoutMs);
+    	leftSlave.configNominalOutputReverse(-0.0, RobotMap.kTimeoutMs);
+    	leftSlave.configPeakOutputForward(+12.0, RobotMap.kTimeoutMs);    	    
+    	leftSlave.configPeakOutputReverse(-12.0, RobotMap.kTimeoutMs);   	    
+    	
+    	rightMaster.configNominalOutputForward(0.0, RobotMap.kTimeoutMs);
+    	rightMaster.configNominalOutputReverse(-0.0, RobotMap.kTimeoutMs);
+    	rightMaster.configPeakOutputForward(+12.0, RobotMap.kTimeoutMs);    	    
+    	rightMaster.configPeakOutputReverse(-12.0, RobotMap.kTimeoutMs);   	    
+    	
+    	rightSlave.configNominalOutputForward(0.0, RobotMap.kTimeoutMs);
+    	rightSlave.configNominalOutputReverse(-0.0, RobotMap.kTimeoutMs);
+    	rightSlave.configPeakOutputForward(+12.0, RobotMap.kTimeoutMs);    	    
+    	rightSlave.configPeakOutputReverse(-12.0, RobotMap.kTimeoutMs);  
     }
 }
