@@ -12,6 +12,8 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import org.usfirst.frc.team63.robot.commands.AutoDriveFixedDistance;
 //import org.usfirst.frc.team63.robot.commands.ExampleCommand;
 import org.usfirst.frc.team63.robot.subsystems.ClawSubsystem;
 import org.usfirst.frc.team63.robot.subsystems.ClimbSubsystem;
@@ -47,6 +49,12 @@ public class Robot extends TimedRobot {
 //		m_chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", m_chooser);
+		SmartDashboard.putData("Magical button", new AutoDriveFixedDistance());
+        SmartDashboard.putNumber("setpoint", 0.0);
+        SmartDashboard.putNumber("kF", 0.2);
+        SmartDashboard.putNumber("kP", 0.2);
+        SmartDashboard.putNumber("kI", 0.0);
+        SmartDashboard.putNumber("kD", 0.0);
 	}
 
 	/**

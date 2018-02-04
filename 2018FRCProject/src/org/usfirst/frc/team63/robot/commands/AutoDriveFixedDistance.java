@@ -3,6 +3,7 @@ package org.usfirst.frc.team63.robot.commands;
 import org.usfirst.frc.team63.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -17,7 +18,13 @@ public class AutoDriveFixedDistance extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.drive.setMotionMagicLeft(setpoint);
+    	Robot.drive.configGains(SmartDashboard.getNumber("kF", 0.0), 
+    	  SmartDashboard.getNumber("kP", 0.0), 
+    	  SmartDashboard.getNumber("kI", 0.0), 
+    	  SmartDashboard.getNumber("kD", 0.0));
+    	
+        setpoint = SmartDashboard.getNumber("setpoint", 0.0);
+        Robot.drive.setMotionMagicLeft(setpoint);
     	Robot.drive.setMotionMagicRight(setpoint);
     }
 

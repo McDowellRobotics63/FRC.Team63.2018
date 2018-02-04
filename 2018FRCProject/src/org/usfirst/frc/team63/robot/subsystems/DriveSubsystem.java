@@ -88,6 +88,18 @@ public class DriveSubsystem extends Subsystem {
     	return rightMaster.getClosedLoopError(0);
     }
     
+    public void configGains(double f, double p, double i, double d) {
+		leftMaster.config_kF(0, f, RobotMap.kTimeoutMs);
+		leftMaster.config_kP(0, p, RobotMap.kTimeoutMs);
+		leftMaster.config_kI(0, i, RobotMap.kTimeoutMs);
+		leftMaster.config_kD(0, d, RobotMap.kTimeoutMs);
+		
+		rightMaster.config_kF(0, f, RobotMap.kTimeoutMs);
+		rightMaster.config_kP(0, p, RobotMap.kTimeoutMs);
+		rightMaster.config_kI(0, i, RobotMap.kTimeoutMs);
+		rightMaster.config_kD(0, d, RobotMap.kTimeoutMs);
+    }
+    
     private static double unitsToInches(double units) {
         return units * RobotMap.kDriveWheelCircumference / RobotMap.kDriveEncoderFactor;
     }
