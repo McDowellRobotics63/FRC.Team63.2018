@@ -1,5 +1,6 @@
 package org.usfirst.frc.team63.robot.subsystems;
 
+import org.usfirst.frc.team63.robot.Instrum;
 import org.usfirst.frc.team63.robot.RobotMap;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -17,6 +18,7 @@ public class DriveSubsystem extends Subsystem {
 	 private WPI_TalonSRX leftSlave = new WPI_TalonSRX(RobotMap.DRIVELEFTSLAVE); 
 	 private WPI_TalonSRX rightSlave = new WPI_TalonSRX(RobotMap.DRIVERIGHTSLAVE);
 	 private DifferentialDrive differentialDrive;
+	 StringBuilder _sb = new StringBuilder();
 	 
 	 public DriveSubsystem() {
 		 differentialDrive = new DifferentialDrive(leftMaster, rightMaster);
@@ -75,10 +77,12 @@ public class DriveSubsystem extends Subsystem {
     }
     
     public void setMotionMagicLeft(double setpoint) {
+    	System.out.println("Left setpoint: " + setpoint);
     	leftMaster.set(ControlMode.MotionMagic, inchesToUnits(setpoint));
     }
     
     public void setMotionMagicRight(double setpoint) {
+    	System.out.println("Right setpoint: " + setpoint);
     	leftMaster.set(ControlMode.MotionMagic, inchesToUnits(setpoint));
     }
     
@@ -91,11 +95,13 @@ public class DriveSubsystem extends Subsystem {
     }
     
     public void configGains(double f, double p, double i, double d) {
+    	leftMaster.selectProfileSlot(0, 0);
 		leftMaster.config_kF(0, f, RobotMap.kTimeoutMs);
 		leftMaster.config_kP(0, p, RobotMap.kTimeoutMs);
 		leftMaster.config_kI(0, i, RobotMap.kTimeoutMs);
 		leftMaster.config_kD(0, d, RobotMap.kTimeoutMs);
 		
+		rightMaster.selectProfileSlot(0, 0);
 		rightMaster.config_kF(0, f, RobotMap.kTimeoutMs);
 		rightMaster.config_kP(0, p, RobotMap.kTimeoutMs);
 		rightMaster.config_kI(0, i, RobotMap.kTimeoutMs);
@@ -115,6 +121,9 @@ public class DriveSubsystem extends Subsystem {
     	leftMaster.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, RobotMap.kTimeoutMs);
     	rightMaster.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, RobotMap.kTimeoutMs);
 		
+    	leftMaster.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
+    	rightMaster.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
+    	
     	leftMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, RobotMap.kTimeoutMs);
     	leftMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10, RobotMap.kTimeoutMs);
     	
@@ -151,5 +160,20 @@ public class DriveSubsystem extends Subsystem {
 		
     	rightMaster.configMotionCruiseVelocity(1000, RobotMap.kTimeoutMs);
     	rightMaster.configMotionAcceleration(400, RobotMap.kTimeoutMs);
+    }
+    
+    public void DebugMotionMagic()
+    {
+    	double motorOutput = leftMaster.getMotorOutputPercent();
+		/* prepare line to print */
+		_sb.append("\tOut%:");
+		_sb.append(motorOutput);
+		_sb.append("\tVel:");
+		_sb.append(leftMaster.getSelectedSensorVelocity(0));
+		
+		_sb.append("\terr:");
+		_sb.append(leftMaster.getClosedLoopError(0));
+		
+    	Instrum.Process(leftMaster, _sb);
     }
 }
