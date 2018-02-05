@@ -10,13 +10,22 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  *
  */
 public class AutoDriveFixedDistance extends Command {
+	public static final double PGAIN = 3.0; // hz
+	public static final double GYROGAIN = 30;
+	public static final double TOLERANCE = 3;
+	public static final double TARGETTIME = 0.5;
+	public static final double TOTALTIMELIMIT = 9999.0;
+	public static final double MIN_SPEED = 0.2; //arcadeDrive input units equivalent
+	public static final double MIN_ROTATE = 0.15;
 	
 	private double setpoint; //inches to go
 	private final Timer totalTimer;
-
+	private final Timer onTargetTimer;
+	
     public AutoDriveFixedDistance() {
         requires(Robot.drive);
         totalTimer = new Timer();
+        onTargetTimer = new Timer();
     }
 
     // Called just before this Command runs the first time
