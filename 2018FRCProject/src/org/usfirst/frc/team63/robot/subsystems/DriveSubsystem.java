@@ -114,34 +114,25 @@ public class DriveSubsystem extends Subsystem {
 		rightSlave.set(ControlMode.Follower, RobotMap.DRIVERIGHTMASTER);
 		
 		//Closed Loop Voltage Limits
-		leftMaster.configNominalOutputForward(0.0, 10);
-		rightMaster.configNominalOutputForward(0.0, 10);
-		leftMaster.configNominalOutputReverse(-0.0, 10);
-		rightMaster.configNominalOutputReverse(-0.0, 10);
-	
-		leftMaster.configPeakOutputForward(12.0, 10);
-		rightMaster.configPeakOutputForward(12.0, 10);
-		
-		leftMaster.configPeakOutputReverse(-12.0, 10);
-		rightMaster.configPeakOutputReverse(-12.0, 10);
-		
-		leftMaster.configPeakOutputForward(+12.0, RobotMap.kTimeoutMs);    	    
-		leftMaster.configPeakOutputReverse(-12.0, RobotMap.kTimeoutMs);  
+		leftMaster.configPeakOutputForward(1.0, RobotMap.kTimeoutMs);
+		leftMaster.configPeakOutputReverse(-1.0, RobotMap.kTimeoutMs);
+		leftMaster.configPeakOutputForward(+1.0, RobotMap.kTimeoutMs);    	    
+		leftMaster.configPeakOutputReverse(-1.0, RobotMap.kTimeoutMs);  
 		
 		leftSlave.configNominalOutputForward(0.0, RobotMap.kTimeoutMs);
 		leftSlave.configNominalOutputReverse(-0.0, RobotMap.kTimeoutMs);
-		leftSlave.configPeakOutputForward(+12.0, RobotMap.kTimeoutMs);    	    
-		leftSlave.configPeakOutputReverse(-12.0, RobotMap.kTimeoutMs);   	    
+		leftSlave.configPeakOutputForward(+1.0, RobotMap.kTimeoutMs);    	    
+		leftSlave.configPeakOutputReverse(-1.0, RobotMap.kTimeoutMs);   	    
 		
 		rightMaster.configNominalOutputForward(0.0, RobotMap.kTimeoutMs);
 		rightMaster.configNominalOutputReverse(-0.0, RobotMap.kTimeoutMs);
-		rightMaster.configPeakOutputForward(+12.0, RobotMap.kTimeoutMs);    	    
-		rightMaster.configPeakOutputReverse(-12.0, RobotMap.kTimeoutMs);   	    
+		rightMaster.configPeakOutputForward(+1.0, RobotMap.kTimeoutMs);    	    
+		rightMaster.configPeakOutputReverse(-1.0, RobotMap.kTimeoutMs);   	    
 		
 		rightSlave.configNominalOutputForward(0.0, RobotMap.kTimeoutMs);
 		rightSlave.configNominalOutputReverse(-0.0, RobotMap.kTimeoutMs);
-		rightSlave.configPeakOutputForward(+12.0, RobotMap.kTimeoutMs);    	    
-		rightSlave.configPeakOutputReverse(-12.0, RobotMap.kTimeoutMs);  
+		rightSlave.configPeakOutputForward(+1.0, RobotMap.kTimeoutMs);    	    
+		rightSlave.configPeakOutputReverse(-1.0, RobotMap.kTimeoutMs);  
 		
 		//Configure Quadrature Encoders
 		leftMaster.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, RobotMap.kTimeoutMs);
