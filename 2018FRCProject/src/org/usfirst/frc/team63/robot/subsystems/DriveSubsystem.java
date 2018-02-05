@@ -11,14 +11,12 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 public class DriveSubsystem extends Subsystem {
 	 private TalonSRX leftMaster = new WPI_TalonSRX(RobotMap.DRIVELEFTMASTER); 
 	 private TalonSRX rightMaster = new WPI_TalonSRX(RobotMap.DRIVERIGHTMASTER); 
 	 private TalonSRX leftSlave = new WPI_TalonSRX(RobotMap.DRIVELEFTSLAVE); 
 	 private TalonSRX rightSlave = new WPI_TalonSRX(RobotMap.DRIVERIGHTSLAVE);
-//	 private DifferentialDrive differentialDrive;
 	 StringBuilder _sb = new StringBuilder();
 	 
 	 public DriveSubsystem() {
@@ -29,28 +27,6 @@ public class DriveSubsystem extends Subsystem {
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
-    }
-    
-    /**
-     * Arcade drive for use with PID control or other non-joystick driving
-     * 
-     * @param xSpeed    The robot's speed forward (positive) and back from -1.0 to 1.0.
-     * @param zRotation The robot's rotation rate around the Z axis from -1.0 to 1.0. Clockwise/rightturn is
-     *                  positive.
-     */
-    public void autoDrive(double xSpeed, double zRotation) {
-//    	differentialDrive.arcadeDrive(xSpeed, zRotation, false);
-    }
-    
-    /**
-     * Arcade drive for use for teleop
-     * 
-     * @param xSpeed    The robot's speed forward (positive) and back from -1.0 to 1.0.
-     * @param zRotation The robot's rotation rate around the Z axis from -1.0 to 1.0. Clockwise/rightturn is
-     *                  positive.
-     */
-    public void teleDrive(double xSpeed, double zRotation) {
-//    	differentialDrive.arcadeDrive(xSpeed, zRotation);
     }
     
     /**
@@ -81,16 +57,6 @@ public class DriveSubsystem extends Subsystem {
 
     	leftMaster.getSensorCollection().setQuadraturePosition(RobotMap.kVelocityControlSlot, RobotMap.kTimeoutMs);
     	rightMaster.getSensorCollection().setQuadraturePosition(RobotMap.kVelocityControlSlot, RobotMap.kTimeoutMs);
-    }
-    
-    public void setMotionMagicLeft(double setpoint) {
-    	System.out.println("Left setpoint: " + inchesToUnits(setpoint));
-    	leftMaster.set(ControlMode.MotionMagic, inchesToUnits(setpoint));
-    }
-    
-    public void setMotionMagicRight(double setpoint) {
-    	System.out.println("Right setpoint: " + inchesToUnits(setpoint));
-    	rightMaster.set(ControlMode.MotionMagic, inchesToUnits(setpoint));
     }
     
     public double getErrorLeft() {
@@ -125,24 +91,21 @@ public class DriveSubsystem extends Subsystem {
     
     /*Called in constructor to ensure correct drive talon settings*/
     private void TalonConfig() {
+    	//Sensor stuff
     	leftMaster.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, RobotMap.kTimeoutMs);
     	rightMaster.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, RobotMap.kTimeoutMs);
-		
     	leftMaster.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
     	rightMaster.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
-    	
     	leftMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, RobotMap.kTimeoutMs);
     	leftMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10, RobotMap.kTimeoutMs);
-    	
     	rightMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, RobotMap.kTimeoutMs);
     	rightMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10, RobotMap.kTimeoutMs);
 		
+    	//Directions
     	leftMaster.setSensorPhase(true);
     	rightMaster.setSensorPhase(true);
-    	
     	leftMaster.setInverted(false);
     	leftSlave.setInverted(false);
-    	
     	rightMaster.setInverted(true);
     	rightSlave.setInverted(true);
     	
@@ -167,15 +130,9 @@ public class DriveSubsystem extends Subsystem {
     	
     	leftMaster.configPeakOutputReverse(-1.0, RobotMap.kTimeoutMs);
     	rightMaster.configPeakOutputReverse(-1.0, RobotMap.kTimeoutMs);
-    	
-    	leftMaster.configMotionCruiseVelocity(1000, RobotMap.kTimeoutMs);
-    	leftMaster.configMotionAcceleration(400, RobotMap.kTimeoutMs);
-		
-    	rightMaster.configMotionCruiseVelocity(1000, RobotMap.kTimeoutMs);
-    	rightMaster.configMotionAcceleration(400, RobotMap.kTimeoutMs);
     }
     
-    public void DebugMotionMagic()
+    public void debug()
     {
     	double motorOutput = rightMaster.getMotorOutputPercent();
 		/* prepare line to print */

@@ -34,8 +34,6 @@ public class AutoDriveFixedDistance extends Command {
     	
     	
         setpoint = SmartDashboard.getNumber("setpoint", 0.0);
-        Robot.drive.setMotionMagicLeft(setpoint);
-    	Robot.drive.setMotionMagicRight(setpoint);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -45,7 +43,7 @@ public class AutoDriveFixedDistance extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return totalTimer.get() > 0.5 && Math.abs(Robot.drive.getErrorLeft()) < 300 && Math.abs(Robot.drive.getErrorRight()) < 300;
+        return totalTimer.get() > 0.5 ||( Math.abs(Robot.drive.getErrorLeft()) < 300 && Math.abs(Robot.drive.getErrorRight()) < 300);
     }
 
     // Called once after isFinished returns true

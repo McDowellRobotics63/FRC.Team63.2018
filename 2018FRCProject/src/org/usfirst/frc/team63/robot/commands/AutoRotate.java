@@ -36,8 +36,6 @@ public class AutoRotate extends Command {
         setpoint = SmartDashboard.getNumber("rotate", 0.0);
         
         setpoint *= 18.0*Math.PI/360*2; //empirically derived correction factor of two
-        Robot.drive.setMotionMagicLeft(setpoint);
-    	Robot.drive.setMotionMagicRight(-setpoint);
     }
 
     // Called repeatedly when this Command is scheduled to run
