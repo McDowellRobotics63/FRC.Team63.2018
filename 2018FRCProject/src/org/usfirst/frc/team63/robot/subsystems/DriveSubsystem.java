@@ -146,5 +146,7 @@ public class DriveSubsystem extends Subsystem {
 		//Configure Quadrature Encoders
 		leftMaster.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, RobotMap.kTimeoutMs);
 		rightMaster.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, RobotMap.kTimeoutMs);
+    	leftMaster.setSensorPhase(true);
+    	rightMaster.setSensorPhase(true);
 	}
 }
