@@ -29,6 +29,7 @@ public class RobotMap {
 	
 	//Solenoid Mappings
 	public static final int ClimbArmSolenoid = 0;
+	public static final int ClimbClampLockSolenoid = 0;
 	
 	public static final int XBOX_LEFT_X_AXIS = 0;
     public static final int XBOX_LEFT_Y_AXIS = 1;
