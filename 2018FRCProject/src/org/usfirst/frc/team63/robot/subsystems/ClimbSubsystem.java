@@ -32,6 +32,10 @@ public class ClimbSubsystem extends Subsystem {
 	{
 		lockSolenoid.set(isclamp);
 	}
+	public void clampOpen(boolean isclamp)
+	{
+		lockSolenoid.set(isclamp);
+	}
 	
 	
     public void initDefaultCommand() {
