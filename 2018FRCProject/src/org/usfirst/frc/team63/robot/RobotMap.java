@@ -27,6 +27,9 @@ public class RobotMap {
 	public static final int CLAWRIGHT = 0;
 	public static final int CLIMBWINCH = 0;
 	
+	//Solenoid Mappings
+	public static final int ClimbArmSolenoid = 0;
+	
 	public static final int XBOX_LEFT_X_AXIS = 0;
     public static final int XBOX_LEFT_Y_AXIS = 1;
     public static final int XBOX_LEFT_TRIGGER_AXIS = 2;
