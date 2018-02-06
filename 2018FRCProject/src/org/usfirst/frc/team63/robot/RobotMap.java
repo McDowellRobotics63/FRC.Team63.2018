@@ -21,7 +21,7 @@ public class RobotMap {
 	public static final int DRIVERIGHTSLAVE = 0;
 	
 	public static final int LIFT = 0;
-	
+	public static final double desiredClimb=0;
 	//Spark PWM Channels
 	public static final int CLAWLEFT = 0;
 	public static final int CLAWRIGHT = 0;
