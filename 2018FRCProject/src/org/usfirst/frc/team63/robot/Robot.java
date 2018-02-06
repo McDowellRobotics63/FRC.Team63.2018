@@ -19,6 +19,7 @@ import org.usfirst.frc.team63.robot.commands.UTurn;
 //import org.usfirst.frc.team63.robot.commands.ExampleCommand;
 import org.usfirst.frc.team63.robot.subsystems.ClawSubsystem;
 import org.usfirst.frc.team63.robot.subsystems.ClimbSubsystem;
+import org.usfirst.frc.team63.robot.subsystems.DebugSubsystem;
 import org.usfirst.frc.team63.robot.subsystems.DriveSubsystem;
 import org.usfirst.frc.team63.robot.subsystems.LiftSubsystem;
 import org.usfirst.frc.team63.robot.subsystems.VisionSubsystem;
@@ -36,6 +37,7 @@ public class Robot extends TimedRobot {
 	public static final ClimbSubsystem climb = new ClimbSubsystem();
 	public static final LiftSubsystem lift = new LiftSubsystem();
 	public static final VisionSubsystem vision = new VisionSubsystem();
+	public static final DebugSubsystem debug = new DebugSubsystem();
 	public static OI m_oi;
 
 	Command m_autonomousCommand;

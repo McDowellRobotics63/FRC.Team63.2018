@@ -1,5 +1,8 @@
 package org.usfirst.frc.team63.robot.subsystems;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.usfirst.frc.team63.robot.Instrum;
 import org.usfirst.frc.team63.robot.RobotMap;
 
@@ -114,7 +117,18 @@ public class DriveSubsystem extends Subsystem {
 		rightMaster.config_kI(0, i, RobotMap.kTimeoutMs);
 		rightMaster.config_kD(0, d, RobotMap.kTimeoutMs);
     }
-    
+        public List<Double> DebugMotionMagicRight()
+    {
+    	List<Double> resulterino = new ArrayList<Double>();
+    	resulterino.add((double) rightMaster.getSelectedSensorPosition(0));
+    	resulterino.add((double) rightMaster.getSelectedSensorVelocity(0));
+    	resulterino.add((double) rightMaster.getActiveTrajectoryPosition());
+    	resulterino.add((double) rightMaster.getActiveTrajectoryVelocity());
+    	resulterino.add(rightMaster.getMotorOutputPercent());
+    	resulterino.add((double) rightMaster.getClosedLoopError(0));
+    	return resulterino;
+    }
+        
     private static double unitsToInches(double units) {
         return units * RobotMap.kDriveWheelCircumference / RobotMap.kDriveEncoderFactor;
     }
@@ -173,20 +187,5 @@ public class DriveSubsystem extends Subsystem {
 		
     	rightMaster.configMotionCruiseVelocity(1000, RobotMap.kTimeoutMs);
     	rightMaster.configMotionAcceleration(400, RobotMap.kTimeoutMs);
-    }
-    
-    public void DebugMotionMagic()
-    {
-    	double motorOutput = rightMaster.getMotorOutputPercent();
-		/* prepare line to print */
-		_sb.append("\tOut%:");
-		_sb.append(motorOutput);
-		_sb.append("\tVel:");
-		_sb.append(rightMaster.getSelectedSensorVelocity(0));
-		
-		_sb.append("\terr:");
-		_sb.append(rightMaster.getClosedLoopError(0));
-		
-    	Instrum.Process(rightMaster, _sb);
     }
 }
