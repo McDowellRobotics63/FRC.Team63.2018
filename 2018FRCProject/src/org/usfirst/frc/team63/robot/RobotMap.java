@@ -51,8 +51,18 @@ public class RobotMap {
     public static final int XBOX_RIGHT_BUMPER = 6;
     public static final int XBOX_BACK = 7;
     public static final int XBOX_START = 8;
+    
     public static final int kTimeoutMs = 10;
+    //Drive constants
+	public static final double kDriveWheelDiameterInches = 69;
+	public static final double kDriveWheelCircumference = kDriveWheelDiameterInches*Math.PI; //inches
+	public static final double kDriveTrack = 42; //inches between centerlines of left and right wheels
+	public static final double kDriveEncoderFactor = 1440; //native units per rotation
+	public static final int kTimeoutMs = 10; //ms to wait for talon timeout, literally doesn't matter
+	public static final int kVelocityControlSlot = 0;
 
-    public static double BoxInputSpeed = 0;
-    public static double BoxOutputSpeed = 0;
+	//Solenoid Mapping
+	public static final int PCMID = 0;
+	public static final int LEFTSHIPHTUR = 0; //PCM id of pneumatic gearbox thing
+	public static final int RIGHTSHIPHTUR = 0;
 }
