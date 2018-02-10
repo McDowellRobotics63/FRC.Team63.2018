@@ -30,8 +30,6 @@ public class RobotMap {
 	//Solenoid Mappings
 	public static final int ClimbArmSolenoid = 0;
 	public static final int ClimbClampLockSolenoid = 0;
-	
-	//Solenoid Map
 	public static final int LEFT_CLAW_SOLENOID = 0;
 	public static final int RIGHT_CLAW_SOLENOID = 0;
 	public static final int PCM_CANID = 0;
@@ -52,7 +50,6 @@ public class RobotMap {
     public static final int XBOX_BACK = 7;
     public static final int XBOX_START = 8;
     
-    public static final int kTimeoutMs = 10;
     //Drive constants
 	public static final double kDriveWheelDiameterInches = 69;
 	public static final double kDriveWheelCircumference = kDriveWheelDiameterInches*Math.PI; //inches
@@ -65,4 +62,6 @@ public class RobotMap {
 	public static final int PCMID = 0;
 	public static final int LEFTSHIPHTUR = 0; //PCM id of pneumatic gearbox thing
 	public static final int RIGHTSHIPHTUR = 0;
+	public static final double BoxInputSpeed = 0;
+	public static final double BoxOutputSpeed = 0;
 }

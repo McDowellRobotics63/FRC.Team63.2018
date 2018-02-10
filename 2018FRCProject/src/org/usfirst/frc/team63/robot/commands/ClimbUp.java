@@ -8,9 +8,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ClimbCommand extends Command {
+public class ClimbUp extends Command {
 
-    public ClimbCommand() {
+    public ClimbUp() {
         requires(Robot.climb);
     }
 

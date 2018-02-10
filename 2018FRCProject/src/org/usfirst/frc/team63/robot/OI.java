@@ -11,60 +11,74 @@ import org.usfirst.frc.team63.robot.XboxDPadButton.DPAD_BUTTON;
 import org.usfirst.frc.team63.robot.commands.BoxDrop;
 import org.usfirst.frc.team63.robot.commands.BoxObtain;
 import org.usfirst.frc.team63.robot.commands.BoxShoot;
+import org.usfirst.frc.team63.robot.commands.ClimbArmExtended;
+import org.usfirst.frc.team63.robot.commands.ClimbClampLock;
+import org.usfirst.frc.team63.robot.commands.ClimbClampOpen;
+import org.usfirst.frc.team63.robot.commands.ClimbRetract;
+import org.usfirst.frc.team63.robot.commands.ClimbUp;
+import org.usfirst.frc.team63.robot.simple_commands.BoxPullClawCommand;
+import org.usfirst.frc.team63.robot.simple_commands.BoxPushClawCommand;
+import org.usfirst.frc.team63.robot.simple_commands.ClawCloseCommand;
+import org.usfirst.frc.team63.robot.simple_commands.ClawOpenCommand;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.command.Command;
 
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-	public Joystick stick1 = new Joystick(0);
-	public Joystick stick2 = new Joystick(1);
+	public Joystick controller1 = new Joystick(0);
+	public Joystick controller2 = new Joystick(1);
 	
-	 public Button stick1_X = new JoystickButton(stick1 , RobotMap.XBOX_X);
-	 public Button stick1_Y = new JoystickButton(stick1 , RobotMap.XBOX_Y);
-	 public Button stick1_A = new JoystickButton(stick1 , RobotMap.XBOX_A);
-	 public Button stick1_B = new JoystickButton(stick1 , RobotMap.XBOX_B);
-	 public Button stick1_LB = new JoystickButton(stick1 , RobotMap.XBOX_LEFT_BUMPER);
-	 public Button stick1_RB = new JoystickButton(stick1 , RobotMap.XBOX_RIGHT_BUMPER);
-	 public Button stick1_start = new JoystickButton(stick1 , RobotMap.XBOX_START);
-	 public Button stick1_back = new JoystickButton(stick1 , RobotMap.XBOX_BACK);
-	 public Button stick1_dpadUp = new XboxDPadButton(stick1, DPAD_BUTTON.DPAD_UP);
-	 public Button stick1_dpadRight = new XboxDPadButton(stick1, DPAD_BUTTON.DPAD_RIGHT);
-	 public Button stick1_dpadDown = new XboxDPadButton(stick1, DPAD_BUTTON.DPAD_DOWN);
-	 public Button stick1_dpadLeft = new XboxDPadButton(stick1, DPAD_BUTTON.DPAD_LEFT);
+	 public Button controller1_X = new JoystickButton(controller1 , RobotMap.XBOX_X);
+	 public Button controller1_Y = new JoystickButton(controller1 , RobotMap.XBOX_Y);
+	 public Button controller1_A = new JoystickButton(controller1 , RobotMap.XBOX_A);
+	 public Button controller1_B = new JoystickButton(controller1 , RobotMap.XBOX_B);
+	 public Button controller1_LB = new JoystickButton(controller1 , RobotMap.XBOX_LEFT_BUMPER);
+	 public Button controller1_RB = new JoystickButton(controller1 , RobotMap.XBOX_RIGHT_BUMPER);
+	 public Button controller1_start = new JoystickButton(controller1 , RobotMap.XBOX_START);
+	 public Button controller1_back = new JoystickButton(controller1 , RobotMap.XBOX_BACK);
+	 public Button controller1_dpadUp = new XboxDPadButton(controller1, DPAD_BUTTON.DPAD_UP);
+	 public Button controller1_dpadRight = new XboxDPadButton(controller1, DPAD_BUTTON.DPAD_RIGHT);
+	 public Button controller1_dpadDown = new XboxDPadButton(controller1, DPAD_BUTTON.DPAD_DOWN);
+	 public Button controller1_dpadLeft = new XboxDPadButton(controller1, DPAD_BUTTON.DPAD_LEFT);
 	
-	 public Button stick2_X = new JoystickButton(stick2 , RobotMap.XBOX_X);
-	 public Button stick2_Y = new JoystickButton(stick2 , RobotMap.XBOX_Y);
-	 public Button stick2_A = new JoystickButton(stick2 , RobotMap.XBOX_A);
-	 public Button stick2_B = new JoystickButton(stick2 , RobotMap.XBOX_B);
-	 public Button stick2_LB = new JoystickButton(stick2 , RobotMap.XBOX_LEFT_BUMPER);
-	 public Button stick2_RB = new JoystickButton(stick2 , RobotMap.XBOX_RIGHT_BUMPER);
-	 public Button stick2_start = new JoystickButton(stick2 , RobotMap.XBOX_START);
-	 public Button stick2_back = new JoystickButton(stick2 , RobotMap.XBOX_BACK);
-	 public Button stick2_dpadUp = new XboxDPadButton(stick2, DPAD_BUTTON.DPAD_UP);
-	 public Button stick2_dpadRight = new XboxDPadButton(stick2, DPAD_BUTTON.DPAD_RIGHT);
-	 public Button stick2_dpadDown = new XboxDPadButton(stick2, DPAD_BUTTON.DPAD_DOWN);
-	 public Button stick2_dpadLeft = new XboxDPadButton(stick2, DPAD_BUTTON.DPAD_LEFT);	 
+	 public Button controller2_X = new JoystickButton(controller2 , RobotMap.XBOX_X);
+	 public Button controller2_Y = new JoystickButton(controller2 , RobotMap.XBOX_Y);
+	 public Button controller2_A = new JoystickButton(controller2 , RobotMap.XBOX_A);
+	 public Button controller2_B = new JoystickButton(controller2 , RobotMap.XBOX_B);
+	 public Button controller2_LB = new JoystickButton(controller2 , RobotMap.XBOX_LEFT_BUMPER);
+	 public Button controller2_RB = new JoystickButton(controller2 , RobotMap.XBOX_RIGHT_BUMPER);
+	 public Button controller2_start = new JoystickButton(controller2 , RobotMap.XBOX_START);
+	 public Button controller2_back = new JoystickButton(controller2 , RobotMap.XBOX_BACK);
+	 public Button controller2_dpadUp = new XboxDPadButton(controller2, DPAD_BUTTON.DPAD_UP);
+	 public Button controller2_dpadRight = new XboxDPadButton(controller2, DPAD_BUTTON.DPAD_RIGHT);
+	 public Button controller2_dpadDown = new XboxDPadButton(controller2, DPAD_BUTTON.DPAD_DOWN);
+	 public Button controller2_dpadLeft = new XboxDPadButton(controller2, DPAD_BUTTON.DPAD_LEFT);	 
 
 	//// TRIGGERING COMMANDS WITH BUTTONS
 	 public OI()
 	 {
 			
-//	 stick2_Y.whenPressed(new ShootUpClimbCommand());
-//	 stick2_X.whenPressed(new LockClimbCommand());
-//	 stick2_B.whileHeld(new ClimbCommand());
-//	 stick2_A.whileHeld(new DescendCommand());
-	 stick2_LB.whenPressed(new BoxDrop());
-	 stick2_RB.whenPressed(new BoxObtain());
-	 stick1_LB.whenPressed(new BoxShoot());
-//	 stick2_dpadDown.whileHeld(new LiftUpCommand());
-//	 stick2_dpadUp.whileHeld(new LiftDownCommand());
-//	 
-//	 stick1_X.whenPressed(new ResetGyroOriginCommand());
+		 controller2_Y.whenPressed(new ClimbArmExtended());
+		 controller2_Y.whenPressed(new ClimbClampLock());
+		 controller2_Y.whenPressed(new ClimbClampOpen());
+		 controller2_Y.whileHeld(new ClimbUp());
+		 controller2_Y.whileHeld(new ClimbRetract());
+		 controller2_Y.whenPressed(new BoxPullClawCommand());
+		 controller2_Y.whenPressed(new BoxPushClawCommand());
+		 controller2_Y.whenPressed(new ClawOpenCommand());
+		 controller2_Y.whenPressed(new ClawCloseCommand());
+		 controller2_Y.whenPressed(new BoxDrop());
+		 controller2_Y.whenPressed(new BoxObtain());
+		 controller2_Y.whenPressed(new BoxShoot());
+		 
+		 
+		 
 	 }
 	// Start the command when the button is released and let it run the command
 	// until it is finished as determined by it's isFinished method.
