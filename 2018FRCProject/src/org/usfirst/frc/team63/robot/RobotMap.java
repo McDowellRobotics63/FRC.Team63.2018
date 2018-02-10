@@ -60,8 +60,8 @@ public class RobotMap {
 
 	//Solenoid Mapping
 	public static final int PCMID = 0;
-	public static final int LEFTSHIPHTUR = 0; //PCM id of pneumatic gearbox thing
-	public static final int RIGHTSHIPHTUR = 0;
+	public static final int LEFTSHIFTER = 0; //PCM id of pneumatic gearbox thing
+	public static final int RIGHTSHIFTER = 0;
 	public static final double BoxInputSpeed = 0;
 	public static final double BoxOutputSpeed = 0;
 }

@@ -23,6 +23,8 @@ import org.usfirst.frc.team63.robot.simple_commands.ClimbClampOpen;
 import org.usfirst.frc.team63.robot.simple_commands.ClimbRetract;
 import org.usfirst.frc.team63.robot.simple_commands.ClimbStop;
 import org.usfirst.frc.team63.robot.simple_commands.ClimbUp;
+import org.usfirst.frc.team63.robot.simple_commands.DriveGearShift;
+import org.usfirst.frc.team63.robot.simple_commands.DriveGearShift.Shift;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -87,6 +89,8 @@ public class OI {
 		 
 		 
 		 //Drive Gear Shift
+		 controller1_X.whileHeld(new DriveGearShift(Shift.HIGH));
+		 controller1_X.whenReleased(new DriveGearShift(Shift.LOW));
 		 
 		 
 		 

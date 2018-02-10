@@ -16,8 +16,8 @@ public class DriveSubsystem extends Subsystem {
 	 private WPI_TalonSRX rightMaster = new WPI_TalonSRX(RobotMap.DRIVERIGHTMASTER); 
 	 private WPI_TalonSRX leftSlave = new WPI_TalonSRX(RobotMap.DRIVELEFTSLAVE); 
 	 private WPI_TalonSRX rightSlave = new WPI_TalonSRX(RobotMap.DRIVERIGHTSLAVE);
-	 private Solenoid leftShiphtur = new Solenoid(RobotMap.PCMID, RobotMap.LEFTSHIPHTUR);
-	 private Solenoid rightShiphtur = new Solenoid(RobotMap.PCMID, RobotMap.RIGHTSHIPHTUR); 
+	 private Solenoid leftShifter = new Solenoid(RobotMap.PCMID, RobotMap.LEFTSHIFTER);
+	 private Solenoid rightShifter = new Solenoid(RobotMap.PCMID, RobotMap.RIGHTSHIFTER); 
 	 
 	 private DifferentialDrive differentialDrive;
 	 
@@ -30,7 +30,7 @@ public class DriveSubsystem extends Subsystem {
 	    // Set the default command for a subsystem here.
 	    //setDefaultCommand(new MySpecialCommand());
 	 }
-	
+
 	/**
 	 * Arcade drive for use with PID control or other non-joystick driving
 	 * 
@@ -77,12 +77,16 @@ public class DriveSubsystem extends Subsystem {
 		rightMaster.getSensorCollection().setQuadraturePosition(RobotMap.kVelocityControlSlot, 10);
 	}
 	
-	public void shiftHigh() {
-		
+	public void shiftHigh()
+	{
+		leftShifter.set(true);
+		rightShifter.set(true);
 	}
 	
-	public void shiftLow() {
-		
+	public void shiftLow() 
+	{
+		leftShifter.set(false);
+		rightShifter.set(false);
 	}
 	
 	/**
