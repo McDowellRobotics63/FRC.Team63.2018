@@ -8,10 +8,10 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class BoxPullClawCommand extends Command {
+public class ClimbStop extends Command {
 
-    public BoxPullClawCommand() {
-     requires(Robot.claw);
+    public ClimbStop() {
+        requires(Robot.climb);
     }
 
     // Called just before this Command runs the first time
@@ -20,13 +20,12 @@ public class BoxPullClawCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.claw.clawPull(RobotMap.BoxInputSpeed);
+    	Robot.climb.pullyclimb(0);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
-        //TODO: use ultra sonic
+        return true;
     }
 
     // Called once after isFinished returns true

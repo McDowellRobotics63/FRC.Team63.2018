@@ -23,7 +23,7 @@ public class ClawSubsystem extends Subsystem {
     	
     }
     
-    public void clawGrab(boolean isOpen) {
+    public void clawToggle(boolean isOpen) {
     	//true = open
     	LEFT_CLAW.set(isOpen);
     	RIGHT_CLAW.set(isOpen);

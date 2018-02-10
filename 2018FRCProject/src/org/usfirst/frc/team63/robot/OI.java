@@ -11,14 +11,17 @@ import org.usfirst.frc.team63.robot.XboxDPadButton.DPAD_BUTTON;
 import org.usfirst.frc.team63.robot.commands.BoxDrop;
 import org.usfirst.frc.team63.robot.commands.BoxObtain;
 import org.usfirst.frc.team63.robot.commands.BoxShoot;
-import org.usfirst.frc.team63.robot.simple_commands.BoxPullClawCommand;
-import org.usfirst.frc.team63.robot.simple_commands.BoxPushClawCommand;
+import org.usfirst.frc.team63.robot.simple_commands.BoxPullCommand;
+import org.usfirst.frc.team63.robot.simple_commands.BoxPushCommand;
+import org.usfirst.frc.team63.robot.simple_commands.BoxStopCommand;
 import org.usfirst.frc.team63.robot.simple_commands.ClawCloseCommand;
 import org.usfirst.frc.team63.robot.simple_commands.ClawOpenCommand;
 import org.usfirst.frc.team63.robot.simple_commands.ClimbArmExtended;
+import org.usfirst.frc.team63.robot.simple_commands.ClimbArmRetract;
 import org.usfirst.frc.team63.robot.simple_commands.ClimbClampLock;
 import org.usfirst.frc.team63.robot.simple_commands.ClimbClampOpen;
 import org.usfirst.frc.team63.robot.simple_commands.ClimbRetract;
+import org.usfirst.frc.team63.robot.simple_commands.ClimbStop;
 import org.usfirst.frc.team63.robot.simple_commands.ClimbUp;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -64,18 +67,26 @@ public class OI {
 	 public OI()
 	 {
 			
-		 controller2_Y.whenPressed(new ClimbArmExtended());
-		 controller2_Y.whenPressed(new ClimbClampLock());
-		 controller2_Y.whenPressed(new ClimbClampOpen());
-		 controller2_Y.whileHeld(new ClimbUp());
-		 controller2_Y.whileHeld(new ClimbRetract());
-		 controller2_Y.whenPressed(new BoxPullClawCommand());
-		 controller2_Y.whenPressed(new BoxPushClawCommand());
-		 controller2_Y.whenPressed(new ClawOpenCommand());
-		 controller2_Y.whenPressed(new ClawCloseCommand());
-		 controller2_Y.whenPressed(new BoxDrop());
-		 controller2_Y.whenPressed(new BoxObtain());
-		 controller2_Y.whenPressed(new BoxShoot());
+		 controller2_LB.whenPressed(new ClimbArmExtended());
+		 controller2_RB.whenPressed(new ClimbArmRetract());
+		 controller2_start.whenPressed(new ClimbClampLock());
+		 controller2_back.whenPressed(new ClimbClampOpen());
+		 controller2_dpadUp.whileHeld(new ClimbUp());
+		 controller2_dpadUp.whenReleased(new ClimbStop());
+		 controller2_dpadDown.whileHeld(new ClimbRetract());
+		 controller2_dpadDown.whenReleased(new ClimbStop());
+		 
+		 controller1_RB.whenPressed(new ClawOpenCommand());
+		 controller1_LB.whenPressed(new ClawCloseCommand());
+		 controller1_A.whileHeld(new BoxObtain());
+		 controller1_A.whenReleased(new BoxStopCommand());
+		 controller1_B.whileHeld(new BoxPushCommand());
+		 controller1_B.whenReleased(new BoxStopCommand());
+		 
+		 //Lift
+		 
+		 
+		 //Drive Gear Shift
 		 
 		 
 		 

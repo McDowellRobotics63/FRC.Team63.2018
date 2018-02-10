@@ -1,7 +1,7 @@
 package org.usfirst.frc.team63.robot.commands;
 
 import org.usfirst.frc.team63.robot.Robot;
-import org.usfirst.frc.team63.robot.simple_commands.BoxPushClawCommand;
+import org.usfirst.frc.team63.robot.simple_commands.BoxPushCommand;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -16,7 +16,7 @@ public class BoxShoot extends CommandGroup {
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
         // these will run in order.
-    	addSequential(new BoxPushClawCommand());
+    	addSequential(new BoxPushCommand());
     	
 
         // To run multiple commands at the same time,
