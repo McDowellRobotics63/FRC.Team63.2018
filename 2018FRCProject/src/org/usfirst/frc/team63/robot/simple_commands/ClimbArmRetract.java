@@ -1,17 +1,17 @@
 package org.usfirst.frc.team63.robot.simple_commands;
 
 import org.usfirst.frc.team63.robot.Robot;
-import org.usfirst.frc.team63.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class BoxPullClawCommand extends Command {
+public class ClimbArmRetract extends Command {
 
-    public BoxPullClawCommand() {
-     requires(Robot.claw);
+    public ClimbArmRetract() {
+        
+    	requires(Robot.climb);
     }
 
     // Called just before this Command runs the first time
@@ -20,13 +20,12 @@ public class BoxPullClawCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.claw.clawPull(RobotMap.BoxInputSpeed);
+    	Robot.climb.armExtend(false);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
-        //TODO: use ultra sonic
+        return true;
     }
 
     // Called once after isFinished returns true
