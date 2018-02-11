@@ -113,11 +113,11 @@ public class DriveSubsystem extends Subsystem {
 	}
 	
 	/*Units are native units of encoder*/
-	private static double unitsToInches(double units) {
+	private static double unitsToInches(int units) {
 	    return units * RobotMap.kDriveWheelCircumference / RobotMap.kDriveEncoderFactor;
 	}
-	private static double inchesToUnits(double inches) {
-		return inches * RobotMap.kDriveEncoderFactor / RobotMap.kDriveWheelCircumference; 
+	private static int inchesToUnits(double inches) {
+		return (int)(inches * RobotMap.kDriveEncoderFactor / RobotMap.kDriveWheelCircumference); 
 	}
 	
 	public void autoInit() {
