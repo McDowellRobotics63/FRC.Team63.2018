@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.usfirst.frc.team63.robot.RobotMap;
+import org.usfirst.frc.team63.robot.simple_commands.TeleopDriveCommand;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
@@ -36,8 +37,7 @@ public class DriveSubsystem extends Subsystem {
 	 }
 	
 	 public void initDefaultCommand() {
-	    // Set the default command for a subsystem here.
-	    //setDefaultCommand(new MySpecialCommand());
+	    setDefaultCommand(new TeleopDriveCommand());
 	 }
 
 	/**
