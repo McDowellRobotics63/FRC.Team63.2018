@@ -17,32 +17,32 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 public class DriveSubsystem extends Subsystem {
-	 public TalonSRX leftMaster = new WPI_TalonSRX(RobotMap.DRIVELEFTMASTER); 
-	 private TalonSRX rightMaster = new WPI_TalonSRX(RobotMap.DRIVERIGHTMASTER); 
-	 private TalonSRX leftSlave = new WPI_TalonSRX(RobotMap.DRIVELEFTSLAVE); 
-	 private TalonSRX rightSlave = new WPI_TalonSRX(RobotMap.DRIVERIGHTSLAVE);
-//	 private DifferentialDrive differentialDrive;
+	 public WPI_TalonSRX leftMaster = new WPI_TalonSRX(RobotMap.DRIVELEFTMASTER); 
+	 private WPI_TalonSRX rightMaster = new WPI_TalonSRX(RobotMap.DRIVERIGHTMASTER); 
+	 private WPI_TalonSRX leftSlave = new WPI_TalonSRX(RobotMap.DRIVELEFTSLAVE); 
+	 private WPI_TalonSRX rightSlave = new WPI_TalonSRX(RobotMap.DRIVERIGHTSLAVE);
+	 
+	 private DifferentialDrive differentialDrive;
 	 StringBuilder _sb = new StringBuilder();
 	 
-	 public DriveSubsystem() {
-//		 differentialDrive = new DifferentialDrive(leftMaster, rightMaster);
-		 TalonConfig();
+	 public DriveSubsystem() {    	
+    	differentialDrive = new DifferentialDrive(leftMaster, rightMaster);
+		TalonConfig();
 	 }
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
     }
+
+    public void initAutoDrive()
+    {
+    	differentialDrive.setSafetyEnabled(false);
+    }
     
-    /**
-     * Arcade drive for use with PID control or other non-joystick driving
-     * 
-     * @param xSpeed    The robot's speed forward (positive) and back from -1.0 to 1.0.
-     * @param zRotation The robot's rotation rate around the Z axis from -1.0 to 1.0. Clockwise/rightturn is
-     *                  positive.
-     */
-    public void autoDrive(double xSpeed, double zRotation) {
-//    	differentialDrive.arcadeDrive(xSpeed, zRotation, false);
+    public void initTeleopDrive()
+    {
+    	differentialDrive.setSafetyEnabled(true);
     }
     
     /**
@@ -53,7 +53,7 @@ public class DriveSubsystem extends Subsystem {
      *                  positive.
      */
     public void teleDrive(double xSpeed, double zRotation) {
-//    	differentialDrive.arcadeDrive(xSpeed, zRotation);
+    	differentialDrive.arcadeDrive(xSpeed, zRotation, true);
     }
     
     /**
@@ -121,7 +121,8 @@ public class DriveSubsystem extends Subsystem {
 		rightMaster.config_kD(0, d, RobotMap.kTimeoutMs);
 		rightMaster.config_IntegralZone(0, izone, RobotMap.kTimeoutMs);
     }
-        public List<Double> DebugMotionMagicRight()
+    
+    public List<Double> DebugMotionMagicRight()
     {
     	List<Double> resulterino = new ArrayList<Double>();
     	resulterino.add((double) rightMaster.getSelectedSensorPosition(0));

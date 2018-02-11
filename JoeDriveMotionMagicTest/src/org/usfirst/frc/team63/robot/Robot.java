@@ -84,6 +84,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
+		drive.initAutoDrive();
 		m_autonomousCommand = m_chooser.getSelected();
 
 		/*
@@ -105,6 +106,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
+		Instrum.Process(drive.leftMaster, new StringBuilder());
 	}
 
 	@Override
@@ -113,6 +115,9 @@ public class Robot extends TimedRobot {
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
+		
+		drive.initTeleopDrive();
+		
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.cancel();
 		}
@@ -125,8 +130,7 @@ public class Robot extends TimedRobot {
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
 		//drive.leftMaster.set(ControlMode.PercentOutput, m_oi.stick.getRawAxis(RobotMap.XBOX_LEFT_Y_AXIS));
-		
-		Instrum.Process(drive.leftMaster, new StringBuilder());
+		drive.teleDrive(m_oi.stick.getRawAxis(RobotMap.XBOX_LEFT_X_AXIS), -m_oi.stick.getRawAxis(RobotMap.XBOX_LEFT_Y_AXIS));
 		
 	}
 

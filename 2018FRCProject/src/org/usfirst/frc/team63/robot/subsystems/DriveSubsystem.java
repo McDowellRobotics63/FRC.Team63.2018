@@ -26,7 +26,8 @@ public class DriveSubsystem extends Subsystem {
 		 TalonConfig();
 	 }
 	
-	 public void initDefaultCommand() {
+	 public void initDefaultCommand() 
+	 {
 	    // Set the default command for a subsystem here.
 	    //setDefaultCommand(new MySpecialCommand());
 	 }
