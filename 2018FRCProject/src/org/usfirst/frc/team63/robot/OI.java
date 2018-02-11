@@ -20,7 +20,7 @@ import org.usfirst.frc.team63.robot.simple_commands.ClimbArmExtended;
 import org.usfirst.frc.team63.robot.simple_commands.ClimbArmRetract;
 import org.usfirst.frc.team63.robot.simple_commands.ClimbClampLock;
 import org.usfirst.frc.team63.robot.simple_commands.ClimbClampOpen;
-import org.usfirst.frc.team63.robot.simple_commands.ClimbRetract;
+import org.usfirst.frc.team63.robot.simple_commands.ClimbDown;
 import org.usfirst.frc.team63.robot.simple_commands.ClimbStop;
 import org.usfirst.frc.team63.robot.simple_commands.ClimbUp;
 import org.usfirst.frc.team63.robot.simple_commands.DriveGearShift;
@@ -75,7 +75,7 @@ public class OI {
 		 controller2_back.whenPressed(new ClimbClampOpen());
 		 controller2_dpadUp.whileHeld(new ClimbUp());
 		 controller2_dpadUp.whenReleased(new ClimbStop());
-		 controller2_dpadDown.whileHeld(new ClimbRetract());
+		 controller2_dpadDown.whileHeld(new ClimbDown());
 		 controller2_dpadDown.whenReleased(new ClimbStop());
 		 
 		 controller1_RB.whenPressed(new ClawOpenCommand());

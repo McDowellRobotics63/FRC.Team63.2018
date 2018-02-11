@@ -1,16 +1,16 @@
 package org.usfirst.frc.team63.robot.simple_commands;
 
 import org.usfirst.frc.team63.robot.Robot;
+import org.usfirst.frc.team63.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class ClimbRetract extends Command {
+public class ClimbDown extends Command {
 
-    public ClimbRetract() {
-        
+    public ClimbDown() {        
     	requires(Robot.climb);
     }
 
@@ -20,7 +20,7 @@ public class ClimbRetract extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.climb.armRetract(false);
+    	Robot.climb.pullyclimb(RobotMap.climbDownSpeed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
