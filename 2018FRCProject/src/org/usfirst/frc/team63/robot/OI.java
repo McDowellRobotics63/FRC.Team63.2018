@@ -24,7 +24,7 @@ import org.usfirst.frc.team63.robot.simple_commands.ClimbDown;
 import org.usfirst.frc.team63.robot.simple_commands.ClimbStop;
 import org.usfirst.frc.team63.robot.simple_commands.ClimbUp;
 import org.usfirst.frc.team63.robot.simple_commands.DriveGearShift;
-import org.usfirst.frc.team63.robot.simple_commands.DriveGearShift.Shift;
+import org.usfirst.frc.team63.robot.subsystems.DriveSubsystem.Shift;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;

@@ -1,6 +1,7 @@
 package org.usfirst.frc.team63.robot.simple_commands;
 
 import org.usfirst.frc.team63.robot.Robot;
+import org.usfirst.frc.team63.robot.subsystems.DriveSubsystem.Shift;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -9,10 +10,6 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class DriveGearShift extends Command {
 
-	public enum Shift
-	{
-	HIGH, LOW
-	}
 	private Shift m_DesiredValue = Shift.LOW;
     public DriveGearShift(Shift desiredValue) {
         m_DesiredValue = desiredValue;

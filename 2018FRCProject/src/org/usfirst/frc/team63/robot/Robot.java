@@ -49,6 +49,15 @@ public class Robot extends TimedRobot {
 		m_oi = new OI();
 //		m_chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
+		SmartDashboard.putNumber("setpoint", 14400.0);
+		SmartDashboard.putNumber("kF", 0.8);
+		SmartDashboard.putNumber("kP", 1.6); 
+		SmartDashboard.putNumber("kI", 0.001); 
+		SmartDashboard.putNumber("kD", 5.0);
+		SmartDashboard.putNumber("kiZone", 75.0);
+		SmartDashboard.putNumber("cruise", 312);
+		SmartDashboard.putNumber("acceleration", 312);
+		
 		SmartDashboard.putData("Auto mode", m_chooser);
 	}
 
@@ -81,14 +90,9 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousInit() {
 		m_autonomousCommand = m_chooser.getSelected();
-
-		/*
-		 * String autoSelected = SmartDashboard.getString("Auto Selector",
-		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
-		 * = new MyAutoCommand(); break; case "Default Auto": default:
-		 * autonomousCommand = new ExampleCommand(); break; }
-		 */
-
+		
+		drive.autoInit();
+		
 		// schedule the autonomous command (example)
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.start();
@@ -109,6 +113,8 @@ public class Robot extends TimedRobot {
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
+		
+		drive.teleInit();
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.cancel();
 		}
