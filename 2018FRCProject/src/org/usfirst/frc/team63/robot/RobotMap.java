@@ -44,9 +44,13 @@ public class RobotMap {
 	public static final double kDriveWheelDiameterInches = 69;
 	public static final double kDriveWheelCircumference = kDriveWheelDiameterInches*Math.PI; //inches
 	public static final double kDriveTrack = 42; //inches between centerlines of left and right wheels
-	public static final double kDriveEncoderFactor = 1440; //native units per rotation
+	public static final double kDriveEncoderFactor = 4096; //native units per rotation
 	public static final int kTimeoutMs = 10; //ms to wait for talon timeout, literally doesn't matter
 	public static final int kVelocityControlSlot = 0;
+	
+	//Lift constants
+	public static final double kLiftEncoderPPR = 4096;
+	public static final double kLiftInchesPerRev = 0;
 	
 	//Controller Map
 	public static final int XBOX_LEFT_X_AXIS = 0;
