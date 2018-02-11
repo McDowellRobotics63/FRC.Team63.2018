@@ -13,7 +13,7 @@ public class ClawSubsystem extends Subsystem {
 
 	private Spark leftMotor = new Spark(RobotMap.CLAWLEFT);
 	private Spark rightMotor = new Spark(RobotMap.CLAWRIGHT);
-	private Solenoid LEFT_CLAW = new Solenoid(RobotMap.PCM_CANID,RobotMap.LEFT_CLAW_SOLENOID);
+	private Solenoid LEFT_CLAW = new Solenoid(RobotMap.PCM1_CANID,RobotMap.LEFT_CLAW_SOLENOID);
 	private Solenoid RIGHT_CLAW = new Solenoid(0,RobotMap.RIGHT_CLAW_SOLENOID);
 	
 	public ClawSubsystem() {

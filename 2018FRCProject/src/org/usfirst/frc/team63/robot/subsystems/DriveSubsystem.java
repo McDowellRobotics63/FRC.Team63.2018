@@ -21,8 +21,7 @@ public class DriveSubsystem extends Subsystem {
 	private WPI_TalonSRX rightMaster = new WPI_TalonSRX(RobotMap.DRIVERIGHTMASTER); 
 	private WPI_TalonSRX leftSlave = new WPI_TalonSRX(RobotMap.DRIVELEFTSLAVE); 
 	private WPI_TalonSRX rightSlave = new WPI_TalonSRX(RobotMap.DRIVERIGHTSLAVE);
-	private Solenoid leftShifter = new Solenoid(RobotMap.PCM_CANID, RobotMap.LEFTSHIFTER);
-	private Solenoid rightShifter = new Solenoid(RobotMap.PCM_CANID, RobotMap.RIGHTSHIFTER); 
+	private Solenoid shifter = new Solenoid(RobotMap.PCM1_CANID, RobotMap.SHIFTER);
 	 
 	private DifferentialDrive differentialDrive;
 	 
@@ -93,14 +92,12 @@ public class DriveSubsystem extends Subsystem {
 	
 	public void shiftHigh()
 	{
-		leftShifter.set(true);
-		rightShifter.set(true);
+		shifter.set(true);
 	}
 	
 	public void shiftLow() 
 	{
-		leftShifter.set(false);
-		rightShifter.set(false);
+		shifter.set(false);
 	}
 	
 	/**
