@@ -78,12 +78,13 @@ public class OI {
 		 controller2_dpadDown.whileHeld(new ClimbDown());
 		 controller2_dpadDown.whenReleased(new ClimbStop());
 		 
-		 controller1_RB.whenPressed(new ClawOpenCommand());
-		 controller1_LB.whenPressed(new ClawCloseCommand());
+//		 controller1_RB.whenPressed(new ClawOpenCommand());
+//		 controller1_LB.whenPressed(new ClawCloseCommand());
 		 controller1_A.whileHeld(new BoxObtain());
 		 controller1_A.whenReleased(new BoxStopCommand());
 		 controller1_B.whileHeld(new BoxPushCommand());
 		 controller1_B.whenReleased(new BoxStopCommand());
+		 
 		 
 		 //Lift
 		 

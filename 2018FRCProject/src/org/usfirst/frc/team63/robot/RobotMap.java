@@ -50,8 +50,9 @@ public class RobotMap {
 	
 	//Lift constants
 	public static final double kLiftEncoderPPR = 4096;
-	public static final double kLiftInchesPerRev = 0;
-	public static final double kMaxDisplacementInches = 0;
+	public static final double kLiftInchesPerRev = 1;
+	public static final double kMaxDisplacementInches = 18;
+	public static final double MIN_FORCE_UP = 0;
 	
 	//Controller Map
 	public static final int XBOX_LEFT_X_AXIS = 0;
