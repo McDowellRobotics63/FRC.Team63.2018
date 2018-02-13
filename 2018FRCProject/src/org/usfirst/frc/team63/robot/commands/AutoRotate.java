@@ -72,6 +72,6 @@ public class AutoRotate extends Command {
     }
     
     private double degreesToInches(double degrees) {
-    	return degrees/180*Math.PI*(RobotMap.kDriveTrack/2);
+    	return degrees/180*Math.PI*(RobotMap.DRIVE_TRACK/2);
     }
 }

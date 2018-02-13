@@ -75,11 +75,11 @@ public class DriveSubsystem extends Subsystem {
     }
 	
 	public void resetEncoders() {
-		leftMaster.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
-		rightMaster.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
+		leftMaster.setSelectedSensorPosition(0, 0, RobotMap.TIMOUT_MS);
+		rightMaster.setSelectedSensorPosition(0, 0, RobotMap.TIMOUT_MS);
 	
-		leftMaster.getSensorCollection().setQuadraturePosition(RobotMap.kVelocityControlSlot, RobotMap.kTimeoutMs);
-		rightMaster.getSensorCollection().setQuadraturePosition(RobotMap.kVelocityControlSlot, RobotMap.kTimeoutMs);
+		leftMaster.getSensorCollection().setQuadraturePosition(RobotMap.VELOCITY_CONTROL_SLOT, RobotMap.TIMOUT_MS);
+		rightMaster.getSensorCollection().setQuadraturePosition(RobotMap.VELOCITY_CONTROL_SLOT, RobotMap.TIMOUT_MS);
 	}
 	
     public void setMotionMagicLeft(double setpoint) {
@@ -111,10 +111,10 @@ public class DriveSubsystem extends Subsystem {
 	
 	/*Units are native units of encoder*/
 	private static double unitsToInches(int units) {
-	    return units * RobotMap.kDriveWheelCircumference / RobotMap.kDriveEncoderFactor;
+	    return units * RobotMap.DRIVE_WHEEL_CIRCUMFERENCE / RobotMap.DRIVE_ENCODER_PPR;
 	}
 	private static int inchesToUnits(double inches) {
-		return (int)(inches * RobotMap.kDriveEncoderFactor / RobotMap.kDriveWheelCircumference); 
+		return (int)(inches * RobotMap.DRIVE_ENCODER_PPR / RobotMap.DRIVE_WHEEL_CIRCUMFERENCE); 
 	}
 	
 	public void autoInit() {
@@ -127,17 +127,17 @@ public class DriveSubsystem extends Subsystem {
 	
 	/*Called in constructor to ensure correct drive talon settings*/
 	private void TalonConfig() {
-    	leftMaster.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, RobotMap.kTimeoutMs);
-    	rightMaster.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, RobotMap.kTimeoutMs);
+    	leftMaster.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, RobotMap.TIMOUT_MS);
+    	rightMaster.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, RobotMap.TIMOUT_MS);
 		
-    	leftMaster.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
-    	rightMaster.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
+    	leftMaster.setSelectedSensorPosition(0, 0, RobotMap.TIMOUT_MS);
+    	rightMaster.setSelectedSensorPosition(0, 0, RobotMap.TIMOUT_MS);
     	
-    	leftMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, RobotMap.kTimeoutMs);
-    	leftMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10, RobotMap.kTimeoutMs);
+    	leftMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, RobotMap.TIMOUT_MS);
+    	leftMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10, RobotMap.TIMOUT_MS);
     	
-    	rightMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, RobotMap.kTimeoutMs);
-    	rightMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10, RobotMap.kTimeoutMs);
+    	rightMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, RobotMap.TIMOUT_MS);
+    	rightMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10, RobotMap.TIMOUT_MS);
 		
     	leftMaster.setSensorPhase(true);
     	rightMaster.setSensorPhase(true);
@@ -158,39 +158,39 @@ public class DriveSubsystem extends Subsystem {
     	rightSlave.set(ControlMode.Follower, RobotMap.DRIVERIGHTMASTER);
     	
     	//Closed Loop Voltage Limits
-    	leftMaster.configNominalOutputForward(0.0, RobotMap.kTimeoutMs);
-    	rightMaster.configNominalOutputForward(0.0, RobotMap.kTimeoutMs);
+    	leftMaster.configNominalOutputForward(0.0, RobotMap.TIMOUT_MS);
+    	rightMaster.configNominalOutputForward(0.0, RobotMap.TIMOUT_MS);
     	
-    	leftMaster.configNominalOutputReverse(-0.0, RobotMap.kTimeoutMs);
-    	rightMaster.configNominalOutputReverse(-0.0, RobotMap.kTimeoutMs);
+    	leftMaster.configNominalOutputReverse(-0.0, RobotMap.TIMOUT_MS);
+    	rightMaster.configNominalOutputReverse(-0.0, RobotMap.TIMOUT_MS);
     	
-    	leftMaster.configPeakOutputForward(1.0, RobotMap.kTimeoutMs);
-    	rightMaster.configPeakOutputForward(1.0, RobotMap.kTimeoutMs);
+    	leftMaster.configPeakOutputForward(1.0, RobotMap.TIMOUT_MS);
+    	rightMaster.configPeakOutputForward(1.0, RobotMap.TIMOUT_MS);
     	
-    	leftMaster.configPeakOutputReverse(-1.0, RobotMap.kTimeoutMs);
-    	rightMaster.configPeakOutputReverse(-1.0, RobotMap.kTimeoutMs);
+    	leftMaster.configPeakOutputReverse(-1.0, RobotMap.TIMOUT_MS);
+    	rightMaster.configPeakOutputReverse(-1.0, RobotMap.TIMOUT_MS);
 	}
 	
     public void configGains(double f, double p, double i, double d, int izone, int cruise, int accel) {
     	leftMaster.selectProfileSlot(0, 0);
-		leftMaster.config_kF(0, f, RobotMap.kTimeoutMs);
-		leftMaster.config_kP(0, p, RobotMap.kTimeoutMs);
-		leftMaster.config_kI(0, i, RobotMap.kTimeoutMs);
-		leftMaster.config_kD(0, d, RobotMap.kTimeoutMs);
-		leftMaster.config_IntegralZone(0, izone, RobotMap.kTimeoutMs);
+		leftMaster.config_kF(0, f, RobotMap.TIMOUT_MS);
+		leftMaster.config_kP(0, p, RobotMap.TIMOUT_MS);
+		leftMaster.config_kI(0, i, RobotMap.TIMOUT_MS);
+		leftMaster.config_kD(0, d, RobotMap.TIMOUT_MS);
+		leftMaster.config_IntegralZone(0, izone, RobotMap.TIMOUT_MS);
 		
 		rightMaster.selectProfileSlot(0, 0);
-		rightMaster.config_kF(0, f, RobotMap.kTimeoutMs);
-		rightMaster.config_kP(0, p, RobotMap.kTimeoutMs);
-		rightMaster.config_kI(0, i, RobotMap.kTimeoutMs);
-		rightMaster.config_kD(0, d, RobotMap.kTimeoutMs);
-		rightMaster.config_IntegralZone(0, izone, RobotMap.kTimeoutMs);
+		rightMaster.config_kF(0, f, RobotMap.TIMOUT_MS);
+		rightMaster.config_kP(0, p, RobotMap.TIMOUT_MS);
+		rightMaster.config_kI(0, i, RobotMap.TIMOUT_MS);
+		rightMaster.config_kD(0, d, RobotMap.TIMOUT_MS);
+		rightMaster.config_IntegralZone(0, izone, RobotMap.TIMOUT_MS);
 		
-    	leftMaster.configMotionCruiseVelocity(cruise, RobotMap.kTimeoutMs);
-    	leftMaster.configMotionAcceleration(accel, RobotMap.kTimeoutMs);
+    	leftMaster.configMotionCruiseVelocity(cruise, RobotMap.TIMOUT_MS);
+    	leftMaster.configMotionAcceleration(accel, RobotMap.TIMOUT_MS);
 		
-    	rightMaster.configMotionCruiseVelocity(cruise, RobotMap.kTimeoutMs);
-    	rightMaster.configMotionAcceleration(accel, RobotMap.kTimeoutMs);
+    	rightMaster.configMotionCruiseVelocity(cruise, RobotMap.TIMOUT_MS);
+    	rightMaster.configMotionAcceleration(accel, RobotMap.TIMOUT_MS);
     }
     
     public List<Double> DebugMotionMagicRight()

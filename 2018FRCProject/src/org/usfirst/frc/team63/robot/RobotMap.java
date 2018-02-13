@@ -35,25 +35,27 @@ public class RobotMap {
 	public static final int RIGHT_CLAW_SOLENOID = 0;
 	public static final int SHIFTER = 0;
 	
-	public static final double BoxInputSpeed = 0;
-	public static final double BoxOutputSpeed = 0;
-	public static final double climbUpSpeed=0;
-	public static final double climbDownSpeed=0;
+	public static final double BOX_IN_SPEED = 0;
+	public static final double BOX_OUT_SPEED = 0;
+	public static final double CLIMB_UP_SPEED=0;
+	public static final double CLIMB_DOWN_SPEED=0;
 	
     //Drive constants
-	public static final double kDriveWheelDiameterInches = 6;
-	public static final double kDriveWheelCircumference = kDriveWheelDiameterInches*Math.PI; //inches
-	public static final double kDriveTrack = 23.25; //inches between centerlines of left and right wheels
-	public static final double kDriveEncoderFactor = 4096; //native units per rotation
-	public static final int kTimeoutMs = 10; //ms to wait for talon timeout, literally doesn't matter
-	public static final int kVelocityControlSlot = 0;
+	private static final double DRIVE_WHEEL_DIAMETER = 6;
+	public static final double DRIVE_WHEEL_CIRCUMFERENCE = DRIVE_WHEEL_DIAMETER*Math.PI; //inches
+	public static final double DRIVE_TRACK = 23.25; //inches between centerlines of left and right wheels
+	public static final double DRIVE_ENCODER_PPR = 4096; //native units per rotation
+	public static final int TIMOUT_MS = 10; //ms to wait for talon timeout, literally doesn't matter
+	public static final int VELOCITY_CONTROL_SLOT = 0;
 	
 	//Lift constants
-	public static final double kLiftEncoderPPR = 4096;
-	public static final double kLiftInchesPerRev = 1;
-	public static final double kMaxDisplacementInches = 18;
+	public static final double LIFT_ENCODER_PPR = 4096;
+	public static final double LIFT_INCHES_PER_REV = 1;
+	private static final double MAX_LIFT_DISPLACEMENT_INCHES = 18;
+	public static final double MAX_LIFT_DISPLACEMENT = MAX_LIFT_DISPLACEMENT_INCHES*LIFT_ENCODER_PPR/LIFT_INCHES_PER_REV; //native units
 	public static final double MIN_FORCE_UP = 0;
-	public static final double BOX_HEIGHT = 11;
+	private static final double BOX_HEIGHT_INCHES = 11;
+	public static final double BOX_HEIGHT = BOX_HEIGHT_INCHES*LIFT_ENCODER_PPR/LIFT_INCHES_PER_REV; //native encoder units
 	
 	//Controller Map
 	public static final int XBOX_LEFT_X_AXIS = 0;

@@ -20,7 +20,7 @@ public class ClimbDown extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.climb.pullyclimb(RobotMap.climbDownSpeed);
+    	Robot.climb.pullyclimb(RobotMap.CLIMB_DOWN_SPEED);
     }
 
     // Make this return true when this Command no longer needs to run execute()
