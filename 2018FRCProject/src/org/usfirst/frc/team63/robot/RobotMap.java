@@ -53,6 +53,7 @@ public class RobotMap {
 	public static final double kLiftInchesPerRev = 1;
 	public static final double kMaxDisplacementInches = 18;
 	public static final double MIN_FORCE_UP = 0;
+	public static final double BOX_HEIGHT = 11;
 	
 	//Controller Map
 	public static final int XBOX_LEFT_X_AXIS = 0;

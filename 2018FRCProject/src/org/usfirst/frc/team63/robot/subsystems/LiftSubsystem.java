@@ -19,6 +19,9 @@ public class LiftSubsystem extends Subsystem {
 
 	private TalonSRX liftMotor = new TalonSRX(RobotMap.LIFT);
 	private double setpoint = 0;
+	public enum Direction {
+		UP, DOWN
+	}
     public void initDefaultCommand() {
     	TalonConfig();
     	resetEncoder();
@@ -51,6 +54,11 @@ public class LiftSubsystem extends Subsystem {
     public void setMotionMagicSetpoint(double setpoint) {
     	liftMotor.set(ControlMode.MotionMagic, setpoint);
     	//liftMotor.set(ControlMode.MotionMagic, inchesToUnits(setpoint));
+    }
+    
+    public double getCurrentPosition()
+    {
+    	return liftMotor.getSelectedSensorPosition(0);
     }
     
     public double getCurrentSetpoint() {
