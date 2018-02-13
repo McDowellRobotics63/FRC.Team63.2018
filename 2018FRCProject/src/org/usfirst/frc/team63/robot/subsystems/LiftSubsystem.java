@@ -33,7 +33,7 @@ public class LiftSubsystem extends Subsystem {
     	liftMotor.setInverted(false);    	
     	liftMotor.setNeutralMode(NeutralMode.Brake);    	
     	liftMotor.configNominalOutputForward(RobotMap.MIN_FORCE_UP, RobotMap.kTimeoutMs);    	
-    	liftMotor.configNominalOutputReverse(-0.0, RobotMap.kTimeoutMs);    	
+    	liftMotor.configNominalOutputReverse(RobotMap.MIN_FORCE_UP, RobotMap.kTimeoutMs);    	
     	liftMotor.configPeakOutputForward(1.0, RobotMap.kTimeoutMs);
     	liftMotor.configPeakOutputReverse(-1.0, RobotMap.kTimeoutMs);
     }
