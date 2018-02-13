@@ -18,9 +18,10 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class LiftSubsystem extends Subsystem {
 
 	private TalonSRX liftMotor = new TalonSRX(RobotMap.LIFT);
-
+	private double setpoint = 0;
     public void initDefaultCommand() {
     	TalonConfig();
+    	resetEncoder();
     }
 
     private void TalonConfig() {
@@ -31,12 +32,11 @@ public class LiftSubsystem extends Subsystem {
     	liftMotor.setSensorPhase(true);    	
     	liftMotor.setInverted(false);    	
     	liftMotor.setNeutralMode(NeutralMode.Brake);    	
-    	liftMotor.configNominalOutputForward(0.0, RobotMap.kTimeoutMs);    	
+    	liftMotor.configNominalOutputForward(RobotMap.MIN_FORCE_UP, RobotMap.kTimeoutMs);    	
     	liftMotor.configNominalOutputReverse(-0.0, RobotMap.kTimeoutMs);    	
     	liftMotor.configPeakOutputForward(1.0, RobotMap.kTimeoutMs);
     	liftMotor.configPeakOutputReverse(-1.0, RobotMap.kTimeoutMs);
     }
-    
     public void configGains(double f, double p, double i, double d, int izone, int accel, int cruise) {
     	liftMotor.selectProfileSlot(0, 0);
     	liftMotor.config_kF(0, f, RobotMap.kTimeoutMs);
@@ -87,6 +87,10 @@ public class LiftSubsystem extends Subsystem {
 		return unitsToInches(liftMotor.getSelectedSensorVelocity(0));
 	}
 	
+	public void setPercentOutput (double anything)
+	{
+    	liftMotor.set(ControlMode.PercentOutput, anything);
+	}
     private static double unitsToInches(double units) {
         return units * RobotMap.kLiftInchesPerRev / RobotMap.kLiftEncoderPPR;
     }
