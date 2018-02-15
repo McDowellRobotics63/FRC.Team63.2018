@@ -37,8 +37,9 @@ public class RobotMap {
 	
 	public static final double BOX_IN_SPEED = 0;
 	public static final double BOX_OUT_SPEED = 0;
-	public static final double CLIMB_UP_SPEED=0;
-	public static final double CLIMB_DOWN_SPEED=0;
+	public static final double CLIMB_UP_SPEED = 0;
+	public static final double CLIMB_DOWN_SPEED = 0;
+	public static final double LIFT_SPEED = 0;
 	
     //Drive constants
 	private static final double DRIVE_WHEEL_DIAMETER = 6;
@@ -72,4 +73,9 @@ public class RobotMap {
     public static final int XBOX_RIGHT_BUMPER = 6;
     public static final int XBOX_BACK = 7;
     public static final int XBOX_START = 8;
+    
+    //Vision
+    public static final double POWER = -1.07436389463682;
+    public static final double XCOEFF = 11834.7562904465;
+    public static final double intercept = -4.40793976463289;
 }

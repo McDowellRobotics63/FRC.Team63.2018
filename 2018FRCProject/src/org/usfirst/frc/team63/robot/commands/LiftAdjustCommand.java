@@ -1,46 +1,44 @@
-
-package org.usfirst.frc.team63.robot.simple_commands;
+package org.usfirst.frc.team63.robot.commands;
 
 import org.usfirst.frc.team63.robot.Robot;
-import org.usfirst.frc.team63.robot.subsystems.DriveSubsystem.Shift;
+import org.usfirst.frc.team63.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class DriveGearShift extends Command {
-
-	private Shift m_DesiredValue = Shift.LOW;
-    public DriveGearShift(Shift desiredValue) {
-        m_DesiredValue = desiredValue;
-    	requires(Robot.drive);
+public class LiftAdjustCommand extends Command {
+	private double setpoint;
+    public LiftAdjustCommand() {
+        requires(Robot.lift);
     }
-
+    
     // Called just before this Command runs the first time
     protected void initialize() {
+    	setpoint = Robot.lift.getCurrentPosition();
     }
-
+    
     // Called repeatedly when this Command is scheduled to run
-    protected void execute() 
-    {
-    	if (m_DesiredValue == Shift.LOW)
-        	Robot.drive.shiftLow();
-    	if (m_DesiredValue == Shift.HIGH)
-        	Robot.drive.shiftHigh();
+    protected void execute() {
+    	setpoint+=Robot.m_oi.controller1.getRawAxis(RobotMap.XBOX_RIGHT_Y_AXIS)*RobotMap.LIFT_SPEED;
+    	Robot.lift.setMotionMagicSetpoint(setpoint);
     }
-
+    
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+    	
+        return false;
     }
-
+    
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.lift.stop();
     }
-
+    
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	
     }
 }
