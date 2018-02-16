@@ -22,18 +22,18 @@ public class RobotMap {
 	public static final int LIFT = 5;
 	
 	//Spark PWM Channels
-	public static final int CLAWLEFT = 0;
-	public static final int CLAWRIGHT = 0;
-	public static final int CLIMBWINCH = 0;
+	public static final int CLAWLEFT = 1;
+	public static final int CLAWRIGHT = 2;
+	public static final int CLIMBWINCH = 3;
 	
 	//Solenoid Mappings
 	public static final int PCM1_CANID = 6;
 	public static final int PCM2_CANID = 7;
 	public static final int CLIMBARM = 0;
-	public static final int CLIMBCLAMPLOCK = 0;
-	public static final int LEFT_CLAW_SOLENOID = 0;
-	public static final int RIGHT_CLAW_SOLENOID = 0;
-	public static final int SHIFTER = 0;
+	public static final int CLIMBCLAMPLOCK = 1;
+	public static final int LEFT_CLAW_SOLENOID = 2;
+	public static final int RIGHT_CLAW_SOLENOID = 3;
+	public static final int SHIFTER = 4;
 	
 	public static final double BOX_IN_SPEED = 0;
 	public static final double BOX_OUT_SPEED = 0;
@@ -78,4 +78,5 @@ public class RobotMap {
     public static final double POWER = -1.07436389463682;
     public static final double XCOEFF = 11834.7562904465;
     public static final double intercept = -4.40793976463289;
+	public static final double LIFT_INCHES_PER_UNIT = 0.000033;
 }

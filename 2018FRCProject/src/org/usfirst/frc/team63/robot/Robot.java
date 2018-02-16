@@ -12,6 +12,9 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import org.usfirst.frc.team63.robot.commands.AutoSetLiftPosition;
+import org.usfirst.frc.team63.robot.commands.TestLift2;
 //import org.usfirst.frc.team63.robot.commands.ExampleCommand;
 import org.usfirst.frc.team63.robot.subsystems.ClawSubsystem;
 import org.usfirst.frc.team63.robot.subsystems.ClimbSubsystem;
@@ -59,6 +62,28 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("acceleration", 312);
 		
 		SmartDashboard.putData("Auto mode", m_chooser);
+		
+		
+		SmartDashboard.putNumber("kF_lift_up", 0.016);
+		SmartDashboard.putNumber("kP_lift_up", 0.45); 
+		SmartDashboard.putNumber("kI_lift_up", 0.0045); 
+		SmartDashboard.putNumber("kD_lift_up", 4.5);
+		SmartDashboard.putNumber("kiZone_lift_up", 300.0);
+		SmartDashboard.putNumber("kCruise_lift", 51200.0);
+		SmartDashboard.putNumber("kAccel_lift", 102400.0);
+		
+		SmartDashboard.putNumber("kF_lift_down", 0.012); 
+		SmartDashboard.putNumber("kP_lift_down", 0.45); 
+		SmartDashboard.putNumber("kI_lift_down", 0.0045); 
+		SmartDashboard.putNumber("kD_lift_down", 4.5);
+		SmartDashboard.putNumber("kiZone_lift_down", 300.0);
+		
+		SmartDashboard.putNumber("setpoint_lift", 0.0);
+		
+		SmartDashboard.putData("TestLift", new TestLift2());
+		SmartDashboard.putData("AutoSetLift", new AutoSetLiftPosition(0));
+		SmartDashboard.putNumber("lift_cmd", 0);
+		SmartDashboard.putNumber("lift_position", 0);
 	}
 
 	/**

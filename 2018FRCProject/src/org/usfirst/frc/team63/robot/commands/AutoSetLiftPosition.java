@@ -62,11 +62,17 @@ public class AutoSetLiftPosition extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	Robot.debug.Update(Robot.lift.DebugMotionMagic());
+    	
+    	SmartDashboard.putNumber("lift_velocity2", Robot.lift.getLiftSpeed());
+    	SmartDashboard.putNumber("lift_position", Robot.lift.getCurrentPosition());
+    	SmartDashboard.putNumber("ActiveTrajectoryPosition", Robot.lift.liftMotor.getActiveTrajectoryPosition());
+    	SmartDashboard.putNumber("ActiveTrajectoryVelocity", Robot.lift.liftMotor.getActiveTrajectoryVelocity());
+    	SmartDashboard.putNumber("ClosedLoopError", Robot.lift.liftMotor.getClosedLoopError(0));
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return totalTimer.get() > 10;
+    	return Robot.m_oi.controller1_start.get();
         //return totalTimer.get() > 0.5 && Math.abs(Robot.lift.getMotionMagicError() < 10);
     }
 

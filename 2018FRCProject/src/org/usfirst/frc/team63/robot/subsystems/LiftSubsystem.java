@@ -17,7 +17,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class LiftSubsystem extends Subsystem {
 
-	private TalonSRX liftMotor = new TalonSRX(RobotMap.LIFT);
+	public TalonSRX liftMotor = new TalonSRX(RobotMap.LIFT);
 	private double setpoint = 0;
 	public enum Direction {
 		UP, DOWN
@@ -88,11 +88,12 @@ public class LiftSubsystem extends Subsystem {
     
 	public void resetEncoder() {
 		liftMotor.setSelectedSensorPosition(0, 0, RobotMap.TIMOUT_MS);
-		liftMotor.getSensorCollection().setQuadraturePosition(RobotMap.VELOCITY_CONTROL_SLOT, RobotMap.TIMOUT_MS);		
+		liftMotor.getSensorCollection().setQuadraturePosition(0, RobotMap.TIMOUT_MS);		
 	}
     
 	public double getLiftSpeed() {
-		return unitsToInches(liftMotor.getSelectedSensorVelocity(0));
+//		return unitsToInches(liftMotor.getSelectedSensorVelocity(0));
+		return liftMotor.getSelectedSensorVelocity(0);
 	}
 	
 	public void setPercentOutput (double anything)
@@ -100,7 +101,7 @@ public class LiftSubsystem extends Subsystem {
     	liftMotor.set(ControlMode.PercentOutput, anything);
 	}
     private static double unitsToInches(double units) {
-        return units * RobotMap.LIFT_INCHES_PER_REV / RobotMap.LIFT_ENCODER_PPR;
+        return units * RobotMap.LIFT_INCHES_PER_UNIT;
     }
     
     private static double inchesToUnits(double inches) {
