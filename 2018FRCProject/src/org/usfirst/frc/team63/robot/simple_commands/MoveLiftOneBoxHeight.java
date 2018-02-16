@@ -28,11 +28,11 @@ public class MoveLiftOneBoxHeight extends Command {
     	double currentPosition = Robot.lift.getCurrentPosition();
     	if(direction == Direction.UP)
     	{
-    		setpoint=currentPosition+RobotMap.BOX_HEIGHT;
+    		setpoint=currentPosition+RobotMap.BOX_HEIGHT_INCHES;
     	}
     	else if(direction == Direction.DOWN)
     	{
-    		setpoint=currentPosition-RobotMap.BOX_HEIGHT;
+    		setpoint=currentPosition-RobotMap.BOX_HEIGHT_INCHES;
     	}
     	else System.out.println("It was at this moment that the Robot realized, Jake f***ed up");
     	Robot.lift.setMotionMagicSetpoint(setpoint);

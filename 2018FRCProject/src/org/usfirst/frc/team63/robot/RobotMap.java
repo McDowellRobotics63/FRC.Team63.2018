@@ -50,12 +50,9 @@ public class RobotMap {
 	public static final int VELOCITY_CONTROL_SLOT = 0;
 	
 	//Lift constants
-	public static final double LIFT_ENCODER_PPR = 4096;
-	public static final double LIFT_INCHES_PER_REV = 1;
-	private static final double MAX_LIFT_DISPLACEMENT_INCHES = 18;
-	public static final double MAX_LIFT_DISPLACEMENT = MAX_LIFT_DISPLACEMENT_INCHES*LIFT_ENCODER_PPR/LIFT_INCHES_PER_REV; //native units
-	private static final double BOX_HEIGHT_INCHES = 11;
-	public static final double BOX_HEIGHT = BOX_HEIGHT_INCHES*LIFT_ENCODER_PPR/LIFT_INCHES_PER_REV; //native encoder units
+	public static final double LIFT_INCHES_PER_UNIT = 0.000033;
+	public static final double MAX_LIFT_DISPLACEMENT_INCHES = 70;
+	public static final double BOX_HEIGHT_INCHES = 11;
 	
 	//Controller Map
 	public static final int XBOX_LEFT_X_AXIS = 0;
@@ -76,6 +73,5 @@ public class RobotMap {
     //Vision
     public static final double POWER = -1.07436389463682;
     public static final double XCOEFF = 11834.7562904465;
-    public static final double intercept = -4.40793976463289;
-	public static final double LIFT_INCHES_PER_UNIT = 0.000033;
+    public static final double intercept = -4.40793976463289;	
 }

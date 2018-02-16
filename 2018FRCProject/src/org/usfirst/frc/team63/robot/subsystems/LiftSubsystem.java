@@ -96,7 +96,7 @@ public class LiftSubsystem extends Subsystem {
     		appliedFeedFoward = Direction.UP;
     	}
     		
-    	liftMotor.set(ControlMode.MotionMagic, setpoint_units);
+    	liftMotor.set(ControlMode.MotionMagic, Math.max(0, Math.min(setpoint_units, RobotMap.MAX_LIFT_DISPLACEMENT_INCHES)));;
     }
     
     public boolean isMotionMagicNearTarget() {
