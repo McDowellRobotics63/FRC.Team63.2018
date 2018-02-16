@@ -19,6 +19,8 @@ import org.usfirst.frc.team63.robot.commands_climb.ClimbDown;
 import org.usfirst.frc.team63.robot.commands_climb.ClimbStop;
 import org.usfirst.frc.team63.robot.commands_climb.ClimbUp;
 import org.usfirst.frc.team63.robot.commands_drive.DriveGearShift;
+import org.usfirst.frc.team63.robot.commands_lift.MoveLiftMaxHeight;
+import org.usfirst.frc.team63.robot.commands_lift.MoveLiftMinHeight;
 import org.usfirst.frc.team63.robot.commands_lift.MoveLiftOneBoxHeight;
 import org.usfirst.frc.team63.robot.subsystems.DriveSubsystem.Shift;
 import org.usfirst.frc.team63.robot.subsystems.LiftSubsystem.Direction;
@@ -83,6 +85,8 @@ public class OI {
 		 //Lift
 		 controller1_LB.whenPressed(new MoveLiftOneBoxHeight(Direction.DOWN));
 		 controller1_RB.whenPressed(new MoveLiftOneBoxHeight(Direction.UP));
+		 controller1_dpadUp.whenPressed(new MoveLiftMaxHeight());
+		 controller1_dpadDown.whenPressed(new MoveLiftMinHeight());
 		 
 		 //Drive Gear Shift
 		 controller1_X.whileHeld(new DriveGearShift(Shift.HIGH));
