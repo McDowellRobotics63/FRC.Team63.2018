@@ -33,6 +33,7 @@ public class DriveSubsystem extends Subsystem {
 	 public DriveSubsystem() {
 		 differentialDrive = new DifferentialDrive(leftMaster, rightMaster);
 		 TalonConfig();
+		 shiftLow();
 	 }
 	
 	 public void initDefaultCommand() {
