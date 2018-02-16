@@ -1,18 +1,16 @@
-package org.usfirst.frc.team63.robot.simple_commands;
+package org.usfirst.frc.team63.robot.commands_climb;
 
 import org.usfirst.frc.team63.robot.Robot;
-import org.usfirst.frc.team63.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class TeleopDriveCommand extends Command {
+public class ClimbArmRetract extends Command {
 
-    public TeleopDriveCommand() {
-        requires(Robot.drive);
-        setInterruptible(true);
+    public ClimbArmRetract() {        
+    	requires(Robot.climb);
     }
 
     // Called just before this Command runs the first time
@@ -21,25 +19,20 @@ public class TeleopDriveCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.drive.teleDrive(
-    			-Robot.m_oi.controller1.getRawAxis(RobotMap.XBOX_LEFT_Y_AXIS),
-    			Robot.m_oi.controller1.getRawAxis(RobotMap.XBOX_LEFT_X_AXIS)
-    			);
+    	Robot.climb.armRetract();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.drive.stop();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.drive.stop();
     }
 }

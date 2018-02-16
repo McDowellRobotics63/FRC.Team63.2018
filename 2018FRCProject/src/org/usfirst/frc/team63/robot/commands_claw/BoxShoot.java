@@ -1,25 +1,22 @@
-package org.usfirst.frc.team63.robot.commands;
+package org.usfirst.frc.team63.robot.commands_claw;
 
 import org.usfirst.frc.team63.robot.Robot;
-import org.usfirst.frc.team63.robot.simple_commands.BoxPullCommand;
-import org.usfirst.frc.team63.robot.simple_commands.ClawCloseCommand;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  *
  */
-public class BoxObtain extends CommandGroup {
+public class BoxShoot extends CommandGroup {
 
-    public BoxObtain() {
+    public BoxShoot() {
     	requires(Robot.claw);
-    	// Add Commands here:
+        // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
         // these will run in order.
+    	addSequential(new BoxPushCommand());
     	
-    	addSequential(new ClawCloseCommand());
-    	addSequential(new BoxPullCommand());
 
         // To run multiple commands at the same time,
         // use addParallel()
@@ -33,4 +30,6 @@ public class BoxObtain extends CommandGroup {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
     }
+
+	
 }

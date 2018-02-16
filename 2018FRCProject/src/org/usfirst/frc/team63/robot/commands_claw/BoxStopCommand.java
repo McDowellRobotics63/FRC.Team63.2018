@@ -1,4 +1,4 @@
-package org.usfirst.frc.team63.robot.simple_commands;
+package org.usfirst.frc.team63.robot.commands_claw;
 
 import org.usfirst.frc.team63.robot.Robot;
 import org.usfirst.frc.team63.robot.RobotMap;
@@ -8,10 +8,10 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ClimbUp extends Command {
+public class BoxStopCommand extends Command {
 
-    public ClimbUp() {
-        requires(Robot.climb);
+    public BoxStopCommand() {
+    requires(Robot.claw);
     }
 
     // Called just before this Command runs the first time
@@ -20,7 +20,7 @@ public class ClimbUp extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.climb.pullyclimb(RobotMap.CLIMB_UP_SPEED);
+    	Robot.claw.clawPull(0);
     }
 
     // Make this return true when this Command no longer needs to run execute()

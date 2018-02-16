@@ -1,39 +1,43 @@
-package org.usfirst.frc.team63.robot.simple_commands;
+package org.usfirst.frc.team63.robot.commands_test;
+
+import java.util.Arrays;
 
 import org.usfirst.frc.team63.robot.Robot;
-import org.usfirst.frc.team63.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class BoxStopCommand extends Command {
+public class ExampleCommandWithDebug extends Command {
 
-    public BoxStopCommand() {
-    requires(Robot.claw);
+    public ExampleCommandWithDebug() {
+    	requires(Robot.debug);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.debug.Start("ExampleCommand", Arrays.asList("var1", "var2", "var3"));    	
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.claw.clawPull(0);
+    	Robot.debug.Update(Arrays.asList(1.0, 2.0, 3.0));
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.debug.Stop();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	Robot.debug.Stop();
     }
 }

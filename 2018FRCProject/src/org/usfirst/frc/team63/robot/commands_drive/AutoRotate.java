@@ -1,8 +1,9 @@
-package org.usfirst.frc.team63.robot.commands;
+package org.usfirst.frc.team63.robot.commands_drive;
 
 import java.util.Arrays;
 
 import org.usfirst.frc.team63.robot.Robot;
+import org.usfirst.frc.team63.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
@@ -11,12 +12,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  *
  */
-public class AutoDriveFixedDistance extends Command {
+public class AutoRotate extends Command {
 	
 	private double setpoint; //inches to go
 	private final Timer totalTimer;
 
-    public AutoDriveFixedDistance() {
+    public AutoRotate() {
         requires(Robot.drive);
         requires(Robot.debug);
         totalTimer = new Timer();
@@ -36,13 +37,13 @@ public class AutoDriveFixedDistance extends Command {
     	  SmartDashboard.getNumber("kI", 0.0), 
     	  SmartDashboard.getNumber("kD", 0.0),
     	  (int)SmartDashboard.getNumber("kiZone", 0.0),
-    	  (int)SmartDashboard.getNumber("cruise", 0.0),
-    	  (int)SmartDashboard.getNumber("acceleration", 0.0));
+    	  (int)SmartDashboard.getNumber("cruise_rotate", 0.0),
+    	  (int)SmartDashboard.getNumber("acceleration_rotate", 0.0));
     	
     	
-        setpoint = SmartDashboard.getNumber("setpoint", 0.0);
+        setpoint = degreesToInches(SmartDashboard.getNumber("setpoint_rotate", 0.0));
         Robot.drive.setMotionMagicLeft(setpoint);
-    	Robot.drive.setMotionMagicRight(setpoint);
+    	Robot.drive.setMotionMagicRight(-setpoint);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -68,5 +69,9 @@ public class AutoDriveFixedDistance extends Command {
     protected void interrupted() {
     	Robot.drive.stop();
     	Robot.debug.Stop();
-    }  
+    }
+    
+    private double degreesToInches(double degrees) {
+    	return degrees/180*Math.PI*(RobotMap.DRIVE_TRACK/2);
+    }
 }

@@ -1,17 +1,20 @@
-package org.usfirst.frc.team63.robot.simple_commands;
+
+package org.usfirst.frc.team63.robot.commands_drive;
 
 import org.usfirst.frc.team63.robot.Robot;
-import org.usfirst.frc.team63.robot.RobotMap;
+import org.usfirst.frc.team63.robot.subsystems.DriveSubsystem.Shift;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class ClimbStop extends Command {
+public class DriveGearShift extends Command {
 
-    public ClimbStop() {
-        requires(Robot.climb);
+	private Shift m_DesiredValue = Shift.LOW;
+    public DriveGearShift(Shift desiredValue) {
+        m_DesiredValue = desiredValue;
+    	requires(Robot.drive);
     }
 
     // Called just before this Command runs the first time
@@ -19,8 +22,12 @@ public class ClimbStop extends Command {
     }
 
     // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
-    	Robot.climb.pullyclimb(0);
+    protected void execute() 
+    {
+    	if (m_DesiredValue == Shift.LOW)
+        	Robot.drive.shiftLow();
+    	if (m_DesiredValue == Shift.HIGH)
+        	Robot.drive.shiftHigh();
     }
 
     // Make this return true when this Command no longer needs to run execute()

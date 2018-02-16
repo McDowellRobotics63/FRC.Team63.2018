@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.usfirst.frc.team63.robot.RobotMap;
-import org.usfirst.frc.team63.robot.commands.LiftAdjustCommand;
+import org.usfirst.frc.team63.robot.commands_lift.LiftAdjustCommand;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;

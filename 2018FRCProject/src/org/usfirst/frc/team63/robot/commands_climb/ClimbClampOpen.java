@@ -1,6 +1,4 @@
-package org.usfirst.frc.team63.robot.commands;
-
-import java.util.Arrays;
+package org.usfirst.frc.team63.robot.commands_climb;
 
 import org.usfirst.frc.team63.robot.Robot;
 
@@ -9,35 +7,32 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ExampleCommandWithDebug extends Command {
+public class ClimbClampOpen extends Command {
 
-    public ExampleCommandWithDebug() {
-    	requires(Robot.debug);
+    public ClimbClampOpen() {
+    	requires(Robot.climb);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.debug.Start("ExampleCommand", Arrays.asList("var1", "var2", "var3"));    	
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.debug.Update(Arrays.asList(1.0, 2.0, 3.0));
+    	Robot.climb.clampOpen();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.debug.Stop();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.debug.Stop();
     }
 }

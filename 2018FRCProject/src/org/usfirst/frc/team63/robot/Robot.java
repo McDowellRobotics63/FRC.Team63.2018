@@ -13,8 +13,8 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import org.usfirst.frc.team63.robot.commands.AutoSetLiftPosition;
-import org.usfirst.frc.team63.robot.commands.DashboardSetLiftPosition;
+import org.usfirst.frc.team63.robot.commands_lift.AutoSetLiftPosition;
+import org.usfirst.frc.team63.robot.commands_test.DashboardSetLiftPosition;
 //import org.usfirst.frc.team63.robot.commands.ExampleCommand;
 import org.usfirst.frc.team63.robot.subsystems.ClawSubsystem;
 import org.usfirst.frc.team63.robot.subsystems.ClimbSubsystem;

@@ -8,18 +8,18 @@
 package org.usfirst.frc.team63.robot;
 
 import org.usfirst.frc.team63.robot.XboxDPadButton.DPAD_BUTTON;
-import org.usfirst.frc.team63.robot.commands.BoxObtain;
-import org.usfirst.frc.team63.robot.simple_commands.BoxPushCommand;
-import org.usfirst.frc.team63.robot.simple_commands.BoxStopCommand;
-import org.usfirst.frc.team63.robot.simple_commands.ClimbArmExtended;
-import org.usfirst.frc.team63.robot.simple_commands.ClimbArmRetract;
-import org.usfirst.frc.team63.robot.simple_commands.ClimbClampLock;
-import org.usfirst.frc.team63.robot.simple_commands.ClimbClampOpen;
-import org.usfirst.frc.team63.robot.simple_commands.ClimbDown;
-import org.usfirst.frc.team63.robot.simple_commands.ClimbStop;
-import org.usfirst.frc.team63.robot.simple_commands.ClimbUp;
-import org.usfirst.frc.team63.robot.simple_commands.DriveGearShift;
-import org.usfirst.frc.team63.robot.simple_commands.MoveLiftOneBoxHeight;
+import org.usfirst.frc.team63.robot.commands_claw.BoxObtain;
+import org.usfirst.frc.team63.robot.commands_claw.BoxPushCommand;
+import org.usfirst.frc.team63.robot.commands_claw.BoxStopCommand;
+import org.usfirst.frc.team63.robot.commands_climb.ClimbArmExtended;
+import org.usfirst.frc.team63.robot.commands_climb.ClimbArmRetract;
+import org.usfirst.frc.team63.robot.commands_climb.ClimbClampLock;
+import org.usfirst.frc.team63.robot.commands_climb.ClimbClampOpen;
+import org.usfirst.frc.team63.robot.commands_climb.ClimbDown;
+import org.usfirst.frc.team63.robot.commands_climb.ClimbStop;
+import org.usfirst.frc.team63.robot.commands_climb.ClimbUp;
+import org.usfirst.frc.team63.robot.commands_drive.DriveGearShift;
+import org.usfirst.frc.team63.robot.commands_lift.MoveLiftOneBoxHeight;
 import org.usfirst.frc.team63.robot.subsystems.DriveSubsystem.Shift;
 import org.usfirst.frc.team63.robot.subsystems.LiftSubsystem.Direction;
 

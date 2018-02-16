@@ -1,4 +1,4 @@
-package org.usfirst.frc.team63.robot.simple_commands;
+package org.usfirst.frc.team63.robot.commands_climb;
 
 import org.usfirst.frc.team63.robot.Robot;
 
@@ -7,9 +7,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ClimbClampOpen extends Command {
+public class ClimbClampLock extends Command {
 
-    public ClimbClampOpen() {
+    public ClimbClampLock() {
     	requires(Robot.climb);
     }
 
@@ -19,7 +19,7 @@ public class ClimbClampOpen extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.climb.clampOpen();
+    	Robot.climb.clampLock();
     }
 
     // Make this return true when this Command no longer needs to run execute()

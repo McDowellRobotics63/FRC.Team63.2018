@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.usfirst.frc.team63.robot.RobotMap;
-import org.usfirst.frc.team63.robot.simple_commands.TeleopDriveCommand;
+import org.usfirst.frc.team63.robot.commands_drive.TeleopDriveCommand;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;

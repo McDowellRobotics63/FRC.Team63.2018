@@ -1,4 +1,4 @@
-package org.usfirst.frc.team63.robot.simple_commands;
+package org.usfirst.frc.team63.robot.commands_climb;
 
 import org.usfirst.frc.team63.robot.Robot;
 import org.usfirst.frc.team63.robot.RobotMap;
