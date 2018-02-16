@@ -8,14 +8,9 @@
 package org.usfirst.frc.team63.robot;
 
 import org.usfirst.frc.team63.robot.XboxDPadButton.DPAD_BUTTON;
-import org.usfirst.frc.team63.robot.commands.BoxDrop;
 import org.usfirst.frc.team63.robot.commands.BoxObtain;
-import org.usfirst.frc.team63.robot.commands.BoxShoot;
-import org.usfirst.frc.team63.robot.simple_commands.BoxPullCommand;
 import org.usfirst.frc.team63.robot.simple_commands.BoxPushCommand;
 import org.usfirst.frc.team63.robot.simple_commands.BoxStopCommand;
-import org.usfirst.frc.team63.robot.simple_commands.ClawCloseCommand;
-import org.usfirst.frc.team63.robot.simple_commands.ClawOpenCommand;
 import org.usfirst.frc.team63.robot.simple_commands.ClimbArmExtended;
 import org.usfirst.frc.team63.robot.simple_commands.ClimbArmRetract;
 import org.usfirst.frc.team63.robot.simple_commands.ClimbClampLock;
@@ -31,7 +26,6 @@ import org.usfirst.frc.team63.robot.subsystems.LiftSubsystem.Direction;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import edu.wpi.first.wpilibj.command.Command;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -69,8 +63,7 @@ public class OI {
 
 	//// TRIGGERING COMMANDS WITH BUTTONS
 	 public OI()
-	 {
-			
+	 {			
 		 controller2_LB.whenPressed(new ClimbArmExtended());
 		 controller2_RB.whenPressed(new ClimbArmRetract());
 		 controller2_start.whenPressed(new ClimbClampLock());
@@ -86,20 +79,13 @@ public class OI {
 		 controller1_A.whenReleased(new BoxStopCommand());
 		 controller1_B.whileHeld(new BoxPushCommand());
 		 controller1_B.whenReleased(new BoxStopCommand());
-		 
-		 
+		 		 
 		 //Lift
 		 controller1_LB.whenPressed(new MoveLiftOneBoxHeight(Direction.DOWN));
 		 controller1_RB.whenPressed(new MoveLiftOneBoxHeight(Direction.UP));
 		 
 		 //Drive Gear Shift
 		 controller1_X.whileHeld(new DriveGearShift(Shift.HIGH));
-		 controller1_X.whenReleased(new DriveGearShift(Shift.LOW));
-		 
-		 
-		 
+		 controller1_X.whenReleased(new DriveGearShift(Shift.LOW));		 		
 	 }
-	// Start the command when the button is released and let it run the command
-	// until it is finished as determined by it's isFinished method.
-	// button.whenReleased(new ExampleCommand());
 }
