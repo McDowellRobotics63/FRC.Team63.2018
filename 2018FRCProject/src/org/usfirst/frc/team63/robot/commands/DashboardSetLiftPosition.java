@@ -6,20 +6,18 @@ import org.usfirst.frc.team63.robot.Robot;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
  */
-public class AutoSetLiftPosition extends Command {
-	
-	private double m_setpoint;
+public class DashboardSetLiftPosition extends Command {
 	private final Timer totalTimer;
 
-    public AutoSetLiftPosition(double setpoint) {
+    public DashboardSetLiftPosition() {
         requires(Robot.climb);
         requires(Robot.debug);
         
-        m_setpoint = setpoint;
         totalTimer = new Timer();
     }
 
@@ -30,7 +28,16 @@ public class AutoSetLiftPosition extends Command {
     	totalTimer.reset();
     	totalTimer.start();
 
-    	Robot.lift.setMotionMagicSetpoint(m_setpoint);
+    	Robot.lift.configGains(
+    			SmartDashboard.getNumber("kF_lift_up", 0.0), 
+    			SmartDashboard.getNumber("kP_lift", 0.0), 
+    			SmartDashboard.getNumber("kI_lift", 0.0), 
+    			SmartDashboard.getNumber("kD_lift", 0.0),
+    			(int)SmartDashboard.getNumber("kiZone_lift", 0.0),
+    			(int)SmartDashboard.getNumber("kCruise_lift", 0.0),
+    			(int)SmartDashboard.getNumber("kAccel_lift", 0.0));
+    	
+    	Robot.lift.setMotionMagicSetpoint(SmartDashboard.getNumber("setpoint_lift", 0.0));
     }
 
     // Called repeatedly when this Command is scheduled to run

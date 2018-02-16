@@ -39,7 +39,7 @@ public class RobotMap {
 	public static final double BOX_OUT_SPEED = 0;
 	public static final double CLIMB_UP_SPEED = 0;
 	public static final double CLIMB_DOWN_SPEED = 0;
-	public static final double LIFT_SPEED = 0;
+	public static final double MAX_LIFT_ADJUST_SPEED = 12; //inches per second
 	
     //Drive constants
 	private static final double DRIVE_WHEEL_DIAMETER = 6;
@@ -54,7 +54,6 @@ public class RobotMap {
 	public static final double LIFT_INCHES_PER_REV = 1;
 	private static final double MAX_LIFT_DISPLACEMENT_INCHES = 18;
 	public static final double MAX_LIFT_DISPLACEMENT = MAX_LIFT_DISPLACEMENT_INCHES*LIFT_ENCODER_PPR/LIFT_INCHES_PER_REV; //native units
-	public static final double MIN_FORCE_UP = 0;
 	private static final double BOX_HEIGHT_INCHES = 11;
 	public static final double BOX_HEIGHT = BOX_HEIGHT_INCHES*LIFT_ENCODER_PPR/LIFT_INCHES_PER_REV; //native encoder units
 	
