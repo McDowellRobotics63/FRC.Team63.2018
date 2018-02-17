@@ -52,6 +52,7 @@ public class RobotMap {
 	//Lift constants
 	public static final double LIFT_INCHES_PER_UNIT = 0.000033;
 	public static final double MAX_LIFT_DISPLACEMENT_INCHES = 70;
+	public static final int MAX_LIFT_DISPLACEMENT_UNITS = (int)(MAX_LIFT_DISPLACEMENT_INCHES * LIFT_INCHES_PER_UNIT);
 	public static final double BOX_HEIGHT_INCHES = 11;
 	
 	//Controller Map
