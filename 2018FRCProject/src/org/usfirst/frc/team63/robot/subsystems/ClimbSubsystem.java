@@ -11,8 +11,10 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class ClimbSubsystem extends Subsystem {
 	private Spark winchMotor = new Spark(RobotMap.CLIMBWINCH);
-	private Solenoid armSolenoid = new Solenoid(RobotMap.PCM1_CANID, RobotMap.CLIMBARM);
-	private Solenoid lockSolenoid = new Solenoid(RobotMap.PCM1_CANID, RobotMap.CLIMBCLAMPLOCK);
+	private Solenoid armUpSolenoid = new Solenoid(RobotMap.PCM1_CANID, RobotMap.CLIMBARM_UP);
+	private Solenoid armDownSolenoid = new Solenoid(RobotMap.PCM1_CANID, RobotMap.CLIMBARM_DOWN);
+	private Solenoid lockCloseSolenoid = new Solenoid(RobotMap.PCM1_CANID, RobotMap.CLIMBCLAMPLOCK_CLOSE);	
+	private Solenoid lockOpenSolenoid = new Solenoid(RobotMap.PCM1_CANID, RobotMap.CLIMBCLAMPLOCK_OPEN);
 	
 	public void pullyclimb(double speed)
 	{
@@ -21,22 +23,26 @@ public class ClimbSubsystem extends Subsystem {
 	
 	public void armExtend()
 	{
-		armSolenoid.set(true);		
+		armUpSolenoid.set(true);
+		armDownSolenoid.set(false);
 	}
 	
 	public void armRetract()
 	{
-		armSolenoid.set(false);		
+		armUpSolenoid.set(false);
+		armDownSolenoid.set(true);
 	}
 	
 	public void clampLock()
 	{
-		lockSolenoid.set(true);
+		lockCloseSolenoid.set(true);
+		lockOpenSolenoid.set(false);
 	}
 	
 	public void clampOpen()
 	{
-		lockSolenoid.set(false);
+		lockCloseSolenoid.set(false);
+		lockOpenSolenoid.set(true);
 	}
 	
     public void initDefaultCommand() {
