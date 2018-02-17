@@ -33,7 +33,8 @@ public class RobotMap {
 	public static final int CLIMBCLAMPLOCK = 1;
 	public static final int CLAW_CLOSE_SOLENOID = 2;
 	public static final int CLAW_OPEN_SOLENOID = 2;
-	public static final int SHIFTER = 4;
+	public static final int SHIFTER_HIGH = 4;
+	public static final int SHIFTER_LOW = 4;
 	
 	public static final double BOX_IN_SPEED = 0;
 	public static final double BOX_OUT_SPEED = 0;
