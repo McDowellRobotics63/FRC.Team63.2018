@@ -31,8 +31,8 @@ public class RobotMap {
 	public static final int PCM2_CANID = 7;
 	public static final int CLIMBARM = 0;
 	public static final int CLIMBCLAMPLOCK = 1;
-	public static final int LEFT_CLAW_SOLENOID = 2;
-	public static final int RIGHT_CLAW_SOLENOID = 3;
+	public static final int CLAW_CLOSE_SOLENOID = 2;
+	public static final int CLAW_OPEN_SOLENOID = 2;
 	public static final int SHIFTER = 4;
 	
 	public static final double BOX_IN_SPEED = 0;

@@ -13,8 +13,8 @@ public class ClawSubsystem extends Subsystem {
 
 	private Spark leftMotor = new Spark(RobotMap.CLAWLEFT);
 	private Spark rightMotor = new Spark(RobotMap.CLAWRIGHT);
-	private Solenoid LEFT_CLAW = new Solenoid(RobotMap.PCM1_CANID,RobotMap.LEFT_CLAW_SOLENOID);
-	private Solenoid RIGHT_CLAW = new Solenoid(0,RobotMap.RIGHT_CLAW_SOLENOID);
+	private Solenoid CLAW_OPEN = new Solenoid(RobotMap.PCM1_CANID,RobotMap.CLAW_OPEN_SOLENOID);
+	private Solenoid CLAW_CLOSE = new Solenoid(RobotMap.PCM2_CANID,RobotMap.CLAW_CLOSE_SOLENOID);
 	
 	public ClawSubsystem() {
 	}
@@ -24,9 +24,9 @@ public class ClawSubsystem extends Subsystem {
     }
     
     public void clawToggle(boolean isOpen) {
-    	//true = open
-    	LEFT_CLAW.set(isOpen);
-    	RIGHT_CLAW.set(isOpen);
+    	//true = open    	
+    	CLAW_OPEN.set(isOpen);
+    	CLAW_CLOSE.set(!isOpen);
     }
     
     
