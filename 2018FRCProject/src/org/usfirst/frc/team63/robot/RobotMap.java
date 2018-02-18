@@ -38,11 +38,14 @@ public class RobotMap {
 	public static final int SHIFTER_HIGH = 4;
 	public static final int SHIFTER_LOW = 4;
 	
+	//Claw
 	public static final double BOX_IN_SPEED = -0.3;
 	public static final double BOX_OUT_SPEED = 0.4;
+	public static final int INFRARED_SENSOR_CHANNEL = 0;
+	
+	//Climb
 	public static final double CLIMB_UP_SPEED = -0.3;
 	public static final double CLIMB_DOWN_SPEED = 0.3;
-	public static final double MAX_LIFT_ADJUST_SPEED = 10; //inches per second
 	
     //Drive constants
 	private static final double DRIVE_WHEEL_DIAMETER = 6;
@@ -67,6 +70,7 @@ public class RobotMap {
 	public static final double MAX_LIFT_DISPLACEMENT_INCHES = 70;
 	public static final int MAX_LIFT_DISPLACEMENT_UNITS = (int)(MAX_LIFT_DISPLACEMENT_INCHES / LIFT_INCHES_PER_UNIT);
 	public static final double BOX_HEIGHT_INCHES = 11;
+	public static final double MAX_LIFT_ADJUST_SPEED = 10; //inches per second
 	
 	//Controller Map
 	public static final int XBOX_LEFT_X_AXIS = 0;
@@ -98,5 +102,8 @@ public class RobotMap {
     public static final double DIST_SWITCH = 0;
     public static final double DIST_LINE = 0; //line to cross in auto for points
     public static final double DIST_RETURN = 0; //distance to come back for switch after operating scale
-    public static final double DIST_TURN = 0; //how far to go before turning when going for both switch and scale
+    public static final double DIST_UNTIL_TURN = 0; //how far to go before turning when going for both switch and scale
+	public static final double SWITCH_HEIGHT = 15;
+	public static final double DIST_HALF_SWITCH_WIDTH = 60; //horizontal distance for robot in middle to go
+
 }

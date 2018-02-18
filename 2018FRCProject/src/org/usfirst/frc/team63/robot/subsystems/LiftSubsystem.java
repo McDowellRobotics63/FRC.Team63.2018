@@ -158,7 +158,7 @@ public class LiftSubsystem extends Subsystem {
         return units * RobotMap.LIFT_INCHES_PER_UNIT;
     }
     
-    private static int inchesToUnits(double inches) {
+    public static int inchesToUnits(double inches) {
     	return (int)(inches / RobotMap.LIFT_INCHES_PER_UNIT); 
     }
 }

@@ -3,6 +3,7 @@ package org.usfirst.frc.team63.robot.commands_lift;
 import java.util.Arrays;
 
 import org.usfirst.frc.team63.robot.Robot;
+import org.usfirst.frc.team63.robot.subsystems.LiftSubsystem;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
@@ -19,7 +20,7 @@ public class AutoSetLiftPosition extends Command {
         requires(Robot.lift);
         //requires(Robot.debug);
         
-        m_setpoint = setpoint;
+        m_setpoint = LiftSubsystem.inchesToUnits(setpoint);
         totalTimer = new Timer();
     }
 

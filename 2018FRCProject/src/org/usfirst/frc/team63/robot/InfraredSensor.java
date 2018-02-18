@@ -45,7 +45,7 @@ public class InfraredSensor extends AnalogInput {
         }
 
         @Override
-    public void run() {
+        public void run() {
             m_controller.SampleList.insertElementAt(m_controller.GetVoltage(), 0);
             for(int i = m_controller.SampleList.size()-1; i >=SAMPLE_SIZE; i--)
             {

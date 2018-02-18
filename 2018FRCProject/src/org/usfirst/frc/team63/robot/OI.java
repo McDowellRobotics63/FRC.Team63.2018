@@ -8,7 +8,7 @@
 package org.usfirst.frc.team63.robot;
 
 import org.usfirst.frc.team63.robot.XboxDPadButton.DPAD_BUTTON;
-import org.usfirst.frc.team63.robot.commands_claw.BoxObtain;
+import org.usfirst.frc.team63.robot.commands_claw.AutoBoxObtain;
 import org.usfirst.frc.team63.robot.commands_claw.BoxPushCommand;
 import org.usfirst.frc.team63.robot.commands_claw.BoxStopCommand;
 import org.usfirst.frc.team63.robot.commands_claw.ClawCloseCommand;
@@ -80,7 +80,7 @@ public class OI {
 		 
 		 controller1_RB.whenPressed(new ClawOpenCommand());
 		 controller1_LB.whenPressed(new ClawCloseCommand());
-		 controller1_A.whileHeld(new BoxObtain());
+		 controller1_A.whileHeld(new AutoBoxObtain());
 		 controller1_A.whenReleased(new BoxStopCommand());
 		 controller1_B.whileHeld(new BoxPushCommand());
 		 controller1_B.whenReleased(new BoxStopCommand());
