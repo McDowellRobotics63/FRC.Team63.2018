@@ -8,9 +8,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class TeleopDriveCommand extends Command {
+public class TeleopDriveLowCommand extends Command {
 
-    public TeleopDriveCommand() {
+    public TeleopDriveLowCommand() {
         requires(Robot.drive);
         setInterruptible(true);
     }
@@ -21,9 +21,19 @@ public class TeleopDriveCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	
+    	double axis = Robot.m_oi.controller1.getRawAxis(RobotMap.XBOX_LEFT_X_AXIS);
+    	if(axis > -0.2 && axis < 0.2)
+    	{
+    		axis = 0;
+    	}
+    	
+    	axis = Math.signum(axis) * ((Math.abs(axis) - 0.2) / 0.8);
+    	
+    	Robot.drive.shiftLow();
     	Robot.drive.teleDrive(
     			-Robot.m_oi.controller1.getRawAxis(RobotMap.XBOX_LEFT_Y_AXIS),
-    			Robot.m_oi.controller1.getRawAxis(RobotMap.XBOX_LEFT_X_AXIS)
+    			axis
     			);
     }
 

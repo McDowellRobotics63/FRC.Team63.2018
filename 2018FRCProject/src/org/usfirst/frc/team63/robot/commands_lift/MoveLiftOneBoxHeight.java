@@ -25,7 +25,15 @@ public class MoveLiftOneBoxHeight extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	double currentPosition = Robot.lift.getCurrentPosition();
+
+    	
+    	totalTimer.reset();
+    	totalTimer.start();
+    }
+    
+    // Called repeatedly when this Command is scheduled to run
+    protected void execute() {
+    	double currentPosition = Robot.lift.getCurrentSetpoint();
     	if(direction == Direction.UP)
     	{
     		setpoint=currentPosition+RobotMap.BOX_HEIGHT_INCHES;
@@ -36,18 +44,12 @@ public class MoveLiftOneBoxHeight extends Command {
     	}
     	else System.out.println("It was at this moment that the Robot realized, Jake f***ed up");
     	Robot.lift.setMotionMagicSetpoint(setpoint);
-    	
-    	totalTimer.reset();
-    	totalTimer.start();
-    }
-    
-    // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.lift.isMotionMagicNearTarget() || totalTimer.get() > 5.0;
+       // return Robot.lift.isMotionMagicNearTarget() || totalTimer.get() > 5.0;
+    	return true;
     }
 
     // Called once after isFinished returns true

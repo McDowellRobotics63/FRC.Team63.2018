@@ -7,12 +7,17 @@
 
 package org.usfirst.frc.team63.robot;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.usfirst.frc.team63.robot.commands_auto.DownAndBack;
+import org.usfirst.frc.team63.robot.commands_drive.AutoDriveFixedDistance;
+import org.usfirst.frc.team63.robot.commands_drive.AutoRotate;
+import org.usfirst.frc.team63.robot.commands_drive.TeleopDriveLowCommand;
 import org.usfirst.frc.team63.robot.commands_lift.AutoSetLiftPosition;
 import org.usfirst.frc.team63.robot.commands_test.DashboardSetLiftPosition;
 //import org.usfirst.frc.team63.robot.commands.ExampleCommand;
@@ -40,6 +45,7 @@ public class Robot extends TimedRobot {
 	
 	public static OI m_oi;
 
+	TeleopDriveLowCommand teledrive = new TeleopDriveLowCommand();
 	Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -52,14 +58,20 @@ public class Robot extends TimedRobot {
 		m_oi = new OI();
 //		m_chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
-		SmartDashboard.putNumber("setpoint", 14400.0);
-		SmartDashboard.putNumber("kF", 0.8);
-		SmartDashboard.putNumber("kP", 1.6); 
-		SmartDashboard.putNumber("kI", 0.001); 
-		SmartDashboard.putNumber("kD", 5.0);
-		SmartDashboard.putNumber("kiZone", 75.0);
-		SmartDashboard.putNumber("cruise", 312);
-		SmartDashboard.putNumber("acceleration", 312);
+		SmartDashboard.putNumber("setpoint_rotate", 180.0);
+		SmartDashboard.putNumber("cruise_rotate", 800.0);
+		SmartDashboard.putNumber("acceleration_rotate", 1600.0);
+		SmartDashboard.putNumber("drive_track", 26);
+		
+		
+		SmartDashboard.putNumber("setpoint", 240.0);
+		SmartDashboard.putNumber("kF", 0.5683);
+		SmartDashboard.putNumber("kP", 0.5); 
+		SmartDashboard.putNumber("kI", 0.003); 
+		SmartDashboard.putNumber("kD", 35.0);
+		SmartDashboard.putNumber("kiZone", 200.0);
+		SmartDashboard.putNumber("cruise", 1600.0);
+		SmartDashboard.putNumber("acceleration", 1600.0);
 		
 		SmartDashboard.putData("Auto mode", m_chooser);
 		
@@ -77,8 +89,18 @@ public class Robot extends TimedRobot {
 		
 		SmartDashboard.putNumber("setpoint_lift", 0.0);		
 		SmartDashboard.putData("TestLift", new DashboardSetLiftPosition());
+		SmartDashboard.putData("AutoDrive", new AutoDriveFixedDistance());
+		SmartDashboard.putData("AutoRotate", new AutoRotate());
 
 		SmartDashboard.putNumber("lift_cmd", 0);
+		Robot.lift.configGains(
+    			SmartDashboard.getNumber("kF_lift_up", 0.0), 
+    			SmartDashboard.getNumber("kP_lift", 0.0), 
+    			SmartDashboard.getNumber("kI_lift", 0.0), 
+    			SmartDashboard.getNumber("kD_lift", 0.0),
+    			(int)SmartDashboard.getNumber("kiZone_lift", 0.0),
+    			(int)SmartDashboard.getNumber("kCruise_lift", 0.0),
+    			(int)SmartDashboard.getNumber("kAccel_lift", 0.0));
 	}
 
 	/**
@@ -88,11 +110,12 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void disabledInit() {
-
+		teledrive.cancel();
 	}
 
 	@Override
 	public void disabledPeriodic() {
+		Robot.lift.resetIntegrator();
 		Scheduler.getInstance().run();
 	}
 
@@ -109,11 +132,18 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		m_autonomousCommand = m_chooser.getSelected();
+		//m_autonomousCommand = m_chooser.getSelected();
+		m_autonomousCommand =  new DownAndBack();
+
 		
 		drive.autoInit();
-		
+		lift.initSubsystem();
 		// schedule the autonomous command (example)
+		//while (DriverStation.getInstance().getGameSpecificMessage().isEmpty());
+		
+		//String magicString = DriverStation.getInstance().getGameSpecificMessage();
+		
+		
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.start();
 		}
@@ -125,6 +155,8 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
+		SmartDashboard.putNumber("left position", drive.getLeftPosition());	
+		SmartDashboard.putNumber("right position", drive.getRightPosition());
 	}
 
 	@Override
@@ -135,9 +167,11 @@ public class Robot extends TimedRobot {
 		// this line or comment it out.
 		
 		drive.teleInit();
+		lift.initSubsystem();
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.cancel();
 		}
+		teledrive.start();
 	}
 
 	/**
@@ -146,6 +180,12 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		SmartDashboard.putNumber("lift_pos", lift.getCurrentPosition());
+		SmartDashboard.putNumber("lift_volts", lift.liftMotor.getMotorOutputVoltage());
+		SmartDashboard.putNumber("Left Speed",drive.getLeftSpeed());
+		SmartDashboard.putNumber("Right Speed",drive.getRightSpeed());
+		SmartDashboard.putNumber("left position", drive.getLeftPosition());	
+		SmartDashboard.putNumber("right position", drive.getRightPosition());
 	}
 
 	/**

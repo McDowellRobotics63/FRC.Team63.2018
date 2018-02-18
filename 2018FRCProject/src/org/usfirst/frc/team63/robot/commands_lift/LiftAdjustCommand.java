@@ -3,13 +3,15 @@ package org.usfirst.frc.team63.robot.commands_lift;
 import org.usfirst.frc.team63.robot.Robot;
 import org.usfirst.frc.team63.robot.RobotMap;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
 public class LiftAdjustCommand extends Command {
-	private long lastTime = 0;
+	private double lastTime = 0;
+	private final Timer totalTimer;
 	
     public LiftAdjustCommand() {
         requires(Robot.lift);
@@ -19,22 +21,40 @@ public class LiftAdjustCommand extends Command {
         //If another command comes in that wants to set the setpoint to
         //a pre-set value (top, bottom, box height) then let it interrupt to do so.
         setInterruptible(true);
+        
+        totalTimer = new Timer();
     }
     
     // Called just before this Command runs the first time
-    protected void initialize() {
-    	lastTime = System.currentTimeMillis();
+    protected void initialize() {    	
+    	totalTimer.reset();
+    	totalTimer.start();
     }
     
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	long currentTime = System.currentTimeMillis();
-    	double timeElapsedSeconds = (currentTime - lastTime) / 1000;
+    	double currentTime = totalTimer.get();
+    	double timeElapsedSeconds = (currentTime - lastTime);
+    	
+    	double axis = -Robot.m_oi.controller1.getRawAxis(RobotMap.XBOX_RIGHT_Y_AXIS);
+    	
+    	if(axis > -0.2 && axis < 0.2)
+    	{
+    		axis = 0;
+    	}
+    	
+    	axis = Math.signum(axis) * ((Math.abs(axis) - 0.2) / 0.8);
+    	
+//    	System.out.println("axis: " + axis);
+    	
+//    	System.out.println("setpoint: " + Robot.lift.getCurrentSetpoint() + 
+//    			           ", axis: " + Robot.m_oi.controller1.getRawAxis(RobotMap.XBOX_RIGHT_Y_AXIS) + 
+//    			           ", timeElapsedSeconds: " + timeElapsedSeconds);
     	  	
     	//Let the operator move the setpoint by 0-100% of the max lift adjust speed
     	Robot.lift.setMotionMagicSetpoint(
-    			Robot.lift.getCurrentPosition() + 
-    			-Robot.m_oi.controller1.getRawAxis(RobotMap.XBOX_RIGHT_Y_AXIS) * 
+    			Robot.lift.getCurrentSetpoint() + 
+    			axis * 
     			RobotMap.MAX_LIFT_ADJUST_SPEED * timeElapsedSeconds
     			);
     	

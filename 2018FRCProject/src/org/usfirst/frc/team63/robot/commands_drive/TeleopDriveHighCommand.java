@@ -1,20 +1,18 @@
-
 package org.usfirst.frc.team63.robot.commands_drive;
 
 import org.usfirst.frc.team63.robot.Robot;
-import org.usfirst.frc.team63.robot.subsystems.DriveSubsystem.Shift;
+import org.usfirst.frc.team63.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class DriveGearShift extends Command {
+public class TeleopDriveHighCommand extends Command {
 
-	private Shift m_DesiredValue = Shift.LOW;
-    public DriveGearShift(Shift desiredValue) {
-        m_DesiredValue = desiredValue;
-    	requires(Robot.drive);
+    public TeleopDriveHighCommand() {
+        requires(Robot.drive);
+        setInterruptible(true);
     }
 
     // Called just before this Command runs the first time
@@ -22,25 +20,35 @@ public class DriveGearShift extends Command {
     }
 
     // Called repeatedly when this Command is scheduled to run
-    protected void execute() 
-    {
-    	if (m_DesiredValue == Shift.LOW)
-        	Robot.drive.shiftLow();
-    	if (m_DesiredValue == Shift.HIGH)
-        	Robot.drive.shiftHigh();
+    protected void execute() {
+    	
+    	double axis = Robot.m_oi.controller1.getRawAxis(RobotMap.XBOX_LEFT_X_AXIS);
+    	
+    	if(axis > -0.2 && axis < 0.2)
+    	{
+    		axis = 0;
+    	}
+    	
+    	Robot.drive.shiftHigh();
+    	Robot.drive.teleDrive(
+    			-Robot.m_oi.controller1.getRawAxis(RobotMap.XBOX_LEFT_Y_AXIS),
+    			axis
+    			);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.drive.stop();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	Robot.drive.stop();
     }
 }

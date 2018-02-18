@@ -16,8 +16,8 @@ public class AutoSetLiftPosition extends Command {
 	private final Timer totalTimer;
 
     public AutoSetLiftPosition(double setpoint) {
-        requires(Robot.climb);
-        requires(Robot.debug);
+        requires(Robot.lift);
+        //requires(Robot.debug);
         
         m_setpoint = setpoint;
         totalTimer = new Timer();
@@ -40,7 +40,7 @@ public class AutoSetLiftPosition extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return Robot.lift.isMotionMagicNearTarget() || totalTimer.get() > 5.0;
+    	return (totalTimer.get() > 1.0 && Robot.lift.isMotionMagicNearTarget()) || totalTimer.get() > 5.0;
     }
 
     // Called once after isFinished returns true

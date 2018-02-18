@@ -23,12 +23,18 @@ public class LiftSubsystem extends Subsystem {
 		UP, DOWN
 	}
 	
-	private TalonSRX liftMotor = new TalonSRX(RobotMap.LIFT);
+	public TalonSRX liftMotor = new TalonSRX(RobotMap.LIFT);
 	private Direction appliedFeedFoward = Direction.UP;
 
 	public LiftSubsystem() {
+		initSubsystem();
+	}
+	
+	public void initSubsystem()
+	{
     	TalonConfig();
     	resetEncoder();
+    	setMotionMagicSetpoint(0);
 	}
 	
     public void initDefaultCommand() {
@@ -47,15 +53,7 @@ public class LiftSubsystem extends Subsystem {
     	liftMotor.configNominalOutputReverse(0, RobotMap.TIMOUT_MS);    	
     	liftMotor.configPeakOutputForward(1.0, RobotMap.TIMOUT_MS);
     	liftMotor.configPeakOutputReverse(-1.0, RobotMap.TIMOUT_MS);
-    	
-    	configGains(
-    			SmartDashboard.getNumber("kF_lift_up", 0.0), 
-    			SmartDashboard.getNumber("kP_lift", 0.0), 
-    			SmartDashboard.getNumber("kI_lift", 0.0), 
-    			SmartDashboard.getNumber("kD_lift", 0.0),
-    			(int)SmartDashboard.getNumber("kiZone_lift", 0.0),
-    			(int)SmartDashboard.getNumber("kCruise_lift", 0.0),
-    			(int)SmartDashboard.getNumber("kAccel_lift", 0.0));
+    	liftMotor.setNeutralMode(NeutralMode.Brake);
     }
     
     public void configGains(double f, double p, double i, double d, int izone, int accel, int cruise) {
@@ -67,6 +65,10 @@ public class LiftSubsystem extends Subsystem {
     	liftMotor.config_IntegralZone(0, izone, RobotMap.TIMOUT_MS);
     	liftMotor.configMotionCruiseVelocity(cruise, RobotMap.TIMOUT_MS);
     	liftMotor.configMotionAcceleration(accel, RobotMap.TIMOUT_MS);
+    }
+    
+    public void resetIntegrator() {
+    	liftMotor.setIntegralAccumulator(0, 0, RobotMap.TIMOUT_MS);
     }
     
     public double getCurrentSetpoint() {
@@ -99,10 +101,18 @@ public class LiftSubsystem extends Subsystem {
     	setpoint_units = Math.max(0, Math.min(setpoint_units, RobotMap.MAX_LIFT_DISPLACEMENT_UNITS));
     	
     	SmartDashboard.putNumber("setpoint_units", setpoint_units);
+    	SmartDashboard.putNumber("setpoint_inches", setpoint);
     	
-    	liftMotor.set(ControlMode.MotionMagic, setpoint_units);
+    	if(isSensorConnected())
+    	{
+    		liftMotor.set(ControlMode.MotionMagic, setpoint_units);
+    	}
+    	else
+    	{
+    		stop();
+    	}
     }
-    
+                                                     
     public boolean isMotionMagicNearTarget() {
     	return (liftMotor.getActiveTrajectoryPosition() == liftMotor.getClosedLoopTarget(0)) &&
     			Math.abs(liftMotor.getClosedLoopError(0)) < 10;
@@ -133,6 +143,10 @@ public class LiftSubsystem extends Subsystem {
 	public void setPercentOutput (double anything)
 	{
     	liftMotor.set(ControlMode.PercentOutput, anything);
+	}
+	
+	public boolean isSensorConnected() {
+		return liftMotor.getSensorCollection().getPulseWidthRiseToRiseUs() != 0;
 	}
     
 	public void resetEncoder() {

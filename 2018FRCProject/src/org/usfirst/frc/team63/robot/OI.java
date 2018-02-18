@@ -11,6 +11,8 @@ import org.usfirst.frc.team63.robot.XboxDPadButton.DPAD_BUTTON;
 import org.usfirst.frc.team63.robot.commands_claw.BoxObtain;
 import org.usfirst.frc.team63.robot.commands_claw.BoxPushCommand;
 import org.usfirst.frc.team63.robot.commands_claw.BoxStopCommand;
+import org.usfirst.frc.team63.robot.commands_claw.ClawCloseCommand;
+import org.usfirst.frc.team63.robot.commands_claw.ClawOpenCommand;
 import org.usfirst.frc.team63.robot.commands_climb.ClimbArmExtended;
 import org.usfirst.frc.team63.robot.commands_climb.ClimbArmRetract;
 import org.usfirst.frc.team63.robot.commands_climb.ClimbClampLock;
@@ -18,7 +20,8 @@ import org.usfirst.frc.team63.robot.commands_climb.ClimbClampOpen;
 import org.usfirst.frc.team63.robot.commands_climb.ClimbDown;
 import org.usfirst.frc.team63.robot.commands_climb.ClimbStop;
 import org.usfirst.frc.team63.robot.commands_climb.ClimbUp;
-import org.usfirst.frc.team63.robot.commands_drive.DriveGearShift;
+import org.usfirst.frc.team63.robot.commands_drive.TeleopDriveHighCommand;
+import org.usfirst.frc.team63.robot.commands_drive.TeleopDriveLowCommand;
 import org.usfirst.frc.team63.robot.commands_lift.MoveLiftMaxHeight;
 import org.usfirst.frc.team63.robot.commands_lift.MoveLiftMinHeight;
 import org.usfirst.frc.team63.robot.commands_lift.MoveLiftOneBoxHeight;
@@ -75,21 +78,21 @@ public class OI {
 		 controller2_dpadDown.whileHeld(new ClimbDown());
 		 controller2_dpadDown.whenReleased(new ClimbStop());
 		 
-//		 controller1_RB.whenPressed(new ClawOpenCommand());
-//		 controller1_LB.whenPressed(new ClawCloseCommand());
+		 controller1_RB.whenPressed(new ClawOpenCommand());
+		 controller1_LB.whenPressed(new ClawCloseCommand());
 		 controller1_A.whileHeld(new BoxObtain());
 		 controller1_A.whenReleased(new BoxStopCommand());
 		 controller1_B.whileHeld(new BoxPushCommand());
 		 controller1_B.whenReleased(new BoxStopCommand());
 		 		 
 		 //Lift
-		 controller1_LB.whenPressed(new MoveLiftOneBoxHeight(Direction.DOWN));
-		 controller1_RB.whenPressed(new MoveLiftOneBoxHeight(Direction.UP));
-		 controller1_dpadUp.whenPressed(new MoveLiftMaxHeight());
-		 controller1_dpadDown.whenPressed(new MoveLiftMinHeight());
+		 controller1_dpadDown.whenPressed(new MoveLiftOneBoxHeight(Direction.DOWN));
+		 controller1_dpadUp.whenPressed(new MoveLiftOneBoxHeight(Direction.UP));
+		 controller1_dpadRight.whenPressed(new MoveLiftMaxHeight());
+		 controller1_dpadLeft.whenPressed(new MoveLiftMinHeight());
 		 
 		 //Drive Gear Shift
-		 controller1_X.whileHeld(new DriveGearShift(Shift.HIGH));
-		 controller1_X.whenReleased(new DriveGearShift(Shift.LOW));		 		
+		 controller1_X.whileHeld(new TeleopDriveHighCommand());
+		 controller1_X.whenReleased(new TeleopDriveLowCommand());		 		
 	 }
 }

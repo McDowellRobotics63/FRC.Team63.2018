@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.usfirst.frc.team63.robot.RobotMap;
-import org.usfirst.frc.team63.robot.commands_drive.TeleopDriveCommand;
+import org.usfirst.frc.team63.robot.commands_drive.TeleopDriveLowCommand;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
@@ -15,14 +15,15 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DriveSubsystem extends Subsystem {
 	private WPI_TalonSRX leftMaster = new WPI_TalonSRX(RobotMap.DRIVELEFTMASTER); 
 	private WPI_TalonSRX rightMaster = new WPI_TalonSRX(RobotMap.DRIVERIGHTMASTER); 
 	private WPI_TalonSRX leftSlave = new WPI_TalonSRX(RobotMap.DRIVELEFTSLAVE); 
 	private WPI_TalonSRX rightSlave = new WPI_TalonSRX(RobotMap.DRIVERIGHTSLAVE);
-	private Solenoid shifter_high = new Solenoid(RobotMap.PCM2_CANID, RobotMap.SHIFTER_HIGH);
-	private Solenoid shifter_low = new Solenoid(RobotMap.PCM1_CANID, RobotMap.SHIFTER_LOW);
+	private Solenoid shifter_high = new Solenoid(RobotMap.PCM1_CANID, RobotMap.SHIFTER_HIGH);
+	private Solenoid shifter_low = new Solenoid(RobotMap.PCM2_CANID, RobotMap.SHIFTER_LOW);
 	 
 	private DifferentialDrive differentialDrive;
 	 
@@ -38,7 +39,7 @@ public class DriveSubsystem extends Subsystem {
 	 }
 	
 	 public void initDefaultCommand() {
-	    setDefaultCommand(new TeleopDriveCommand());
+	    //setDefaultCommand(new TeleopDriveLowCommand());
 	 }
 
 	/**
@@ -57,7 +58,7 @@ public class DriveSubsystem extends Subsystem {
 	 * @return Current encoder position on left gearbox shaft in inches
 	 */
 	public double getLeftPosition() {
-	    return unitsToInches(leftMaster.getSelectedSensorPosition(0));
+	    return leftMaster.getSelectedSensorPosition(0);
 	}
 	
 	/**
@@ -65,8 +66,17 @@ public class DriveSubsystem extends Subsystem {
 	 * @return Current encoder position on right gearbox shaft in inches
 	 */
 	public double getRightPosition() {
-	    return -unitsToInches(rightMaster.getSelectedSensorPosition(0));
+	    return rightMaster.getSelectedSensorPosition(0);
 	}
+	
+	public double getRightSpeed() {
+	    return rightMaster.getSelectedSensorVelocity(0);
+	}
+	
+	public double getLeftSpeed() {
+	    return unitsToInches(leftMaster.getSelectedSensorVelocity(0));
+	}
+	
 	
     public double getErrorLeft() {
     	return leftMaster.getClosedLoopError(0);
@@ -76,22 +86,38 @@ public class DriveSubsystem extends Subsystem {
     	return rightMaster.getClosedLoopError(0);
     }
 	
+	public boolean isLeftSensorConnected() {
+		return leftMaster.getSensorCollection().getPulseWidthRiseToRiseUs() != 0;
+	}
+	
+	public boolean isRightSensorConnected() {
+		return rightMaster.getSensorCollection().getPulseWidthRiseToRiseUs() != 0;
+	}
+	
 	public void resetEncoders() {
 		leftMaster.setSelectedSensorPosition(0, 0, RobotMap.TIMOUT_MS);
 		rightMaster.setSelectedSensorPosition(0, 0, RobotMap.TIMOUT_MS);
 	
-		leftMaster.getSensorCollection().setQuadraturePosition(RobotMap.VELOCITY_CONTROL_SLOT, RobotMap.TIMOUT_MS);
-		rightMaster.getSensorCollection().setQuadraturePosition(RobotMap.VELOCITY_CONTROL_SLOT, RobotMap.TIMOUT_MS);
+		leftMaster.getSensorCollection().setQuadraturePosition(0, RobotMap.TIMOUT_MS);
+		rightMaster.getSensorCollection().setQuadraturePosition(0, RobotMap.TIMOUT_MS);
 	}
 	
     public void setMotionMagicLeft(double setpoint) {
+    	SmartDashboard.putNumber("setpoint_left_units", inchesToUnits(setpoint));
     	leftMaster.set(ControlMode.MotionMagic, inchesToUnits(setpoint));
     }
     
     public void setMotionMagicRight(double setpoint) {
-    	rightMaster.set(ControlMode.MotionMagic, inchesToUnits(setpoint));
+    	rightMaster.set(ControlMode.MotionMagic, inchesToUnits(-setpoint));
     }
 	
+    public boolean isMotionMagicNearTarget() {
+    	return (leftMaster.getActiveTrajectoryPosition() == leftMaster.getClosedLoopTarget(0)) &&
+    		   (rightMaster.getActiveTrajectoryPosition() == rightMaster.getClosedLoopTarget(0)) &&
+    			Math.abs(leftMaster.getClosedLoopError(0)) < 20 &&
+    			Math.abs(rightMaster.getClosedLoopError(0)) < 20;
+    }
+    
 	public void shiftHigh()
 	{
 		shifter_high.set(true);
@@ -122,17 +148,28 @@ public class DriveSubsystem extends Subsystem {
 	}
 	
 	public void autoInit() {
+		resetEncoders();
+    	leftMaster.setNeutralMode(NeutralMode.Brake);
+    	leftSlave.setNeutralMode(NeutralMode.Brake);
+    	rightMaster.setNeutralMode(NeutralMode.Brake);
+    	rightSlave.setNeutralMode(NeutralMode.Brake);
 		differentialDrive.setSafetyEnabled(false);
+		shiftLow();
 	}
 	
 	public void teleInit() {
+    	leftMaster.setNeutralMode(NeutralMode.Coast);
+    	leftSlave.setNeutralMode(NeutralMode.Coast);
+    	rightMaster.setNeutralMode(NeutralMode.Coast);
+    	rightSlave.setNeutralMode(NeutralMode.Coast);
 		differentialDrive.setSafetyEnabled(true);
+		shiftLow();
 	}
 	
 	/*Called in constructor to ensure correct drive talon settings*/
 	private void TalonConfig() {
-    	leftMaster.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, RobotMap.TIMOUT_MS);
-    	rightMaster.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, RobotMap.TIMOUT_MS);
+    	leftMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, RobotMap.TIMOUT_MS);
+    	rightMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, RobotMap.TIMOUT_MS);
 		
     	leftMaster.setSelectedSensorPosition(0, 0, RobotMap.TIMOUT_MS);
     	rightMaster.setSelectedSensorPosition(0, 0, RobotMap.TIMOUT_MS);
@@ -143,11 +180,11 @@ public class DriveSubsystem extends Subsystem {
     	rightMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, RobotMap.TIMOUT_MS);
     	rightMaster.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10, RobotMap.TIMOUT_MS);
 		
-    	leftMaster.setSensorPhase(true);
-    	rightMaster.setSensorPhase(true);
+    	leftMaster.setSensorPhase(false);
+    	rightMaster.setSensorPhase(false);
     	
-    	leftMaster.setInverted(false);
-    	leftSlave.setInverted(false);
+    	leftMaster.setInverted(true);
+    	leftSlave.setInverted(true);
     	
     	rightMaster.setInverted(true);
     	rightSlave.setInverted(true);
@@ -197,7 +234,7 @@ public class DriveSubsystem extends Subsystem {
     	rightMaster.configMotionAcceleration(accel, RobotMap.TIMOUT_MS);
     }
     
-    public List<Double> DebugMotionMagicRight()
+    public List<Double> DebugMotionMagic()
     {
 		List<Double> resulterino = new ArrayList<Double>();
 		resulterino.add((double) rightMaster.getSelectedSensorPosition(0));
@@ -206,12 +243,6 @@ public class DriveSubsystem extends Subsystem {
 		resulterino.add((double) rightMaster.getActiveTrajectoryVelocity());
 		resulterino.add(rightMaster.getMotorOutputPercent());
 		resulterino.add((double) rightMaster.getClosedLoopError(0));
-		return resulterino;
-	}
-    
-    public List<Double> DebugMotionMagicLeft()
-    {
-		List<Double> resulterino = new ArrayList<Double>();
 		resulterino.add((double) leftMaster.getSelectedSensorPosition(0));
 		resulterino.add((double) leftMaster.getSelectedSensorVelocity(0));
 		resulterino.add((double) leftMaster.getActiveTrajectoryPosition());

@@ -16,7 +16,7 @@ public class DebugSubsystem extends Subsystem {
 
 	private final int MAX_DIRECTORY_SIZE = 5*1024*1024; //5MB
 	private final int MAX_FILE_COUNT = 100;
-	private final String DEBUG_DIRECTORY = "/home/lvuser/debug";
+	private final String DEBUG_DIRECTORY = "/home/lvuser/debug/";
 	
 	private PrintWriter _pw = null;
 	List<List<Double>> _data = new ArrayList<>();
