@@ -1,28 +1,38 @@
 package org.usfirst.frc.team63.robot.commands_auto;
 
+import org.usfirst.frc.team63.robot.RobotMap;
+import org.usfirst.frc.team63.robot.commands_claw.BoxShoot;
+import org.usfirst.frc.team63.robot.commands_drive.AutoDriveFixedDistance;
+import org.usfirst.frc.team63.robot.commands_drive.AutoRotate;
+
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  *
  */
 public class AutoRoutine1 extends CommandGroup {
-
-    public AutoRoutine1() {
-        // Add Commands here:
-        // e.g. addSequential(new Command1());
-        //      addSequential(new Command2());
-        // these will run in order.
-
-        // To run multiple commands at the same time,
-        // use addParallel()
-        // e.g. addParallel(new Command1());
-        //      addSequential(new Command2());
-        // Command1 and Command2 will run in parallel.
-
-        // A command group will require all of the subsystems that each member
-        // would require.
-        // e.g. if Command1 requires chassis, and Command2 requires arm,
-        // a CommandGroup containing them would require both the chassis and the
-        // arm.
+	private char botPos; //l, m, or r
+	
+    public AutoRoutine1(String fieldSetup, int switches) {
+    	
+    	if (fieldSetup.charAt(1) == botPos) {
+    		addSequential(new AutoDriveFixedDistance(RobotMap.DIST_SCALE));
+    		
+    		if(botPos == 'l') addSequential(new AutoRotate(90));
+    		else addSequential(new AutoRotate(-90));
+    		
+    		addSequential(new BoxShoot());
+    	}
+    	else if (fieldSetup.charAt(0) == botPos) {
+    		addSequential(new AutoDriveFixedDistance(RobotMap.DIST_SWITCH));
+    		
+    		if(botPos == 'l') addSequential(new AutoRotate(90));
+    		else addSequential(new AutoRotate(-90));
+    		
+    		addSequential(new BoxShoot());
+    	}
+    	else {
+    		addSequential(new AutoDriveFixedDistance(RobotMap.DIST_LINE));
+    	}
     }
 }

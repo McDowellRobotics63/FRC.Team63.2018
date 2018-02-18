@@ -14,18 +14,28 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class AutoRotate extends Command {
 	
-	private double setpoint; //inches to go
+	private double testingSetpoint; //degrees to go
+	private double setpoint; //actual degrees for normal use, right is positive
 	private final Timer totalTimer;
+	private boolean isTesting = true;
 
     public AutoRotate() {
         requires(Robot.drive);
         //requires(Robot.debug);
         totalTimer = new Timer();
     }
+    
+    public AutoRotate(double d) {
+        requires(Robot.drive);
+        totalTimer = new Timer();
+        isTesting = false;
+        setpoint = d;
+    }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.debug.Start("AutoRotate", Arrays.asList("Sensor_Position_R", "Sensor_Velocity_R",
+    	if(isTesting) {
+    		Robot.debug.Start("AutoRotate", Arrays.asList("Sensor_Position_R", "Sensor_Velocity_R",
     			"Trajectory_Position_R", "Trajectory_Velocity_R", "Motor_Output_R", "Error_R", "Sensor_Position_L", "Sensor_Velocity_L",
     			"Trajectory_Position_L", "Trajectory_Velocity_L", "Motor_Output_L", "Error_L")); 
     	totalTimer.reset();
@@ -42,14 +52,27 @@ public class AutoRotate extends Command {
     	  (int)SmartDashboard.getNumber("acceleration_rotate", 0.0));
     	
     	
-        setpoint = degreesToInches(SmartDashboard.getNumber("setpoint_rotate", 0.0));
-        Robot.drive.setMotionMagicLeft(setpoint);
-    	Robot.drive.setMotionMagicRight(-setpoint);
+        testingSetpoint = degreesToInches(SmartDashboard.getNumber("setpoint_rotate", 0.0));
+        Robot.drive.setMotionMagicLeft(testingSetpoint);
+    	Robot.drive.setMotionMagicRight(-testingSetpoint);
+    	}
+    	else {
+    		totalTimer.reset();
+	    	totalTimer.start();
+	    	Robot.drive.resetEncoders();
+	    	Robot.drive.configGains(RobotMap.DRIVE_F, RobotMap.DRIVE_P, RobotMap.DRIVE_I, RobotMap.DRIVE_D,
+	    			RobotMap.DRIVE_RIZONE, RobotMap.DRIVE_RCRUISE, RobotMap.RDRIVE_ACCEL);
+	    	
+	    	setpoint = degreesToInches(setpoint);
+	        Robot.drive.setMotionMagicLeft(setpoint);
+	    	Robot.drive.setMotionMagicRight(-setpoint);
+    	}
+    	
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.debug.Update(Robot.drive.DebugMotionMagic());
+    	if(isTesting) Robot.debug.Update(Robot.drive.DebugMotionMagic());
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -62,14 +85,14 @@ public class AutoRotate extends Command {
     // Called once after isFinished returns true
     protected void end() {
     	Robot.drive.stop();
-    	Robot.debug.Stop();
+    	if(isTesting) Robot.debug.Stop();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
     	Robot.drive.stop();
-    	Robot.debug.Stop();
+    	if(isTesting) Robot.debug.Stop();
     }
     
     private double degreesToInches(double degrees) {

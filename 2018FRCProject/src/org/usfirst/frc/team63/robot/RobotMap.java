@@ -51,6 +51,16 @@ public class RobotMap {
 	public static final double DRIVE_ENCODER_PPR = 4096; //native units per rotation
 	public static final int TIMOUT_MS = 10; //ms to wait for talon timeout, literally doesn't matter
 	public static final int VELOCITY_CONTROL_SLOT = 0;
+	public static final double DRIVE_F = 0;
+	public static final double DRIVE_P = 0;
+	public static final double DRIVE_I = 0;
+	public static final double DRIVE_D = 0;
+	public static final int DRIVE_IZONE = 0;
+	public static final int DRIVE_CRUISE = 0;
+	public static final int DRIVE_ACCEL = 0;
+	public static final int DRIVE_RIZONE = 0;
+	public static final int DRIVE_RCRUISE = 0;
+	public static final int RDRIVE_ACCEL = 0;
 	
 	//Lift constants
 	public static final double LIFT_INCHES_PER_UNIT = 0.000033;
@@ -77,5 +87,16 @@ public class RobotMap {
     //Vision
     public static final double POWER = -1.07436389463682;
     public static final double XCOEFF = 11834.7562904465;
-    public static final double intercept = -4.40793976463289;	
+    public static final double intercept = -4.40793976463289;
+
+    
+    //Das Auto, all inches
+    public static final int AUTO_SWITCH_1 = 0;
+	public static final int AUTO_SWITCH_2 = 1;
+	public static final int AUTO_SWITCH_3 = 2;
+    public static final double DIST_SCALE = 0;
+    public static final double DIST_SWITCH = 0;
+    public static final double DIST_LINE = 0; //line to cross in auto for points
+    public static final double DIST_RETURN = 0; //distance to come back for switch after operating scale
+    public static final double DIST_TURN = 0; //how far to go before turning when going for both switch and scale
 }

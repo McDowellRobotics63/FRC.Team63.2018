@@ -7,6 +7,7 @@
 
 package org.usfirst.frc.team63.robot;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -48,6 +49,10 @@ public class Robot extends TimedRobot {
 	TeleopDriveLowCommand teledrive = new TeleopDriveLowCommand();
 	Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
+	
+	public DigitalInput switch1 = new DigitalInput(RobotMap.AUTO_SWITCH_1);
+	public DigitalInput switch2 = new DigitalInput(RobotMap.AUTO_SWITCH_2);
+	public DigitalInput switch3 = new DigitalInput(RobotMap.AUTO_SWITCH_3);
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -141,8 +146,8 @@ public class Robot extends TimedRobot {
 		// schedule the autonomous command (example)
 		//while (DriverStation.getInstance().getGameSpecificMessage().isEmpty());
 		
-		//String magicString = DriverStation.getInstance().getGameSpecificMessage();
-		
+		int switches = (switch1.get()?4:0) + (switch2.get()?2:0) + (switch3.get()?1:0);
+		String magicString = DriverStation.getInstance().getGameSpecificMessage().toLowerCase().substring(0,2);
 		
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.start();
