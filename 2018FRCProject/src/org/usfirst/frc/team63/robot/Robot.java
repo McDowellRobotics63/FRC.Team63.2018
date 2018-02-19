@@ -140,7 +140,7 @@ public class Robot extends TimedRobot {
 		//m_autonomousCommand = m_chooser.getSelected();
 		m_autonomousCommand =  new DownAndBack();
 
-		
+		climb.armRetract();
 		drive.autoInit();
 		lift.initSubsystem();
 		// schedule the autonomous command (example)
@@ -171,6 +171,7 @@ public class Robot extends TimedRobot {
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
 		
+		climb.armRetract();
 		drive.teleInit();
 		lift.initSubsystem();
 		if (m_autonomousCommand != null) {
@@ -191,6 +192,8 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("Right Speed",drive.getRightSpeed());
 		SmartDashboard.putNumber("left position", drive.getLeftPosition());	
 		SmartDashboard.putNumber("right position", drive.getRightPosition());
+		SmartDashboard.putBoolean("box close",claw.boxIsClose());
+		SmartDashboard.putBoolean("box really close",claw.boxIsReallyClose());
 	}
 
 	/**

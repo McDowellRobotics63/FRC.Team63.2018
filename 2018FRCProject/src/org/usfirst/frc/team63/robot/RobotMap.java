@@ -44,8 +44,8 @@ public class RobotMap {
 	public static final int INFRARED_SENSOR_CHANNEL = 0;
 	
 	//Climb
-	public static final double CLIMB_UP_SPEED = -0.3;
-	public static final double CLIMB_DOWN_SPEED = 0.3;
+	public static final double CLIMB_UP_SPEED = -1.0;
+	public static final double CLIMB_DOWN_SPEED = 1.0;
 	
     //Drive constants
 	private static final double DRIVE_WHEEL_DIAMETER = 6;

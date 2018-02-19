@@ -8,6 +8,7 @@ import org.usfirst.frc.team63.robot.commands_claw.AutoBoxObtain;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -42,6 +43,7 @@ public class ClawSubsystem extends Subsystem {
     
     public boolean boxIsClose()
     {
+    	SmartDashboard.putNumber("infrared", Robot.claw.sensor.GetMedianVoltage());
     	return Robot.claw.sensor.GetMedianVoltage() > 0.6;
     }
     
