@@ -25,64 +25,64 @@ public class AutoRoutine1 extends CommandGroup {
     	
     	if(botPos == 'm') {
     		//try going for switch
-    		addParallel(new AutoSetLiftPosition(RobotMap.SWITCH_HEIGHT));
-    		addSequential(new AutoDriveFixedDistance(RobotMap.DIST_UNTIL_TURN));
+//    		addParallel(new AutoSetLiftPosition(RobotMap.SWITCH_HEIGHT));
+//    		addSequential(new AutoDriveFixedDistance(RobotMap.DIST_UNTIL_TURN));
     		if(fieldSetup.charAt(0) == 'l'){
-    			addSequential(new AutoRotate(-90));
+//    			addSequential(new AutoRotate(-90));
     		} else {
-    			addSequential(new AutoRotate(90));
+//    			addSequential(new AutoRotate(90));
     		}
-    		addSequential(new AutoDriveFixedDistance(RobotMap.DIST_HALF_SWITCH_WIDTH));
+//    		addSequential(new AutoDriveFixedDistance(RobotMap.DIST_HALF_SWITCH_WIDTH));
     		if(fieldSetup.charAt(0) == 'l') {
-    			addSequential(new AutoRotate(90));
+//    			addSequential(new AutoRotate(90));
     		} else {
-    			addSequential(new AutoRotate(-90));
+//    			addSequential(new AutoRotate(-90));
     		}
-    		addSequential(new AutoDriveFixedDistance(RobotMap.DIST_SWITCH-RobotMap.DIST_UNTIL_TURN));
-    		addSequential(new BoxShoot());
+//    		addSequential(new AutoDriveFixedDistance(RobotMap.DIST_SWITCH-RobotMap.DIST_UNTIL_TURN));
+//    		addSequential(new BoxShoot());
     	} else if (fieldSetup.charAt(1) == botPos) {
     		//go for scale
-    		addSequential(new AutoDriveFixedDistance(RobotMap.DIST_SCALE));
-    		addParallel(new MoveLiftMaxHeight());
+//    		addSequential(new AutoDriveFixedDistance(RobotMap.DIST_SCALE));
+//    		addParallel(new MoveLiftMaxHeight());
     		if(botPos == 'l') {
-    			addSequential(new AutoRotate(90));
+//    			addSequential(new AutoRotate(90));
     		}
     		else{
-    			addSequential(new AutoRotate(-90));
+//    			addSequential(new AutoRotate(-90));
     		}
-        	addSequential(new AutoDriveFixedDistance(24));
-    		addSequential(new BoxShoot());
+//        	addSequential(new AutoDriveFixedDistance(24));
+//    		addSequential(new BoxShoot());
     		
     		if (fieldSetup.charAt(0) == botPos) {
     			//continue for two cube auto
-    			addParallel(new MoveLiftMinHeight());
+//    			addParallel(new MoveLiftMinHeight());
         		if(botPos == 'l') {
-        			addSequential(new AutoRotate(-90));
+//        			addSequential(new AutoRotate(-90));
         		}
         		else{
-        			addSequential(new AutoRotate(90));
+//        			addSequential(new AutoRotate(90));
         		}
-        		addSequential(new AutoDriveFixedDistance(RobotMap.DIST_RETURN));
-        		addSequential(new AutoBoxObtain());
-        		addParallel(new AutoSetLiftPosition(RobotMap.SWITCH_HEIGHT));
-        		addSequential(new AutoDriveFixedDistance(6));
-        		addSequential(new BoxShoot());
+//        		addSequential(new AutoDriveFixedDistance(RobotMap.DIST_RETURN));
+//        		addSequential(new AutoBoxObtain());
+//        		addParallel(new AutoSetLiftPosition(RobotMap.SWITCH_HEIGHT));
+//        		addSequential(new AutoDriveFixedDistance(6));
+//        		addSequential(new BoxShoot());
     		}
     	}
     	else if (fieldSetup.charAt(0) == botPos) {
     		//just switch
-    		addSequential(new AutoDriveFixedDistance(RobotMap.DIST_SWITCH));
+//    		addSequential(new AutoDriveFixedDistance(RobotMap.DIST_SWITCH));
     		
-    		if(botPos == 'l') addSequential(new AutoRotate(90));
-    		else addSequential(new AutoRotate(-90));
+    		if(botPos == 'l')// addSequential(new AutoRotate(90));
+    		else //addSequential(new AutoRotate(-90));
     		
-    		addSequential(new AutoSetLiftPosition(RobotMap.SWITCH_HEIGHT));
-    		addSequential(new BoxShoot());
+//    		addSequential(new AutoSetLiftPosition(RobotMap.SWITCH_HEIGHT));
+//    		addSequential(new BoxShoot());
     	}
     	else {
     		// basic drive forward
-    		addSequential(new AutoDriveFixedDistance(RobotMap.DIST_LINE));
+//    		addSequential(new AutoDriveFixedDistance(RobotMap.DIST_LINE));
     	}
-    	addSequential(new MoveLiftMinHeight());
+//    	addSequential(new MoveLiftMinHeight());
     }
 }
