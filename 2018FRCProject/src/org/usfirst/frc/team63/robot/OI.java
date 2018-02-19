@@ -73,10 +73,10 @@ public class OI {
 		 controller2_RB.whenPressed(new ClimbArmRetract());
 		 controller2_start.whenPressed(new ClimbClampLock());
 		 controller2_back.whenPressed(new ClimbClampOpen());
-		 controller2_dpadUp.whileHeld(new ClimbUp());
-		 controller2_dpadUp.whenReleased(new ClimbStop());
-		 controller2_dpadDown.whileHeld(new ClimbDown());
-		 controller2_dpadDown.whenReleased(new ClimbStop());
+		 controller2_Y.whileHeld(new ClimbUp());
+		 controller2_Y.whenReleased(new ClimbStop());
+		 controller2_A.whileHeld(new ClimbDown());
+		 controller2_A.whenReleased(new ClimbStop());
 		 
 		 controller1_RB.whenPressed(new ClawOpenCommand());
 		 controller1_LB.whenPressed(new ClawCloseCommand());
