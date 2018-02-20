@@ -46,7 +46,7 @@ public class DebugSubsystem extends Subsystem {
     	for(int i = 0; i < vars.size(); i++)
     	{
     		_columnHeaders.add(vars.get(i));
-    		_data.add(new ArrayList<>());    		    		
+    		_data.add(new ArrayList<Double>());    		    		
     	}
 
     	try

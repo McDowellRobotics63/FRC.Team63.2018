@@ -29,7 +29,7 @@ public class TestLift2 extends Command {
     protected void execute() 
     {
     	//runs only if back is pressed
-    	go = Robot.m_oi.controller1_back.get();
+    	go = Robot.m_oi.controller1.Back().get();
     	if (go)
     	{
     		Robot.lift.setPercentOutput(SmartDashboard.getNumber("lift_cmd", 0));
@@ -43,7 +43,7 @@ public class TestLift2 extends Command {
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() 
     {
-        return Robot.m_oi.controller1_start.get();
+        return Robot.m_oi.controller1.Start().get();
     }
 
     // Called once after isFinished returns true

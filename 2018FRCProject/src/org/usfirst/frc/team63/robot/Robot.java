@@ -95,7 +95,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("setpoint_lift", 0.0);		
 		SmartDashboard.putData("TestLift", new DashboardSetLiftPosition());
 		SmartDashboard.putData("AutoDrive", new AutoDriveFixedDistance());
-		SmartDashboard.putData("AutoRotate", new AutoRotate());	
+		SmartDashboard.putData("AutoRotate", new AutoRotate());
 
 		SmartDashboard.putNumber("lift_cmd", 0);
 		Robot.lift.configGains(
@@ -140,7 +140,7 @@ public class Robot extends TimedRobot {
 		//m_autonomousCommand = m_chooser.getSelected();
 		m_autonomousCommand =  new DownAndBack();
 
-		
+		climb.armRetract();
 		drive.autoInit();
 		lift.initSubsystem();
 		// schedule the autonomous command (example)
@@ -171,6 +171,7 @@ public class Robot extends TimedRobot {
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
 		
+		climb.armRetract();
 		drive.teleInit();
 		lift.initSubsystem();
 		if (m_autonomousCommand != null) {
@@ -193,6 +194,8 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("right position", drive.getRightPosition());
 		SmartDashboard.putNumber("current_lift", lift.liftMotor.getOutputCurrent());
 		SmartDashboard.putNumber("ActiveTrajectoryHeading_lift", lift.liftMotor.getActiveTrajectoryHeading());
+		SmartDashboard.putBoolean("box close",claw.boxIsClose());
+		SmartDashboard.putBoolean("box really close",claw.boxIsReallyClose());
 		SmartDashboard.putNumber("ActiveTrajectoryPosition_lift", lift.liftMotor.getActiveTrajectoryPosition());
 		SmartDashboard.putNumber("ActiveTrajectoryVelocity", lift.liftMotor.getActiveTrajectoryVelocity());
 	}

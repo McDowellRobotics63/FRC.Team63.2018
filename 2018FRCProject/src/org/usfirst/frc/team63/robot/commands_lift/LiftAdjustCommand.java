@@ -36,7 +36,7 @@ public class LiftAdjustCommand extends Command {
     	double currentTime = totalTimer.get();
     	double timeElapsedSeconds = (currentTime - lastTime);
     	
-    	double axis = -Robot.m_oi.controller1.getRawAxis(RobotMap.XBOX_RIGHT_Y_AXIS);
+    	double axis = Robot.m_oi.controller1.RightStickY();
     	
     	if(axis > -0.2 && axis < 0.2)
     	{

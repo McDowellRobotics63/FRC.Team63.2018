@@ -21,18 +21,10 @@ public class TeleopDriveHighCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	
-    	double axis = Robot.m_oi.controller1.getRawAxis(RobotMap.XBOX_LEFT_X_AXIS);
-    	
-    	if(axis > -0.2 && axis < 0.2)
-    	{
-    		axis = 0;
-    	}
-    	
     	Robot.drive.shiftHigh();
     	Robot.drive.teleDrive(
-    			-Robot.m_oi.controller1.getRawAxis(RobotMap.XBOX_LEFT_Y_AXIS),
-    			axis
+    			Robot.m_oi.controller1.LeftStickY(),
+    			Robot.m_oi.controller1.LeftStickX()
     			);
     }
 
