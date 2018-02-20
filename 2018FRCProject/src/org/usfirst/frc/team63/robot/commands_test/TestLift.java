@@ -35,7 +35,7 @@ public class TestLift extends Command {
     protected void execute() 
     {
     	//runs only if back is pressed
-    	go = Robot.m_oi.controller1_back.get();
+    	go = Robot.m_oi.controller1.Back().get();
     	if (go)
     	{
     		Robot.lift.setPercentOutput(current);
@@ -67,14 +67,14 @@ public class TestLift extends Command {
     		current = (highBound+lowBound)/2;
     	}
     	
-    	leftWasPressed = Robot.m_oi.controller1_LB.get();
-    	rightWasPressed = Robot.m_oi.controller1_RB.get();
+    	leftWasPressed = Robot.m_oi.controller1.LeftBumper().get();
+    	rightWasPressed = Robot.m_oi.controller1.RightBumper().get();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() 
     {
-        return Robot.m_oi.controller1_start.get();
+        return Robot.m_oi.controller1.Start().get();
     }
 
     // Called once after isFinished returns true
@@ -92,11 +92,11 @@ public class TestLift extends Command {
     
     //detects leading edge for left bumper
     private boolean left() {
-    	return Robot.m_oi.controller1_LB.get() && !leftWasPressed;
+    	return Robot.m_oi.controller1.LeftBumper().get() && !leftWasPressed;
     }
     
   //detects leading edge for right bumper
     private boolean right() {
-    	return Robot.m_oi.controller1_RB.get() && !rightWasPressed;
+    	return Robot.m_oi.controller1.RightBumper().get() && !rightWasPressed;
     }
 }

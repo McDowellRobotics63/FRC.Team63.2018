@@ -71,23 +71,7 @@ public class RobotMap {
 	public static final int MAX_LIFT_DISPLACEMENT_UNITS = (int)(MAX_LIFT_DISPLACEMENT_INCHES / LIFT_INCHES_PER_UNIT);
 	public static final double BOX_HEIGHT_INCHES = 11;
 	public static final double MAX_LIFT_ADJUST_SPEED = 10; //inches per second
-	
-	//Controller Map
-	public static final int XBOX_LEFT_X_AXIS = 0;
-    public static final int XBOX_LEFT_Y_AXIS = 1;
-    public static final int XBOX_LEFT_TRIGGER_AXIS = 2;
-    public static final int XBOX_RIGHT_TRIGGER_AXIS = 3;
-    public static final int XBOX_RIGHT_X_AXIS = 4;
-    public static final int XBOX_RIGHT_Y_AXIS = 5;
-    public static final int XBOX_A = 1;
-    public static final int XBOX_B = 2;
-    public static final int XBOX_X = 3;
-    public static final int XBOX_Y = 4;
-    public static final int XBOX_LEFT_BUMPER = 5;    
-    public static final int XBOX_RIGHT_BUMPER = 6;
-    public static final int XBOX_BACK = 7;
-    public static final int XBOX_START = 8;
-    
+	   
     //Vision
     public static final double POWER = -1.07436389463682;
     public static final double XCOEFF = 11834.7562904465;
