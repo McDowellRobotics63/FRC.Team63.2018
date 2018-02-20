@@ -98,8 +98,8 @@ public class RobotMap {
     public static final int AUTO_SWITCH_1 = 0;
 	public static final int AUTO_SWITCH_2 = 1;
 	public static final int AUTO_SWITCH_3 = 2;
-    public static final double DIST_SCALE = 0;
-    public static final double DIST_SWITCH = 0;
+    public static final double DIST_SCALE = 0; //Distance from the starting point to the scale
+    public static final double DIST_SWITCH = 0; //Distance from the starting point to the switch
     public static final double DIST_LINE = 0; //line to cross in auto for points
     public static final double DIST_RETURN = 0; //distance to come back for switch after operating scale
     public static final double DIST_UNTIL_TURN = 0; //how far to go before turning when going for both switch and scale
