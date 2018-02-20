@@ -38,6 +38,7 @@ public class LiftSubsystem extends Subsystem {
 	}
 	
     public void initDefaultCommand() {
+
     	setDefaultCommand(new LiftAdjustCommand());
     }
 
@@ -50,9 +51,10 @@ public class LiftSubsystem extends Subsystem {
     	liftMotor.setInverted(false);    	
     	liftMotor.setNeutralMode(NeutralMode.Brake);    	
     	liftMotor.configNominalOutputForward(0, RobotMap.TIMOUT_MS);    	
-    	liftMotor.configNominalOutputReverse(0, RobotMap.TIMOUT_MS);    	
-    	liftMotor.configPeakOutputForward(1.0, RobotMap.TIMOUT_MS);
-    	liftMotor.configPeakOutputReverse(-1.0, RobotMap.TIMOUT_MS);
+    	liftMotor.configNominalOutputReverse(0, RobotMap.TIMOUT_MS);   
+    	//temporary slowing for polarity test on lift
+    	liftMotor.configPeakOutputForward(0.5, RobotMap.TIMOUT_MS);
+    	liftMotor.configPeakOutputReverse(-0.5, RobotMap.TIMOUT_MS);
     	liftMotor.setNeutralMode(NeutralMode.Brake);
     }
     
@@ -97,8 +99,8 @@ public class LiftSubsystem extends Subsystem {
     		liftMotor.config_kF(0, SmartDashboard.getNumber("kF_lift_up", 0.0), RobotMap.TIMOUT_MS);
     		appliedFeedFoward = Direction.UP;
     	}
-    		
-    	setpoint_units = Math.max(0, Math.min(setpoint_units, RobotMap.MAX_LIFT_DISPLACEMENT_UNITS));
+    		//UNDO THIS AFTER POLARITY TEST
+    	setpoint_units = Math.max(-50000,/* Math.min(setpoint_units, RobotMap.MAX_LIFT_DISPLACEMENT_UNITS)*/ 50000);
     	
     	SmartDashboard.putNumber("setpoint_units", setpoint_units);
     	SmartDashboard.putNumber("setpoint_inches", setpoint);
