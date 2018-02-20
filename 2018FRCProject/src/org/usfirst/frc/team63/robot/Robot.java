@@ -95,7 +95,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("setpoint_lift", 0.0);		
 		SmartDashboard.putData("TestLift", new DashboardSetLiftPosition());
 		SmartDashboard.putData("AutoDrive", new AutoDriveFixedDistance());
-		SmartDashboard.putData("AutoRotate", new AutoRotate());
+		SmartDashboard.putData("AutoRotate", new AutoRotate());	
 
 		SmartDashboard.putNumber("lift_cmd", 0);
 		Robot.lift.configGains(
@@ -191,6 +191,10 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("Right Speed",drive.getRightSpeed());
 		SmartDashboard.putNumber("left position", drive.getLeftPosition());	
 		SmartDashboard.putNumber("right position", drive.getRightPosition());
+		SmartDashboard.putNumber("current_lift", lift.liftMotor.getOutputCurrent());
+		SmartDashboard.putNumber("ActiveTrajectoryHeading_lift", lift.liftMotor.getActiveTrajectoryHeading());
+		SmartDashboard.putNumber("ActiveTrajectoryPosition_lift", lift.liftMotor.getActiveTrajectoryPosition());
+		SmartDashboard.putNumber("ActiveTrajectoryVelocity", lift.liftMotor.getActiveTrajectoryVelocity());
 	}
 
 	/**
