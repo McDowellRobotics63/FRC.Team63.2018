@@ -26,8 +26,7 @@ public class ClawSubsystem extends Subsystem {
 	}
 	
     public void initDefaultCommand() {
-    	//setDefaultCommand(new AutoBoxObtain());
-    	//TEMPORARY COMMENT
+    	setDefaultCommand(new AutoBoxObtain());
     }
     
     public void clawToggle(boolean isOpen) {

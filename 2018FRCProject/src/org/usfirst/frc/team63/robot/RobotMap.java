@@ -39,7 +39,7 @@ public class RobotMap {
 	public static final int SHIFTER_LOW = 4;
 	
 	//Claw
-	public static final double BOX_IN_SPEED = -0.3;
+	public static final double BOX_IN_SPEED = -0.4;
 	public static final double BOX_OUT_SPEED = 0.4;
 	public static final int INFRARED_SENSOR_CHANNEL = 0;
 	
@@ -54,20 +54,20 @@ public class RobotMap {
 	public static final double DRIVE_ENCODER_PPR = 4096; //native units per rotation
 	public static final int TIMOUT_MS = 10; //ms to wait for talon timeout, literally doesn't matter
 	public static final int VELOCITY_CONTROL_SLOT = 0;
-	public static final double DRIVE_F = 0;
-	public static final double DRIVE_P = 0;
-	public static final double DRIVE_I = 0;
-	public static final double DRIVE_D = 0;
-	public static final int DRIVE_IZONE = 0;
-	public static final int DRIVE_CRUISE = 0;
-	public static final int DRIVE_ACCEL = 0;
-	public static final int DRIVE_RIZONE = 0;
-	public static final int DRIVE_RCRUISE = 0;
-	public static final int RDRIVE_ACCEL = 0;
+	public static final double DRIVE_F = 0.5683;
+	public static final double DRIVE_P = 0.5;
+	public static final double DRIVE_I = 0.003;
+	public static final double DRIVE_D = 35.0;
+	public static final int DRIVE_IZONE = 200;
+	public static final int DRIVE_CRUISE = 1600;
+	public static final int DRIVE_ACCEL = 1600;
+	public static final int DRIVE_RIZONE = 200;
+	public static final int DRIVE_RCRUISE = 800;
+	public static final int DRIVE_RACCEL = 1600;
 	
-	//Lift constants
+	//Lift constantsrs1
 	public static final double LIFT_INCHES_PER_UNIT = 0.000033;
-	public static final double MAX_LIFT_DISPLACEMENT_INCHES = 75;
+	public static final double MAX_LIFT_DISPLACEMENT_INCHES = 78; //6969
 	public static final int MAX_LIFT_DISPLACEMENT_UNITS = (int)(MAX_LIFT_DISPLACEMENT_INCHES / LIFT_INCHES_PER_UNIT);
 	public static final double BOX_HEIGHT_INCHES = 11;
 	public static final double MAX_LIFT_ADJUST_SPEED = 10; //inches per second
@@ -76,18 +76,9 @@ public class RobotMap {
     public static final double POWER = -1.07436389463682;
     public static final double XCOEFF = 11834.7562904465;
     public static final double intercept = -4.40793976463289;
-
     
-    //Das Auto, all inches
+    //Auto
     public static final int AUTO_SWITCH_1 = 0;
 	public static final int AUTO_SWITCH_2 = 1;
 	public static final int AUTO_SWITCH_3 = 2;
-    public static final double DIST_SCALE = 0; //Distance from the starting point to the scale
-    public static final double DIST_SWITCH = 0; //Distance from the starting point to the switch
-    public static final double DIST_LINE = 0; //line to cross in auto for points
-    public static final double DIST_RETURN = 0; //distance to come back for switch after operating scale
-    public static final double DIST_UNTIL_TURN = 0; //how far to go before turning when going for both switch and scale
-	public static final double SWITCH_HEIGHT = 15;
-	public static final double DIST_HALF_SWITCH_WIDTH = 60; //horizontal distance for robot in middle to go
-
 }

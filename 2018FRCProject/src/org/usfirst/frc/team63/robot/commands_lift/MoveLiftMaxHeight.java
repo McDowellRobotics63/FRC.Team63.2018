@@ -33,7 +33,7 @@ public class MoveLiftMaxHeight extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.lift.isMotionMagicNearTarget() || totalTimer.get() > 5.0;
+        return Robot.lift.isMotionMagicNearTarget() || totalTimer.get() > 9.0;
     }
 
     // Called once after isFinished returns true

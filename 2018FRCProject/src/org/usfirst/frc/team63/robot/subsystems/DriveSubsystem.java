@@ -50,7 +50,7 @@ public class DriveSubsystem extends Subsystem {
 	 *                  positive.
 	 */
 	public void teleDrive(double xSpeed, double zRotation) {
-		differentialDrive.arcadeDrive(xSpeed, zRotation);
+		differentialDrive.arcadeDrive(xSpeed, zRotation, false);
 	}
 	
 	/**

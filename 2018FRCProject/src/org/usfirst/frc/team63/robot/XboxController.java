@@ -56,19 +56,23 @@ public class XboxController extends Joystick {
 	}
 	
 	public double LeftStickY(){   	
-		return conditionAxis(-this.getRawAxis(XBOX_LEFT_Y_AXIS), 0.18, 1, 0.8, 5);
+		//return -this.getRawAxis(XBOX_LEFT_Y_AXIS);
+		return conditionAxis(-this.getRawAxis(XBOX_LEFT_Y_AXIS), 0.18, 1, 0.6, 2, -1.0, 1.0);
 	}
 	
 	public double LeftStickX(){
-		return conditionAxis(this.getRawAxis(XBOX_LEFT_X_AXIS), 0.18, 1, 0.8, 5);
+		//return this.getRawAxis(XBOX_LEFT_X_AXIS);
+		return conditionAxis(this.getRawAxis(XBOX_LEFT_X_AXIS), 0.18, 1, 0.8, 5, -0.5, 0.5);
 	}
 	
 	public double RightStickY(){
-		return conditionAxis(-this.getRawAxis(XBOX_RIGHT_Y_AXIS), 0.18, 1, 0.8, 5);
+		//return -this.getRawAxis(XBOX_RIGHT_Y_AXIS);
+		return conditionAxis(-this.getRawAxis(XBOX_RIGHT_Y_AXIS), 0.18, 1, 0.8, 2, -1.0, 1.0);
 	}
 	
 	public double RightStickX(){
-		return conditionAxis(this.getRawAxis(XBOX_RIGHT_X_AXIS), 0.18, 1, 0.8, 5);
+		//return this.getRawAxis(XBOX_RIGHT_X_AXIS);
+		return conditionAxis(this.getRawAxis(XBOX_RIGHT_X_AXIS), 0.18, 1, 0.8, 5, -1.0, 1.0);
 	}
 	
 	public Button X()
@@ -131,25 +135,31 @@ public class XboxController extends Joystick {
 		return btnDpadRight;
 	}
 	
-	private double conditionAxis(double axis, double deadband, double rate, double expo, double power)
-	{
+	private double conditionAxis(double axis, double deadband, double rate, double expo, double power, double min, double max)
+	{		
 		deadband = Math.min(Math.abs(deadband), 1.0);
 		rate = Math.max(0.1, Math.min(Math.abs(rate), 10));
 		expo = Math.max(0.0, Math.min(Math.abs(expo), 1.0));
 		power = Math.max(1.0, Math.min(Math.abs(power), 10.0));
-		
+				
+		//System.out.println("[INPUT] axis: " + axis + ", deadband: " + deadband + ", rate: " + rate + ", expo: " + expo + ", power: " + power);
 		
     	if(axis > -deadband && axis < deadband)
     	{
     		axis = 0;
     	}
+    	    	    	
+    	axis = rate * (Math.signum(axis) * ((Math.abs(axis) - deadband) / (1.0 - deadband)));
     	
-    	axis = rate * (Math.signum(axis) * ((Math.abs(axis) - deadband) / 1.0 - deadband));
+    	//System.out.println("[SCALE] axis: " + axis + ", deadband: " + deadband + ", rate: " + rate + ", expo: " + expo + ", power: " + power);
     	
     	if(expo > 0.01)
     	{
     		axis = (axis * Math.pow(Math.abs(axis), power) * expo) + (axis * (1-expo));
+    		//System.out.println("[EXPO] axis: " + axis + ", deadband: " + deadband + ", rate: " + rate + ", expo: " + expo + ", power: " + power);
     	}
+    	
+    	Math.max(Math.min(axis, max), min);
     	
     	return axis;
 	}

@@ -38,7 +38,6 @@ public class LiftSubsystem extends Subsystem {
 	}
 	
     public void initDefaultCommand() {
-
     	setDefaultCommand(new LiftAdjustCommand());
     }
 
@@ -47,15 +46,18 @@ public class LiftSubsystem extends Subsystem {
     	liftMotor.setSelectedSensorPosition(0, 0, RobotMap.TIMOUT_MS);    	
     	liftMotor.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, RobotMap.TIMOUT_MS);
     	liftMotor.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10, RobotMap.TIMOUT_MS);		
-    	liftMotor.setSensorPhase(true);    	
-    	liftMotor.setInverted(false);    	
+    	liftMotor.setSensorPhase(false);    	
+    	liftMotor.setInverted(true);    	
     	liftMotor.setNeutralMode(NeutralMode.Brake);    	
     	liftMotor.configNominalOutputForward(0, RobotMap.TIMOUT_MS);    	
     	liftMotor.configNominalOutputReverse(0, RobotMap.TIMOUT_MS);   
-    	//temporary slowing for polarity test on lift
-    	liftMotor.configPeakOutputForward(0.5, RobotMap.TIMOUT_MS);
-    	liftMotor.configPeakOutputReverse(-0.5, RobotMap.TIMOUT_MS);
+    	liftMotor.configPeakOutputForward(1.0, RobotMap.TIMOUT_MS);
+    	liftMotor.configPeakOutputReverse(-1.0, RobotMap.TIMOUT_MS);
     	liftMotor.setNeutralMode(NeutralMode.Brake);
+    	liftMotor.configContinuousCurrentLimit(20, RobotMap.TIMOUT_MS);
+    	liftMotor.configPeakCurrentLimit(0, RobotMap.TIMOUT_MS);
+    	liftMotor.configPeakCurrentDuration(0, RobotMap.TIMOUT_MS);
+    	liftMotor.enableCurrentLimit(false);
     }
     
     public void configGains(double f, double p, double i, double d, int izone, int accel, int cruise) {
@@ -99,8 +101,7 @@ public class LiftSubsystem extends Subsystem {
     		liftMotor.config_kF(0, SmartDashboard.getNumber("kF_lift_up", 0.0), RobotMap.TIMOUT_MS);
     		appliedFeedFoward = Direction.UP;
     	}
-    		//UNDO THIS AFTER POLARITY TEST
-    	setpoint_units = Math.max(-50000,/* Math.min(setpoint_units, RobotMap.MAX_LIFT_DISPLACEMENT_UNITS)*/ 50000);
+    	setpoint_units = Math.max(0, Math.min(setpoint_units, RobotMap.MAX_LIFT_DISPLACEMENT_UNITS));
     	
     	SmartDashboard.putNumber("setpoint_units", setpoint_units);
     	SmartDashboard.putNumber("setpoint_inches", setpoint);
@@ -135,6 +136,7 @@ public class LiftSubsystem extends Subsystem {
     public void hold()
     {
     	liftMotor.set(ControlMode.MotionMagic, liftMotor.getSelectedSensorPosition(0));
+//    	stop();
     }
     
     public void stop()

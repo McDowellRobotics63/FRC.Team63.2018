@@ -15,7 +15,6 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import org.usfirst.frc.team63.robot.commands_auto.AutoRoutine1;
 import org.usfirst.frc.team63.robot.commands_auto.DownAndBack;
 import org.usfirst.frc.team63.robot.commands_drive.AutoDriveFixedDistance;
 import org.usfirst.frc.team63.robot.commands_drive.AutoRotate;
@@ -96,7 +95,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("setpoint_lift", 0.0);		
 		SmartDashboard.putData("TestLift", new DashboardSetLiftPosition());
 		SmartDashboard.putData("AutoDrive", new AutoDriveFixedDistance());
-		SmartDashboard.putData("AutoRotate", new AutoRotate());
+		SmartDashboard.putData("AutoRotate", new AutoRotate());	
 
 		SmartDashboard.putNumber("lift_cmd", 0);
 		Robot.lift.configGains(
@@ -117,7 +116,6 @@ public class Robot extends TimedRobot {
 	@Override
 	public void disabledInit() {
 		teledrive.cancel();
-		drive.teleInit();
 	}
 
 	@Override
@@ -140,16 +138,17 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousInit() {
 		//m_autonomousCommand = m_chooser.getSelected();
-		//m_autonomousCommand =  new DownAndBack();
+		m_autonomousCommand =  new DownAndBack();
 
 		climb.armRetract();
 		drive.autoInit();
 		lift.initSubsystem();
 		// schedule the autonomous command (example)
 		//while (DriverStation.getInstance().getGameSpecificMessage().isEmpty());
+		
 		int switches = (switch1.get()?4:0) + (switch2.get()?2:0) + (switch3.get()?1:0);
-		m_autonomousCommand = new AutoRoutine1(DriverStation.getInstance().getGameSpecificMessage().toLowerCase(), switches);
-		//m_autonomousCommand = new AutoDriveFixedDistance(120);
+		String magicString = DriverStation.getInstance().getGameSpecificMessage().toLowerCase().substring(0,2);
+		
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.start();
 		}
@@ -193,12 +192,15 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("Right Speed",drive.getRightSpeed());
 		SmartDashboard.putNumber("left position", drive.getLeftPosition());	
 		SmartDashboard.putNumber("right position", drive.getRightPosition());
+<<<<<<< HEAD
 		SmartDashboard.putNumber("current_lift", lift.liftMotor.getOutputCurrent());
 		SmartDashboard.putNumber("ActiveTrajectoryHeading_lift", lift.liftMotor.getActiveTrajectoryHeading());
-		SmartDashboard.putBoolean("box close",claw.boxIsClose());
-		SmartDashboard.putBoolean("box really close",claw.boxIsReallyClose());
 		SmartDashboard.putNumber("ActiveTrajectoryPosition_lift", lift.liftMotor.getActiveTrajectoryPosition());
 		SmartDashboard.putNumber("ActiveTrajectoryVelocity", lift.liftMotor.getActiveTrajectoryVelocity());
+=======
+		SmartDashboard.putBoolean("box close",claw.boxIsClose());
+		SmartDashboard.putBoolean("box really close",claw.boxIsReallyClose());
+>>>>>>> 4025eb3d5c375b4859b65a19e50b9db0c2732ea0
 	}
 
 	/**

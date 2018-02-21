@@ -36,28 +36,11 @@ public class LiftAdjustCommand extends Command {
     	double currentTime = totalTimer.get();
     	double timeElapsedSeconds = (currentTime - lastTime);
     	
-    	double axis = Robot.m_oi.controller1.RightStickY();
-    	
-    	if(axis > -0.2 && axis < 0.2)
-    	{
-    		axis = 0;
-    	}
-    	
-    	axis = Math.signum(axis) * ((Math.abs(axis) - 0.2) / 0.8);
-    	
-//    	System.out.println("axis: " + axis);
-    	
-//    	System.out.println("setpoint: " + Robot.lift.getCurrentSetpoint() + 
-//    			           ", axis: " + Robot.m_oi.controller1.getRawAxis(RobotMap.XBOX_RIGHT_Y_AXIS) + 
-//    			           ", timeElapsedSeconds: " + timeElapsedSeconds);
-    	  	
-    	//Let the operator move the setpoint by 0-100% of the max lift adjust speed
-    	Robot.lift.setMotionMagicSetpoint(
-    			Robot.lift.getCurrentSetpoint() + 
-    			axis * 
-    			RobotMap.MAX_LIFT_ADJUST_SPEED * timeElapsedSeconds
-    			);
-    	
+		Robot.lift.setMotionMagicSetpoint(Robot.lift.getCurrentSetpoint() + 
+			Robot.m_oi.controller1.RightStickY() * 
+			RobotMap.MAX_LIFT_ADJUST_SPEED * timeElapsedSeconds
+			);
+    	    	
     	lastTime = currentTime;
     }
     

@@ -75,7 +75,7 @@ public class AutoDriveFixedDistance extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return (totalTimer.get() > 1.0 && Robot.drive.isMotionMagicNearTarget()) || totalTimer.get() > 10.0;
+    	return ((totalTimer.get() > 1.0 && Robot.drive.isMotionMagicNearTarget())) || totalTimer.get() > 10.0;
         //return totalTimer.get() > 0.5 && Math.abs(Robot.drive.getErrorLeft()) < 300 && Math.abs(Robot.drive.getErrorRight()) < 300;
     	//return false;
     }

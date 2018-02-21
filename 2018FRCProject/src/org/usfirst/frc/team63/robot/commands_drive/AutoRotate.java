@@ -61,7 +61,7 @@ public class AutoRotate extends Command {
 	    	totalTimer.start();
 	    	Robot.drive.resetEncoders();
 	    	Robot.drive.configGains(RobotMap.DRIVE_F, RobotMap.DRIVE_P, RobotMap.DRIVE_I, RobotMap.DRIVE_D,
-	    			RobotMap.DRIVE_RIZONE, RobotMap.DRIVE_RCRUISE, RobotMap.RDRIVE_ACCEL);
+	    			RobotMap.DRIVE_RIZONE, RobotMap.DRIVE_RCRUISE, RobotMap.DRIVE_RACCEL);
 	    	
 	    	setpoint = degreesToInches(setpoint);
 	        Robot.drive.setMotionMagicLeft(setpoint);
