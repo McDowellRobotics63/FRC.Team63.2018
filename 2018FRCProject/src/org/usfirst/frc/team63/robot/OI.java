@@ -50,15 +50,15 @@ public class OI {
 		 controller2.Back().whenPressed(new ClimbClampOpen());
 		 controller2.Y().whileHeld(new ClimbUp());
 		 controller2.Y().whenReleased(new ClimbStop());
-		 controller2.A().whileHeld(new ClimbDown());
-		 controller2.A().whenReleased(new ClimbStop());
+		 controller2.X().whileHeld(new ClimbDown());
+		 controller2.X().whenReleased(new ClimbStop());
 		 
-		 controller1.RightBumper().whenPressed(new ClawOpenCommand());
-		 controller1.LeftBumper().whenPressed(new ClawCloseCommand());
-		 controller1.A().whileHeld(new AutoBoxObtain());
-		 controller1.A().whenReleased(new BoxStopCommand());
-		 controller1.B().whileHeld(new BoxPushCommand());
-		 controller1.B().whenReleased(new BoxStopCommand());
+//		 controller1.DpadRight().whenPressed(new ClawOpenCommand());
+//		 controller1.LeftBumper().whenPressed(new ClawCloseCommand());
+		 controller2.A().whileHeld(new AutoBoxObtain());
+		 controller2.A().whenReleased(new BoxStopCommand());
+		 controller2.B().whileHeld(new BoxPushCommand());
+		 controller2.B().whenReleased(new BoxStopCommand());
 		 		 
 		 //Lift
 		 controller1.DpadDown().whenPressed(new MoveLiftOneBoxHeight(Direction.DOWN));
