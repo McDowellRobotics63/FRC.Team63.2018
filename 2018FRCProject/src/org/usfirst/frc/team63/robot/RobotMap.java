@@ -63,6 +63,8 @@ public class RobotMap {
 	public static final int DRIVE_RIZONE = 200;
 	public static final int DRIVE_RCRUISE = 800;
 	public static final int DRIVE_RACCEL = 1600;
+	public static final double OFF_BALANCE_THRESHOLD_DEGREES = 20;
+	public static final double On_BALANCE_THRESHOLD_DEGREES = 10;
 	
 	//Lift constantsrs1
 	public static final double LIFT_INCHES_PER_UNIT = 0.000033;

@@ -1,5 +1,6 @@
 package org.usfirst.frc.team63.robot.commands_auto;
 
+import org.usfirst.frc.team63.robot.RobotMap;
 import org.usfirst.frc.team63.robot.commands_claw.BoxObtainFoSho;
 import org.usfirst.frc.team63.robot.commands_claw.BoxShootForTime;
 import org.usfirst.frc.team63.robot.commands_drive.AutoDriveFixedDistance;
@@ -18,10 +19,10 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class AutoRoutine1 extends CommandGroup {
     //Das Auto, all inches
 	public static final double SWITCH_HEIGHT = 15;
-    public static final double DIST_SCALE0 = 205;
-    public static final double DIST_SCALE1 = 36;
+    public static final double DIST_SCALE0 = 235;
+    public static final double DIST_SCALE1 = 18;
     public static final double DIST_SWITCH = 140; //Distance from the starting point to the switch
-    public static final double DIST_WE_REKT_BOIS = 90; //line to cross in auto for points
+    public static final double DIST_WE_REKT_BOIS = 120; //line to cross in auto for points
     public static final double DIST_UNTIL_TURN = 70; //how far to go before turning when in middle
 	public static final double DIST_HALF_SWITCH_WIDTH = 60; //horizontal distance for robot in middle to go
 	public static final double DIST_TWOCUBE0 = 48; //distance to come back for switch before turning
@@ -59,11 +60,10 @@ public class AutoRoutine1 extends CommandGroup {
     		System.out.println("Goooooooooooo");
     		addSequential(new AutoDriveFixedDistance(DIST_SCALE0));
     		System.out.println("Already Went");
-    		turnCalc(45);
+    		turnCalc(40);
     		addParallel(new AutoDriveFixedDistance(DIST_SCALE1));
-        	addSequential(new MoveLiftMaxHeight());
+        	addSequential(new AutoSetLiftPosition(RobotMap.MAX_LIFT_DISPLACEMENT_INCHES-2));
     		addSequential(new BoxShootForTime());
-    		addSequential(new AutoDriveFixedDistance(-DIST_SCALE1));
 //    		if (fieldSetup.charAt(0) == botPos) { //switch is also on our bot's side
 //    			//continue for two cube auto
 //        		turnCalc(90);

@@ -121,7 +121,7 @@ public class LiftSubsystem extends Subsystem {
                                                      
     public boolean isMotionMagicNearTarget() {
     	return (liftMotor.getActiveTrajectoryPosition() == liftMotor.getClosedLoopTarget(0)) &&
-    			Math.abs(liftMotor.getClosedLoopError(0)) < 10;
+    			Math.abs(liftMotor.getClosedLoopError(0)) < 1000;
     }
     
     public List<Double> DebugMotionMagic()

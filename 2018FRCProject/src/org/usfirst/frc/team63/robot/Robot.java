@@ -197,6 +197,21 @@ public class Robot extends TimedRobot {
 		Scheduler.getInstance().run();
 		SmartDashboard.putNumber("left position", drive.getLeftPosition());	
 		SmartDashboard.putNumber("right position", drive.getRightPosition());
+		SmartDashboard.putNumber("lift_pos", lift.getCurrentPosition());
+		SmartDashboard.putNumber("lift_volts", lift.liftMotor.getMotorOutputVoltage());
+		SmartDashboard.putNumber("Left_Wheels_Speed",drive.getLeftSpeed());
+		SmartDashboard.putNumber("Right_Wheels_Speed",drive.getRightSpeed());
+		SmartDashboard.putNumber("left position", drive.getLeftPosition());	
+		SmartDashboard.putNumber("right position", drive.getRightPosition());
+		SmartDashboard.putNumber("current_lift", lift.liftMotor.getOutputCurrent());
+		SmartDashboard.putNumber("ActiveTrajectoryHeading_lift", lift.liftMotor.getActiveTrajectoryHeading());
+		SmartDashboard.putBoolean("box close",claw.boxIsClose());
+		SmartDashboard.putBoolean("box really close",claw.boxIsReallyClose());
+		SmartDashboard.putNumber("ActiveTrajectoryPosition_lift", lift.liftMotor.getActiveTrajectoryPosition());
+		SmartDashboard.putNumber("ActiveTrajectoryVelocity", lift.liftMotor.getActiveTrajectoryVelocity());
+		
+		SmartDashboard.putBoolean("LiftBottom", lift.isBottomedOut());
+		SmartDashboard.putBoolean("HookPressed", climb.isHookPressed());
 	}
 
 	@Override
