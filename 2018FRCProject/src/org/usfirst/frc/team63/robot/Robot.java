@@ -19,6 +19,7 @@ import org.usfirst.frc.team63.robot.commands_auto.AutoRoutine1;
 import org.usfirst.frc.team63.robot.commands_auto.DownAndBack;
 import org.usfirst.frc.team63.robot.commands_drive.AutoDriveFixedDistance;
 import org.usfirst.frc.team63.robot.commands_drive.AutoRotate;
+import org.usfirst.frc.team63.robot.commands_drive.SetAxis;
 import org.usfirst.frc.team63.robot.commands_drive.TeleopDriveLowCommand;
 import org.usfirst.frc.team63.robot.commands_lift.AutoSetLiftPosition;
 import org.usfirst.frc.team63.robot.commands_test.DashboardSetLiftPosition;
@@ -62,6 +63,35 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		m_oi = new OI();
+		
+		SmartDashboard.putNumber("left_y_rate", 1.0);
+		SmartDashboard.putNumber("left_y_expo", 0.0);
+		SmartDashboard.putNumber("left_y_deadband", 0.18);
+		SmartDashboard.putNumber("left_y_power", 1.0);
+		SmartDashboard.putNumber("left_y_min", -1.0);
+		SmartDashboard.putNumber("left_y_max", 1.0);
+		
+		SmartDashboard.putNumber("left_x_rate", 1.0);
+		SmartDashboard.putNumber("left_x_expo", 0.8);
+		SmartDashboard.putNumber("left_x_deadband", 0.18);
+		SmartDashboard.putNumber("left_x_power", 5.0);
+		SmartDashboard.putNumber("left_x_min", -0.5);
+		SmartDashboard.putNumber("left_x_max", 0.5);
+		
+		SmartDashboard.putNumber("right_y_rate", 1.0);
+		SmartDashboard.putNumber("right_y_expo", 0.0);
+		SmartDashboard.putNumber("right_y_deadband", 0.18);
+		SmartDashboard.putNumber("right_y_power", 1.0);
+		SmartDashboard.putNumber("right_y_min", -1.0);
+		SmartDashboard.putNumber("left_y_max", 1.0);
+		
+		SmartDashboard.putNumber("right_x_rate", 1.0);
+		SmartDashboard.putNumber("right_x_expo", 0.0);
+		SmartDashboard.putNumber("right_x_deadband", 0.18);
+		SmartDashboard.putNumber("right_x_power", 1.0);
+		SmartDashboard.putNumber("right_x_min", -1.0);
+		SmartDashboard.putNumber("left_x_max", 1.0);
+		
 //		m_chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putNumber("setpoint_rotate", 180.0);
@@ -97,6 +127,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putData("TestLift", new DashboardSetLiftPosition());
 		SmartDashboard.putData("AutoDrive", new AutoDriveFixedDistance());
 		SmartDashboard.putData("AutoRotate", new AutoRotate());
+		SmartDashboard.putData("SetAxis", new SetAxis());
 
 		SmartDashboard.putNumber("lift_cmd", 0);
 		Robot.lift.configGains(
@@ -171,7 +202,8 @@ public class Robot extends TimedRobot {
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
-		
+		m_oi.controller1.setAxisCurve();
+		m_oi.controller2.setAxisCurve();
 		climb.armRetract();
 		drive.teleInit();
 		lift.initSubsystem();
@@ -193,7 +225,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("Right Speed",drive.getRightSpeed());
 		SmartDashboard.putNumber("left position", drive.getLeftPosition());	
 		SmartDashboard.putNumber("right position", drive.getRightPosition());
-		SmartDashboard.putNumber("current_lift", lift.liftMotor.getOutputCurrent());
+//		SmartDashboard.putNumber("current_lift", lift.liftMotor.getOutputCurrent());
 		SmartDashboard.putNumber("ActiveTrajectoryHeading_lift", lift.liftMotor.getActiveTrajectoryHeading());
 		SmartDashboard.putBoolean("box close",claw.boxIsClose());
 		SmartDashboard.putBoolean("box really close",claw.boxIsReallyClose());

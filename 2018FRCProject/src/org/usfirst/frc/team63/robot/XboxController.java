@@ -23,6 +23,32 @@ public class XboxController extends Joystick {
 	private static final int XBOX_RIGHT_BUMPER = 6;
 	private static final int XBOX_BACK = 7;
 	private static final int XBOX_START = 8;
+	
+	private static double m_l_y_rate;
+	private static double m_l_y_expo;
+	private static double m_l_y_deadband;
+	private static double m_l_y_power;
+	private static double m_l_y_min;
+	private static double m_l_y_max;
+	private static double m_l_x_rate;
+	private static double m_l_x_expo;
+	private static double m_l_x_deadband;
+	private static double m_l_x_power;
+	private static double m_l_x_min;
+	private static double m_l_x_max;
+	
+	private static double m_r_y_rate;
+	private static double m_r_y_expo;
+	private static double m_r_y_deadband;
+	private static double m_r_y_power;
+	private static double m_r_y_min;
+	private static double m_r_y_max;
+	private static double m_r_x_rate;
+	private static double m_r_x_expo;
+	private static double m_r_x_deadband;
+	private static double m_r_x_power;
+	private static double m_r_x_min;
+	private static double m_r_x_max;
     
 	private Button btnX;
 	private Button btnY;
@@ -55,24 +81,54 @@ public class XboxController extends Joystick {
 		btnDpadLeft = new XboxDPadButton(this, DPAD_BUTTON.DPAD_LEFT);
 	}
 	
+	public void setAxisCurve() {
+		m_l_y_rate = SmartDashboard.getNumber("left_y_rate", 0.0);
+		m_l_y_expo = SmartDashboard.getNumber("left_y_expo", 0.0);
+		m_l_y_deadband = SmartDashboard.getNumber("left_y_deadband", 0.0);
+		m_l_y_power = SmartDashboard.getNumber("left_y_power", 0.0);
+		m_l_y_min = SmartDashboard.getNumber("left_y_min", 0.0);
+		m_l_y_max = SmartDashboard.getNumber("left_y_max", 0.0);
+		
+		m_l_x_rate = SmartDashboard.getNumber("left_x_xate", 0.0);
+		m_l_x_expo = SmartDashboard.getNumber("left_x_expo", 0.0);
+		m_l_x_deadband = SmartDashboard.getNumber("left_x_deadband", 0.0);
+		m_l_x_power = SmartDashboard.getNumber("left_x_power", 0.0);
+		m_l_x_min = SmartDashboard.getNumber("left_x_min", 0.0);
+		m_l_x_max = SmartDashboard.getNumber("left_x_max", 0.0);
+		
+		m_r_y_max = SmartDashboard.getNumber("right_y_rate", 0.0);
+		m_r_y_max = SmartDashboard.getNumber("right_y_expo", 0.0);
+		m_r_y_max = SmartDashboard.getNumber("right_y_deadband", 0.0);
+		m_r_y_max = SmartDashboard.getNumber("right_y_power", 0.0);
+		m_r_y_max = SmartDashboard.getNumber("right_y_min", 0.0);
+		m_r_y_max = SmartDashboard.getNumber("left_y_max", 0.0);
+		
+		m_r_x_max = SmartDashboard.getNumber("right_x_rate", 0.0);
+		m_r_x_max = SmartDashboard.getNumber("right_x_expo", 0.0);
+		m_r_x_max = SmartDashboard.getNumber("right_x_deadband", 0.0);
+		m_r_x_max = SmartDashboard.getNumber("right_x_power", 0.0);
+		m_r_x_max = SmartDashboard.getNumber("right_x_min", 0.0);
+		m_r_x_max = SmartDashboard.getNumber("left_x_max", 0.0);
+	}
+	
 	public double LeftStickY(){   	
 		//return -this.getRawAxis(XBOX_LEFT_Y_AXIS);
-		return conditionAxis(-this.getRawAxis(XBOX_LEFT_Y_AXIS), 0.18, 1, 0.6, 2, -1.0, 1.0);
+		return conditionAxis(-this.getRawAxis(XBOX_LEFT_Y_AXIS), m_l_y_deadband,m_l_y_rate, m_l_y_expo, m_l_y_power, m_l_y_min, m_l_y_max);
 	}
 	
 	public double LeftStickX(){
 		//return this.getRawAxis(XBOX_LEFT_X_AXIS);
-		return conditionAxis(this.getRawAxis(XBOX_LEFT_X_AXIS), 0.18, 1, 0.8, 5, -0.5, 0.5);
+		return conditionAxis(this.getRawAxis(XBOX_LEFT_X_AXIS), m_l_x_deadband,m_l_x_rate, m_l_x_expo, m_l_x_power, m_l_x_min, m_l_x_max);
 	}
 	
 	public double RightStickY(){
 		//return -this.getRawAxis(XBOX_RIGHT_Y_AXIS);
-		return conditionAxis(-this.getRawAxis(XBOX_RIGHT_Y_AXIS), 0.18, 1, 0.8, 2, -1.0, 1.0);
+		return conditionAxis(-this.getRawAxis(XBOX_RIGHT_Y_AXIS),  m_r_y_deadband, m_r_y_rate, m_r_y_expo, m_r_y_power, m_r_y_min, m_r_y_max);
 	}
 	
 	public double RightStickX(){
 		//return this.getRawAxis(XBOX_RIGHT_X_AXIS);
-		return conditionAxis(this.getRawAxis(XBOX_RIGHT_X_AXIS), 0.18, 1, 0.8, 5, -1.0, 1.0);
+		return conditionAxis(this.getRawAxis(XBOX_RIGHT_X_AXIS),  m_r_x_deadband,m_r_x_rate, m_r_x_expo, m_r_x_power, m_r_x_min, m_r_x_max);
 	}
 	
 	public Button X()
