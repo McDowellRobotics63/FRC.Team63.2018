@@ -2,6 +2,7 @@ package org.usfirst.frc.team63.robot.subsystems;
 
 import org.usfirst.frc.team63.robot.RobotMap;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -15,6 +16,7 @@ public class ClimbSubsystem extends Subsystem {
 	private Solenoid armDownSolenoid = new Solenoid(RobotMap.PCM1_CANID, RobotMap.CLIMBARM_DOWN);
 	private Solenoid lockCloseSolenoid = new Solenoid(RobotMap.PCM1_CANID, RobotMap.CLIMBCLAMPLOCK_CLOSE);	
 	private Solenoid lockOpenSolenoid = new Solenoid(RobotMap.PCM1_CANID, RobotMap.CLIMBCLAMPLOCK_OPEN);
+	private DigitalInput hookLimit = new DigitalInput(RobotMap.LIMIT_SWITCH_HOOK);
 	
 	public void pullyclimb(double speed)
 	{
@@ -44,7 +46,12 @@ public class ClimbSubsystem extends Subsystem {
 		lockCloseSolenoid.set(false);
 		lockOpenSolenoid.set(true);
 	}
-	
+
+    public boolean isHookPressed()
+    {
+    	return hookLimit.get() == false;
+    }
+    
     public void initDefaultCommand() {
     
     }

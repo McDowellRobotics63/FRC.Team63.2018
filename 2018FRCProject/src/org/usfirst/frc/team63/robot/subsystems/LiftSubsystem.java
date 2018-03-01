@@ -11,6 +11,8 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -25,6 +27,7 @@ public class LiftSubsystem extends Subsystem {
 	
 	public TalonSRX liftMotor = new TalonSRX(RobotMap.LIFT);
 	private Direction appliedFeedFoward = Direction.UP;
+	private DigitalInput bottomLimit = new DigitalInput(RobotMap.LIMIT_SWITCH_LIFT);
 
 	public LiftSubsystem() {
 		initSubsystem();
@@ -164,5 +167,10 @@ public class LiftSubsystem extends Subsystem {
     
     public static int inchesToUnits(double inches) {
     	return (int)(inches / RobotMap.LIFT_INCHES_PER_UNIT); 
+    }
+    
+    public boolean isBottomedOut()
+    {
+    	return bottomLimit.get() == false;
     }
 }

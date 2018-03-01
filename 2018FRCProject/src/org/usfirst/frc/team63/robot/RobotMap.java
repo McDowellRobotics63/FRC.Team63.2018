@@ -76,8 +76,10 @@ public class RobotMap {
     public static final double XCOEFF = 11834.7562904465;
     public static final double intercept = -4.40793976463289;
     
-    //Auto
+    //Digital Inputs
     public static final int AUTO_SWITCH_1 = 0;
 	public static final int AUTO_SWITCH_2 = 1;
 	public static final int AUTO_SWITCH_3 = 2;
+	public static final int LIMIT_SWITCH_HOOK = 3;
+	public static final int LIMIT_SWITCH_LIFT = 4;
 }

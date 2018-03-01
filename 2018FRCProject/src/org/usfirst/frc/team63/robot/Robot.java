@@ -199,6 +199,9 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putBoolean("box really close",claw.boxIsReallyClose());
 		SmartDashboard.putNumber("ActiveTrajectoryPosition_lift", lift.liftMotor.getActiveTrajectoryPosition());
 		SmartDashboard.putNumber("ActiveTrajectoryVelocity", lift.liftMotor.getActiveTrajectoryVelocity());
+		
+		SmartDashboard.putBoolean("LiftBottom", lift.isBottomedOut());
+		SmartDashboard.putBoolean("HookPressed", climb.isHookPressed());
 	}
 
 	/**
