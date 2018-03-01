@@ -3,6 +3,7 @@ package org.usfirst.frc.team63.robot.subsystems;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.usfirst.frc.team63.robot.Robot;
 import org.usfirst.frc.team63.robot.RobotMap;
 import org.usfirst.frc.team63.robot.commands_drive.TeleopDriveLowCommand;
 
@@ -50,6 +51,12 @@ public class DriveSubsystem extends Subsystem {
 	 *                  positive.
 	 */
 	public void teleDrive(double xSpeed, double zRotation) {
+		if(Robot.m_oi.controller1.B().get())
+		{
+			double scale = SmartDashboard.getNumber("creep_mult", 0.3);
+			xSpeed = xSpeed * scale;
+			zRotation = zRotation * scale;
+		}
 		differentialDrive.arcadeDrive(xSpeed, zRotation, false);
 	}
 	
