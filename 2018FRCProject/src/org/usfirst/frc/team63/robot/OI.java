@@ -44,10 +44,10 @@ public class OI {
 	//// TRIGGERING COMMANDS WITH BUTTONS
 	 public OI()
 	 {			
-		 controller2.LeftBumper().whenPressed(new ClimbArmExtended());
-		 controller2.RightBumper().whenPressed(new ClimbArmRetract());
-		 controller2.Start().whenPressed(new ClimbClampLock());
-		 controller2.Back().whenPressed(new ClimbClampOpen());
+		 controller2.RightBumper().whenPressed(new ClimbArmExtended());
+		 controller2.LeftBumper().whenPressed(new ClimbArmRetract());
+		 controller2.Back().whenPressed(new ClimbClampLock());
+		 controller2.Start().whenPressed(new ClimbClampOpen());
 		 controller2.Y().whileHeld(new ClimbUp());
 		 controller2.Y().whenReleased(new ClimbStop());
 		 controller2.X().whileHeld(new ClimbDown());
@@ -55,10 +55,10 @@ public class OI {
 		 
 //		 controller1.DpadRight().whenPressed(new ClawOpenCommand());
 //		 controller1.LeftBumper().whenPressed(new ClawCloseCommand());
-		 controller2.A().whileHeld(new AutoBoxObtain());
-		 controller2.A().whenReleased(new BoxStopCommand());
+//		 controller2.A().whileHeld(new AutoBoxObtain());
+//		 controller2.A().whenReleased(new BoxStopCommand());
 		 controller2.B().whileHeld(new BoxPushCommand());
-		 controller2.B().whenReleased(new BoxStopCommand());
+//		 controller2.B().whenReleased(new BoxStopCommand());
 		 		 
 		 //Lift
 		 controller1.DpadDown().whenPressed(new MoveLiftOneBoxHeight(Direction.DOWN));
