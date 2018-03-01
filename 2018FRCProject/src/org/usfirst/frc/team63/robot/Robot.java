@@ -63,18 +63,18 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		m_oi = new OI();
-		SmartDashboard.putNumber("creep_mult", 0.3);
+		SmartDashboard.putNumber("creep_mult", 0.5);
 		
 		SmartDashboard.putString("LEFT_Y_VALUES", "LEFT_Y_VALUES");
-		SmartDashboard.putNumber("left_y_rate", 1.0);
+		SmartDashboard.putNumber("left_y_rate", 0.5);
 		SmartDashboard.putNumber("left_y_expo", 1.0);
 		SmartDashboard.putNumber("left_y_deadband", 0.1);
 		SmartDashboard.putNumber("left_y_power", 1.5);
-		SmartDashboard.putNumber("left_y_min", -1.0);
-		SmartDashboard.putNumber("left_y_max", 1.0);
+		SmartDashboard.putNumber("left_y_min", -0.5);
+		SmartDashboard.putNumber("left_y_max", 0.5);
 		
 		SmartDashboard.putString("LEFT_X_VALUES", "LEFT_X_VALUES");
-		SmartDashboard.putNumber("left_x_rate", 1.0);
+		SmartDashboard.putNumber("left_x_rate", 0.5);
 		SmartDashboard.putNumber("left_x_expo", 1.0);
 		SmartDashboard.putNumber("left_x_deadband", 0.1);
 		SmartDashboard.putNumber("left_x_power", 1.5);
