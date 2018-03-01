@@ -81,6 +81,10 @@ public class XboxController extends Joystick {
 		btnDpadLeft = new XboxDPadButton(this, DPAD_BUTTON.DPAD_LEFT);
 	}
 	
+	public void SetAxisCreep() {
+		
+	}
+	
 	public void setAxisCurve() {
 		m_l_y_rate = SmartDashboard.getNumber("left_y_rate", 0.0);
 		m_l_y_expo = SmartDashboard.getNumber("left_y_expo", 0.0);
@@ -89,25 +93,25 @@ public class XboxController extends Joystick {
 		m_l_y_min = SmartDashboard.getNumber("left_y_min", 0.0);
 		m_l_y_max = SmartDashboard.getNumber("left_y_max", 0.0);
 		
-		m_l_x_rate = SmartDashboard.getNumber("left_x_xate", 0.0);
+		m_l_x_rate = SmartDashboard.getNumber("left_x_rate", 0.0);
 		m_l_x_expo = SmartDashboard.getNumber("left_x_expo", 0.0);
 		m_l_x_deadband = SmartDashboard.getNumber("left_x_deadband", 0.0);
 		m_l_x_power = SmartDashboard.getNumber("left_x_power", 0.0);
 		m_l_x_min = SmartDashboard.getNumber("left_x_min", 0.0);
 		m_l_x_max = SmartDashboard.getNumber("left_x_max", 0.0);
 		
-		m_r_y_max = SmartDashboard.getNumber("right_y_rate", 0.0);
-		m_r_y_max = SmartDashboard.getNumber("right_y_expo", 0.0);
-		m_r_y_max = SmartDashboard.getNumber("right_y_deadband", 0.0);
-		m_r_y_max = SmartDashboard.getNumber("right_y_power", 0.0);
-		m_r_y_max = SmartDashboard.getNumber("right_y_min", 0.0);
+		m_r_y_rate = SmartDashboard.getNumber("right_y_rate", 0.0);
+		m_r_y_expo = SmartDashboard.getNumber("right_y_expo", 0.0);
+		m_r_y_deadband = SmartDashboard.getNumber("right_y_deadband", 0.0);
+		m_r_y_power = SmartDashboard.getNumber("right_y_power", 0.0);
+		m_r_y_min = SmartDashboard.getNumber("right_y_min", 0.0);
 		m_r_y_max = SmartDashboard.getNumber("left_y_max", 0.0);
 		
-		m_r_x_max = SmartDashboard.getNumber("right_x_rate", 0.0);
-		m_r_x_max = SmartDashboard.getNumber("right_x_expo", 0.0);
-		m_r_x_max = SmartDashboard.getNumber("right_x_deadband", 0.0);
-		m_r_x_max = SmartDashboard.getNumber("right_x_power", 0.0);
-		m_r_x_max = SmartDashboard.getNumber("right_x_min", 0.0);
+		m_r_x_rate = SmartDashboard.getNumber("right_x_rate", 0.0);
+		m_r_x_expo = SmartDashboard.getNumber("right_x_expo", 0.0);
+		m_r_x_deadband = SmartDashboard.getNumber("right_x_deadband", 0.0);
+		m_r_x_power = SmartDashboard.getNumber("right_x_power", 0.0);
+		m_r_x_min = SmartDashboard.getNumber("right_x_min", 0.0);
 		m_r_x_max = SmartDashboard.getNumber("left_x_max", 0.0);
 	}
 	
@@ -205,14 +209,18 @@ public class XboxController extends Joystick {
     		axis = 0;
     	}
     	    	    	
-    	axis = rate * (Math.signum(axis) * ((Math.abs(axis) - deadband) / (1.0 - deadband)));
+    	axis = (Math.signum(axis) * ((Math.abs(axis) - deadband) / (1.0 - deadband)));
     	
     	//System.out.println("[SCALE] axis: " + axis + ", deadband: " + deadband + ", rate: " + rate + ", expo: " + expo + ", power: " + power);
     	
     	if(expo > 0.01)
     	{
-    		axis = (axis * Math.pow(Math.abs(axis), power) * expo) + (axis * (1-expo));
+    		axis = rate * ((axis * Math.pow(Math.abs(axis), power) * expo) + (axis * (1-expo)));
     		//System.out.println("[EXPO] axis: " + axis + ", deadband: " + deadband + ", rate: " + rate + ", expo: " + expo + ", power: " + power);
+    	}
+    	else
+    	{
+    		axis = rate * axis;
     	}
     	
     	Math.max(Math.min(axis, max), min);
