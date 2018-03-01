@@ -17,7 +17,7 @@ public class ClawSubsystem extends Subsystem {
 
 	private Spark leftMotor = new Spark(RobotMap.CLAWLEFT);
 	private Spark rightMotor = new Spark(RobotMap.CLAWRIGHT);
-	private Solenoid CLAW_OPEN = new Solenoid(RobotMap.PCM2_CANID,RobotMap.CLAW_OPEN_SOLENOID);
+	private Solenoid CLAW_OPEN = new Solenoid(RobotMap.PCM1_CANID,RobotMap.CLAW_OPEN_SOLENOID);
 	private Solenoid CLAW_CLOSE = new Solenoid(RobotMap.PCM1_CANID,RobotMap.CLAW_CLOSE_SOLENOID);
 	private InfraredSensor sensor = new InfraredSensor(RobotMap.INFRARED_SENSOR_CHANNEL);
 	

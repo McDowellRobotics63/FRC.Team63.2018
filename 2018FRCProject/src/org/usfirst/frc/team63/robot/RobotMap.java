@@ -28,15 +28,14 @@ public class RobotMap {
 	
 	//Solenoid Mappings
 	public static final int PCM1_CANID = 6;
-	public static final int PCM2_CANID = 7;
 	public static final int CLIMBARM_UP = 1;
-	public static final int CLIMBARM_DOWN = 1;
+	public static final int CLIMBARM_DOWN = 3;
 	public static final int CLIMBCLAMPLOCK_OPEN = 6;
-	public static final int CLIMBCLAMPLOCK_CLOSE = 6;
+	public static final int CLIMBCLAMPLOCK_CLOSE = 7;
 	public static final int CLAW_CLOSE_SOLENOID = 2;
-	public static final int CLAW_OPEN_SOLENOID = 2;
+	public static final int CLAW_OPEN_SOLENOID = 0;
 	public static final int SHIFTER_HIGH = 4;
-	public static final int SHIFTER_LOW = 4;
+	public static final int SHIFTER_LOW = 5;
 	
 	//Claw
 	public static final double BOX_IN_SPEED = -0.4;
