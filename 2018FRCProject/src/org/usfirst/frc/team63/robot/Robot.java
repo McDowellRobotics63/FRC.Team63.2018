@@ -63,7 +63,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		m_oi = new OI();
-		
+		SmartDashboard.putString("LEFT_Y_VALUES", "LEFT_Y_VALUES");
 		SmartDashboard.putNumber("left_y_rate", 1.0);
 		SmartDashboard.putNumber("left_y_expo", 0.0);
 		SmartDashboard.putNumber("left_y_deadband", 0.18);
@@ -71,6 +71,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("left_y_min", -1.0);
 		SmartDashboard.putNumber("left_y_max", 1.0);
 		
+		SmartDashboard.putString("LEFT_X_VALUES", "LEFT_X_VALUES");
 		SmartDashboard.putNumber("left_x_rate", 1.0);
 		SmartDashboard.putNumber("left_x_expo", 0.8);
 		SmartDashboard.putNumber("left_x_deadband", 0.18);
@@ -78,6 +79,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("left_x_min", -0.5);
 		SmartDashboard.putNumber("left_x_max", 0.5);
 		
+		SmartDashboard.putString("RIGHT_Y_VALUES", "RIGHT_Y_VALUES");
 		SmartDashboard.putNumber("right_y_rate", 1.0);
 		SmartDashboard.putNumber("right_y_expo", 0.0);
 		SmartDashboard.putNumber("right_y_deadband", 0.18);
@@ -85,6 +87,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("right_y_min", -1.0);
 		SmartDashboard.putNumber("left_y_max", 1.0);
 		
+		SmartDashboard.putString("RIGHT_X_VALUES", "RIGHT_X_VALUES");
 		SmartDashboard.putNumber("right_x_rate", 1.0);
 		SmartDashboard.putNumber("right_x_expo", 0.0);
 		SmartDashboard.putNumber("right_x_deadband", 0.18);
@@ -99,7 +102,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("acceleration_rotate", 1600.0);
 		SmartDashboard.putNumber("drive_track", 26);
 		
-		
+		SmartDashboard.putString("DRIVE_VALUES", "DRIVE_VALUES");
 		SmartDashboard.putNumber("setpoint", 240.0);
 		SmartDashboard.putNumber("kF", 0.5683);
 		SmartDashboard.putNumber("kP", 0.5); 
@@ -111,22 +114,20 @@ public class Robot extends TimedRobot {
 		
 		SmartDashboard.putData("Auto mode", m_chooser);
 		
-		
+		SmartDashboard.putString("LIFT_VALUES", "LIFT_VALUES");
 		SmartDashboard.putNumber("kF_lift_up", 0.016);
 		SmartDashboard.putNumber("kF_lift_down", 0.012);
-		
 		SmartDashboard.putNumber("kP_lift", 0.45); 
 		SmartDashboard.putNumber("kI_lift", 0.0045); 
 		SmartDashboard.putNumber("kD_lift", 4.5);
 		SmartDashboard.putNumber("kiZone_lift", 300.0);
-		
 		SmartDashboard.putNumber("kCruise_lift", 51200.0);
 		SmartDashboard.putNumber("kAccel_lift", 102400.0);
 		
 		SmartDashboard.putNumber("setpoint_lift", 0.0);		
-		SmartDashboard.putData("TestLift", new DashboardSetLiftPosition());
-		SmartDashboard.putData("AutoDrive", new AutoDriveFixedDistance());
-		SmartDashboard.putData("AutoRotate", new AutoRotate());
+//		SmartDashboard.putData("TestLift", new DashboardSetLiftPosition());
+//		SmartDashboard.putData("AutoDrive", new AutoDriveFixedDistance());
+//		SmartDashboard.putData("AutoRotate", new AutoRotate());
 		SmartDashboard.putData("SetAxis", new SetAxis());
 
 		SmartDashboard.putNumber("lift_cmd", 0);
@@ -220,9 +221,9 @@ public class Robot extends TimedRobot {
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
 		SmartDashboard.putNumber("lift_pos", lift.getCurrentPosition());
-		SmartDashboard.putNumber("lift_volts", lift.liftMotor.getMotorOutputVoltage());
-		SmartDashboard.putNumber("Left Speed",drive.getLeftSpeed());
-		SmartDashboard.putNumber("Right Speed",drive.getRightSpeed());
+//		SmartDashboard.putNumber("lift_volts", lift.liftMotor.getMotorOutputVoltage());
+		SmartDashboard.putNumber("Left_Wheels_Speed",drive.getLeftSpeed());
+		SmartDashboard.putNumber("Right_Wheels_Speed",drive.getRightSpeed());
 		SmartDashboard.putNumber("left position", drive.getLeftPosition());	
 		SmartDashboard.putNumber("right position", drive.getRightPosition());
 //		SmartDashboard.putNumber("current_lift", lift.liftMotor.getOutputCurrent());
