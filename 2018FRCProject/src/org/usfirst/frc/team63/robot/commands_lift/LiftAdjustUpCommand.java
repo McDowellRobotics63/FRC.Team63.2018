@@ -9,44 +9,25 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class LiftAdjustCommand extends Command {
-	private double lastTime = 0;
-	private final Timer totalTimer;
+public class LiftAdjustUpCommand extends Command {
 	
-    public LiftAdjustCommand() {
+    public LiftAdjustUpCommand() {
         requires(Robot.lift);
-        
-        //This will be the default command for the lift.
-        //Operator can always be adjust the lift using analog stick.
-        //If another command comes in that wants to set the setpoint to
-        //a pre-set value (top, bottom, box height) then let it interrupt to do so.
-        setInterruptible(true);
-        
-        totalTimer = new Timer();
     }
     
     // Called just before this Command runs the first time
-    protected void initialize() {    	
-    	totalTimer.reset();
-    	totalTimer.start();
+    protected void initialize() {
     }
     
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double currentTime = totalTimer.get();
-    	double timeElapsedSeconds = (currentTime - lastTime);
-    	
 		Robot.lift.setMotionMagicSetpoint(Robot.lift.getCurrentSetpoint() + 
-			Robot.m_oi.controller1.RightStickY() * 
-			RobotMap.MAX_LIFT_ADJUST_SPEED * timeElapsedSeconds
-			);
-    	    	
-    	lastTime = currentTime;
+			RobotMap.MAX_LIFT_ADJUST_SPEED * 0.02);
     }
     
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {    	
-        return false;
+        return true;
     }
     
     // Called once after isFinished returns true
