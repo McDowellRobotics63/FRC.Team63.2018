@@ -57,6 +57,7 @@ public class OI {
 //		 controller1.LeftBumper().whenPressed(new ClawCloseCommand());
 //		 controller2.A().whileHeld(new AutoBoxObtain());
 //		 controller2.A().whenReleased(new BoxStopCommand());
+		 controller1.A().whileHeld(new BoxPushCommand());
 		 controller2.B().whileHeld(new BoxPushCommand());
 //		 controller2.B().whenReleased(new BoxStopCommand());
 		 		 

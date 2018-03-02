@@ -66,7 +66,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("creep_mult", 0.5);
 		
 		SmartDashboard.putString("LEFT_Y_VALUES", "LEFT_Y_VALUES");
-		SmartDashboard.putNumber("left_y_rate", 0.5);
+		SmartDashboard.putNumber("left_y_rate", 0.6);
 		SmartDashboard.putNumber("left_y_expo", 1.0);
 		SmartDashboard.putNumber("left_y_deadband", 0.1);
 		SmartDashboard.putNumber("left_y_power", 1.5);
@@ -90,12 +90,12 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("right_y_max", 1.0);
 		
 		SmartDashboard.putString("RIGHT_X_VALUES", "RIGHT_X_VALUES");
-		SmartDashboard.putNumber("right_x_rate", 1.0);
-		SmartDashboard.putNumber("right_x_expo", 0.0);
+		SmartDashboard.putNumber("right_x_rate", 0.5);
+		SmartDashboard.putNumber("right_x_expo", 1.0);
 		SmartDashboard.putNumber("right_x_deadband", 0.1);
-		SmartDashboard.putNumber("right_x_power", 1.0);
-		SmartDashboard.putNumber("right_x_min", -1.0);
-		SmartDashboard.putNumber("right_x_max", 1.0);
+		SmartDashboard.putNumber("right_x_power", 1.5);
+		SmartDashboard.putNumber("right_x_min", -0.5);
+		SmartDashboard.putNumber("right_x_max", 0.5);
 		
 //		m_chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
@@ -197,6 +197,21 @@ public class Robot extends TimedRobot {
 		Scheduler.getInstance().run();
 		SmartDashboard.putNumber("left position", drive.getLeftPosition());	
 		SmartDashboard.putNumber("right position", drive.getRightPosition());
+		SmartDashboard.putNumber("lift_pos", lift.getCurrentPosition());
+		SmartDashboard.putNumber("lift_volts", lift.liftMotor.getMotorOutputVoltage());
+		SmartDashboard.putNumber("Left_Wheels_Speed",drive.getLeftSpeed());
+		SmartDashboard.putNumber("Right_Wheels_Speed",drive.getRightSpeed());
+		SmartDashboard.putNumber("left position", drive.getLeftPosition());	
+		SmartDashboard.putNumber("right position", drive.getRightPosition());
+		SmartDashboard.putNumber("current_lift", lift.liftMotor.getOutputCurrent());
+		SmartDashboard.putNumber("ActiveTrajectoryHeading_lift", lift.liftMotor.getActiveTrajectoryHeading());
+		SmartDashboard.putBoolean("box close",claw.boxIsClose());
+		SmartDashboard.putBoolean("box really close",claw.boxIsReallyClose());
+		SmartDashboard.putNumber("ActiveTrajectoryPosition_lift", lift.liftMotor.getActiveTrajectoryPosition());
+		SmartDashboard.putNumber("ActiveTrajectoryVelocity", lift.liftMotor.getActiveTrajectoryVelocity());
+		
+		SmartDashboard.putBoolean("LiftBottom", lift.isBottomedOut());
+		SmartDashboard.putBoolean("HookPressed", climb.isHookPressed());
 	}
 
 	@Override

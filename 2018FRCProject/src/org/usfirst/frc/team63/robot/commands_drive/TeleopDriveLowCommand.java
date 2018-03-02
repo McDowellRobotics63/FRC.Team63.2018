@@ -24,7 +24,7 @@ public class TeleopDriveLowCommand extends Command {
     	Robot.drive.shiftLow();
     	Robot.drive.teleDrive(
     			Robot.m_oi.controller1.LeftStickY(),
-    			Robot.m_oi.controller1.LeftStickX()
+    			Robot.m_oi.controller1.RightStickX()
     			);
     }
 

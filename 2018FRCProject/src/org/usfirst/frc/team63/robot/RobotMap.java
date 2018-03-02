@@ -63,10 +63,12 @@ public class RobotMap {
 	public static final int DRIVE_RIZONE = 200;
 	public static final int DRIVE_RCRUISE = 800;
 	public static final int DRIVE_RACCEL = 1600;
+	public static final double OFF_BALANCE_THRESHOLD_DEGREES = 20;
+	public static final double On_BALANCE_THRESHOLD_DEGREES = 10;
 	
 	//Lift constantsrs1
 	public static final double LIFT_INCHES_PER_UNIT = 0.000033;
-	public static final double MAX_LIFT_DISPLACEMENT_INCHES = 78; //6969
+	public static final double MAX_LIFT_DISPLACEMENT_INCHES = 76; //6969
 	public static final int MAX_LIFT_DISPLACEMENT_UNITS = (int)(MAX_LIFT_DISPLACEMENT_INCHES / LIFT_INCHES_PER_UNIT);
 	public static final double BOX_HEIGHT_INCHES = 11;
 	public static final double MAX_LIFT_ADJUST_SPEED = 10; //inches per second

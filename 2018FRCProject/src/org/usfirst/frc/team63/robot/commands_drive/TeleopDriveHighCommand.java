@@ -24,7 +24,7 @@ public class TeleopDriveHighCommand extends Command {
     	Robot.drive.shiftHigh();
     	Robot.drive.teleDrive(
     			Robot.m_oi.controller1.LeftStickY(),
-    			Robot.m_oi.controller1.LeftStickX()
+    			Robot.m_oi.controller1.RightStickX()
     			);
     }
 
