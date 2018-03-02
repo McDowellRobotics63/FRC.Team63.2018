@@ -42,6 +42,15 @@ public class DriveSubsystem extends Subsystem {
 	 public void initDefaultCommand() {
 	    //setDefaultCommand(new TeleopDriveLowCommand());
 	 }
+	 
+//	 public void autobalance()
+//	 {
+//		 double xAxisRate = Robot.m_oi.controller1.getX();
+//		 double yAxisRate = Robot.m_oi.controller1.getY();
+//		 double pitchAngleDegrees = ahrs.getPitch();
+//		 double rollAngleDegrees = ahrs.getRoll();
+//		 
+//	 }
 
 	/**
 	 * Arcade drive for use for teleop
@@ -121,8 +130,8 @@ public class DriveSubsystem extends Subsystem {
     public boolean isMotionMagicNearTarget() {
     	return (leftMaster.getActiveTrajectoryPosition() == leftMaster.getClosedLoopTarget(0)) &&
     		   (rightMaster.getActiveTrajectoryPosition() == rightMaster.getClosedLoopTarget(0)) &&
-    			Math.abs(leftMaster.getClosedLoopError(0)) < 20 &&
-    			Math.abs(rightMaster.getClosedLoopError(0)) < 20;
+    			Math.abs(leftMaster.getClosedLoopError(0)) < 300 &&
+    			Math.abs(rightMaster.getClosedLoopError(0)) < 300;
     }
     
 	public void shiftHigh()
