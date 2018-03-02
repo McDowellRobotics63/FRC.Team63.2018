@@ -20,7 +20,7 @@ public class AutoSetLiftPosition extends Command {
         requires(Robot.lift);
         //requires(Robot.debug);
         
-        m_setpoint = LiftSubsystem.inchesToUnits(setpoint);
+        m_setpoint = setpoint;
         totalTimer = new Timer();
     }
 
@@ -36,12 +36,12 @@ public class AutoSetLiftPosition extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	//Robot.debug.Update(Robot.lift.DebugMotionMagic());
+    	Robot.debug.Update(Robot.lift.DebugMotionMagic());
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return (totalTimer.get() > 1.0 && Robot.lift.isMotionMagicNearTarget()) || totalTimer.get() > 5.0;
+    	return (totalTimer.get() > 1.0 && Robot.lift.isMotionMagicNearTarget()) || totalTimer.get() > 9.0;
     }
 
     // Called once after isFinished returns true
