@@ -12,6 +12,7 @@ public class ClimbDown extends Command {
 
     public ClimbDown() {        
     	requires(Robot.climb);
+    	requires(Robot.claw);
     }
 
     // Called just before this Command runs the first time
@@ -22,6 +23,7 @@ public class ClimbDown extends Command {
     protected void execute() {
        	Robot.climb.armRetract();
     	Robot.climb.pullyclimb(RobotMap.CLIMB_DOWN_SPEED);
+    	Robot.claw.clawToggle(false);
     }
 
     // Make this return true when this Command no longer needs to run execute()

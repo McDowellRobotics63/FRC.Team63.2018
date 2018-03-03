@@ -68,8 +68,8 @@ public class RobotMap {
 	
 	//Lift constantsrs1
 	public static final double LIFT_INCHES_PER_UNIT = 0.000033;
-	public static final double MAX_LIFT_DISPLACEMENT_INCHES = 76; //6969
-	public static final int MAX_LIFT_DISPLACEMENT_UNITS = (int)(MAX_LIFT_DISPLACEMENT_INCHES / LIFT_INCHES_PER_UNIT);
+//	public static final double MAX_LIFT_DISPLACEMENT_INCHES = 79; //6969
+	//public static final int MAX_LIFT_DISPLACEMENT_UNITS = (int)(MAX_LIFT_DISPLACEMENT_INCHES / LIFT_INCHES_PER_UNIT);
 	public static final double BOX_HEIGHT_INCHES = 11;
 	public static final double MAX_LIFT_ADJUST_SPEED = 10; //inches per second
 	   

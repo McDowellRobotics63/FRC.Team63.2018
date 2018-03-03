@@ -1,18 +1,16 @@
-package org.usfirst.frc.team63.robot.commands_climb;
+package org.usfirst.frc.team63.robot.commands_lift;
 
 import org.usfirst.frc.team63.robot.Robot;
-import org.usfirst.frc.team63.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class ClimbUp extends Command {
+public class LiftAdjustStop extends Command {
 
-    public ClimbUp() {
-        requires(Robot.climb);
-        requires(Robot.claw);
+    public LiftAdjustStop() {
+  requires(Robot.lift);
     }
 
     // Called just before this Command runs the first time
@@ -21,14 +19,12 @@ public class ClimbUp extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-       	Robot.climb.armRetract();
-    	Robot.climb.pullyclimb(RobotMap.CLIMB_UP_SPEED);
-    	Robot.claw.clawToggle(false);
+    	Robot.lift.hold();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        return false;
     }
 
     // Called once after isFinished returns true

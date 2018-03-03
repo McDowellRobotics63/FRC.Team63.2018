@@ -63,9 +63,10 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		m_oi = new OI();
+		SmartDashboard.putNumber("max_lift_inches", 81.5);
 		SmartDashboard.putNumber("creep_mult", 0.5);
 		
-		SmartDashboard.putString("LEFT_Y_VALUES", "LEFT_Y_VALUES");
+		SmartDashboard.putString("DRIVE_VALUE", "DRIVE_VALUES");
 		SmartDashboard.putNumber("left_y_rate", 0.6);
 		SmartDashboard.putNumber("left_y_expo", 1.0);
 		SmartDashboard.putNumber("left_y_deadband", 0.1);
@@ -89,7 +90,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("right_y_min", -1.0);
 		SmartDashboard.putNumber("right_y_max", 1.0);
 		
-		SmartDashboard.putString("RIGHT_X_VALUES", "RIGHT_X_VALUES");
+		SmartDashboard.putString("TURN", "TURN_VALUES");
 		SmartDashboard.putNumber("right_x_rate", 0.5);
 		SmartDashboard.putNumber("right_x_expo", 1.0);
 		SmartDashboard.putNumber("right_x_deadband", 0.1);
@@ -114,7 +115,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("cruise", 1600.0);
 		SmartDashboard.putNumber("acceleration", 1600.0);
 		
-		SmartDashboard.putData("Auto mode", m_chooser);
+//		SmartDashboard.putData("Auto mode", m_chooser);
 		
 		SmartDashboard.putString("LIFT_VALUES", "LIFT_VALUES");
 		SmartDashboard.putNumber("kF_lift_up", 0.016);
@@ -178,7 +179,7 @@ public class Robot extends TimedRobot {
 
 		climb.armRetract();
 		drive.autoInit();
-		lift.initSubsystem();
+		lift.initSubsystemAuto();
 		// schedule the autonomous command (example)
 		//while (DriverStation.getInstance().getGameSpecificMessage().isEmpty());
 		int switches = (switch1.get()?4:0) + (switch2.get()?2:0) + (switch3.get()?1:0);
@@ -224,7 +225,6 @@ public class Robot extends TimedRobot {
 		m_oi.controller2.setAxisCurve();
 		climb.armRetract();
 		drive.teleInit();
-		lift.initSubsystem();
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.cancel();
 		}

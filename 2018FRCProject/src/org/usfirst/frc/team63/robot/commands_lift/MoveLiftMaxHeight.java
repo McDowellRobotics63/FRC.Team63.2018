@@ -5,6 +5,7 @@ import org.usfirst.frc.team63.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team63.robot.subsystems.LiftSubsystem.Direction;
 
@@ -21,7 +22,7 @@ public class MoveLiftMaxHeight extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.lift.setMotionMagicSetpoint(RobotMap.MAX_LIFT_DISPLACEMENT_INCHES);
+    	Robot.lift.setMotionMagicSetpoint(SmartDashboard.getNumber("max_lift_inches", 79));
     	
     	totalTimer.reset();
     	totalTimer.start();

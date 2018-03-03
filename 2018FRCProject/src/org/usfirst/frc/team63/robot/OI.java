@@ -25,6 +25,7 @@ import org.usfirst.frc.team63.robot.commands_drive.TeleopDriveHighCommand;
 import org.usfirst.frc.team63.robot.commands_drive.TeleopDriveLowCommand;
 import org.usfirst.frc.team63.robot.commands_lift.LiftAdjustUpCommand;
 import org.usfirst.frc.team63.robot.commands_lift.LiftAdjustDownCommand;
+import org.usfirst.frc.team63.robot.commands_lift.LiftAdjustStop;
 import org.usfirst.frc.team63.robot.commands_lift.MoveLiftMaxHeight;
 import org.usfirst.frc.team63.robot.commands_lift.MoveLiftMinHeight;
 import org.usfirst.frc.team63.robot.commands_lift.MoveLiftOneBoxHeight;
@@ -69,7 +70,9 @@ public class OI {
 		 controller1.DpadRight().whenPressed(new MoveLiftMaxHeight());
 		 controller1.DpadLeft().whenPressed(new MoveLiftMinHeight());
 		 controller1.RightBumper().whileHeld(new LiftAdjustUpCommand());
+		 controller1.RightBumper().whenReleased(new LiftAdjustStop());
 		 controller1.LeftBumper().whileHeld(new LiftAdjustDownCommand());
+		 controller1.LeftBumper().whenReleased(new LiftAdjustStop());
 		 //Drive Gear Shift
 		 controller1.X().whileHeld(new TeleopDriveHighCommand());
 		 controller1.X().whenReleased(new TeleopDriveLowCommand());		 		

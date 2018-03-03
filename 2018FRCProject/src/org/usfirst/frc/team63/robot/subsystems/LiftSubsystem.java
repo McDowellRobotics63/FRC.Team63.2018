@@ -30,12 +30,11 @@ public class LiftSubsystem extends Subsystem {
 	private DigitalInput bottomLimit = new DigitalInput(RobotMap.LIMIT_SWITCH_LIFT);
 
 	public LiftSubsystem() {
-		initSubsystem();
+		TalonConfig();
 	}
 	
-	public void initSubsystem()
-	{
-    	TalonConfig();
+	public void initSubsystemAuto()
+	{    	
     	resetEncoder();
     	setMotionMagicSetpoint(0);
 	}
@@ -104,7 +103,8 @@ public class LiftSubsystem extends Subsystem {
     		liftMotor.config_kF(0, SmartDashboard.getNumber("kF_lift_up", 0.0), RobotMap.TIMOUT_MS);
     		appliedFeedFoward = Direction.UP;
     	}
-    	setpoint_units = Math.max(0, Math.min(setpoint_units, RobotMap.MAX_LIFT_DISPLACEMENT_UNITS));
+
+    	setpoint_units = Math.max(0, Math.min(setpoint_units, (int)(SmartDashboard.getNumber("max_lift_inches", 79) / RobotMap.LIFT_INCHES_PER_UNIT)));
     	
     	SmartDashboard.putNumber("setpoint_units", setpoint_units);
     	SmartDashboard.putNumber("setpoint_inches", setpoint);

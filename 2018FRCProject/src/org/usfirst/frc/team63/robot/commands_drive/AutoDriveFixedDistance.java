@@ -35,13 +35,13 @@ public class AutoDriveFixedDistance extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	if (isTesting) {
+    	
 	    	Robot.debug.Start("AutoDriveFixedDistance", Arrays.asList("Sensor_Position_R", "Sensor_Velocity_R",
 	    			"Trajectory_Position_R", "Trajectory_Velocity_R", "Motor_Output_R", "Error_R", "Sensor_Position_L", "Sensor_Velocity_L",
 	    			"Trajectory_Position_L", "Trajectory_Velocity_L", "Motor_Output_L", "Error_L")); 
 	    	totalTimer.reset();
 	    	totalTimer.start();
-	    	
+    	if (isTesting) {
 	    	Robot.drive.resetEncoders();
 	    	
 	    	Robot.drive.configGains(SmartDashboard.getNumber("kF", 0.0), 
@@ -70,7 +70,7 @@ public class AutoDriveFixedDistance extends Command {
     }
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(isTesting) Robot.debug.Update(Robot.drive.DebugMotionMagic());
+    	/*if(isTesting)*/ Robot.debug.Update(Robot.drive.DebugMotionMagic());
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -83,13 +83,13 @@ public class AutoDriveFixedDistance extends Command {
     // Called once after isFinished returns true
     protected void end() {
     	Robot.drive.stop();
-    	if(isTesting) Robot.debug.Stop();
+    	/*if(isTesting)*/ Robot.debug.Stop();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
     	Robot.drive.stop();
-    	if(isTesting) Robot.debug.Stop();
+    	/*if(isTesting)*/ Robot.debug.Stop();
     }  
 }
