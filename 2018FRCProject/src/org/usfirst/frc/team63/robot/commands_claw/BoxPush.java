@@ -1,16 +1,17 @@
-package org.usfirst.frc.team63.robot.commands_climb;
+package org.usfirst.frc.team63.robot.commands_claw;
 
 import org.usfirst.frc.team63.robot.Robot;
+import org.usfirst.frc.team63.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class ClimbArmExtended extends Command {
+public class BoxPush extends Command {
 
-    public ClimbArmExtended() {        
-    	requires(Robot.climb);
+    public BoxPush() {
+    requires(Robot.claw);
     }
 
     // Called just before this Command runs the first time
@@ -19,7 +20,7 @@ public class ClimbArmExtended extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.climb.armExtend();
+    	Robot.claw.setSpeed(RobotMap.BOX_OUT_SPEED);
     }
 
     // Make this return true when this Command no longer needs to run execute()

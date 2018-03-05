@@ -9,13 +9,13 @@
 package org.usfirst.frc.team63.robot;
 
 import org.usfirst.frc.team63.robot.XboxDPadButton.DPAD_BUTTON;
-import org.usfirst.frc.team63.robot.commands_claw.AutoBoxObtain;
-import org.usfirst.frc.team63.robot.commands_claw.BoxPushCommand;
-import org.usfirst.frc.team63.robot.commands_claw.BoxStopCommand;
-import org.usfirst.frc.team63.robot.commands_claw.ClawCloseCommand;
-import org.usfirst.frc.team63.robot.commands_claw.ClawOpenCommand;
-import org.usfirst.frc.team63.robot.commands_climb.ClimbArmExtended;
-import org.usfirst.frc.team63.robot.commands_climb.ClimbArmRetract;
+import org.usfirst.frc.team63.robot.commands_claw.ObtainBoxContinuous;
+import org.usfirst.frc.team63.robot.commands_claw.BoxPush;
+import org.usfirst.frc.team63.robot.commands_claw.BoxStop;
+import org.usfirst.frc.team63.robot.commands_claw.ClawClose;
+import org.usfirst.frc.team63.robot.commands_claw.ClawOpen;
+import org.usfirst.frc.team63.robot.commands_climb.ArmExtend;
+import org.usfirst.frc.team63.robot.commands_climb.ArmRetract;
 import org.usfirst.frc.team63.robot.commands_climb.ClimbClampLock;
 import org.usfirst.frc.team63.robot.commands_climb.ClimbClampOpen;
 import org.usfirst.frc.team63.robot.commands_climb.ClimbDown;
@@ -47,8 +47,8 @@ public class OI {
 	//// TRIGGERING COMMANDS WITH BUTTONS
 	 public OI()
 	 {			
-		 controller2.RightBumper().whenPressed(new ClimbArmExtended());
-		 controller2.LeftBumper().whenPressed(new ClimbArmRetract());
+		 controller2.RightBumper().whenPressed(new ArmExtend());
+		 controller2.LeftBumper().whenPressed(new ArmRetract());
 		 controller2.Back().whenPressed(new ClimbClampLock());
 		 controller2.Start().whenPressed(new ClimbClampOpen());
 		 controller2.Y().whileHeld(new ClimbUp());
@@ -60,8 +60,8 @@ public class OI {
 //		 controller1.LeftBumper().whenPressed(new ClawCloseCommand());
 //		 controller2.A().whileHeld(new AutoBoxObtain());
 //		 controller2.A().whenReleased(new BoxStopCommand());
-		 controller1.A().whileHeld(new BoxPushCommand());
-		 controller2.B().whileHeld(new BoxPushCommand());
+		 controller1.A().whileHeld(new BoxPush());
+		 controller2.B().whileHeld(new BoxPush());
 //		 controller2.B().whenReleased(new BoxStopCommand());
 		 		 
 		 //Lift

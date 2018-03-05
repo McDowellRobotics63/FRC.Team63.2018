@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import org.usfirst.frc.team63.robot.commands_auto.AutoRoutine1;
+import org.usfirst.frc.team63.robot.commands_auto.AutoRoutine;
 import org.usfirst.frc.team63.robot.commands_auto.DownAndBack;
 import org.usfirst.frc.team63.robot.commands_drive.AutoDriveFixedDistance;
 import org.usfirst.frc.team63.robot.commands_drive.AutoRotate;
@@ -183,7 +183,7 @@ public class Robot extends TimedRobot {
 		// schedule the autonomous command (example)
 		//while (DriverStation.getInstance().getGameSpecificMessage().isEmpty());
 		int switches = (switch1.get()?4:0) + (switch2.get()?2:0) + (switch3.get()?1:0);
-		m_autonomousCommand = new AutoRoutine1(DriverStation.getInstance().getGameSpecificMessage().toLowerCase(), switches);
+		m_autonomousCommand = new AutoRoutine(DriverStation.getInstance().getGameSpecificMessage().toLowerCase(), switches);
 		//m_autonomousCommand = new AutoDriveFixedDistance(120);
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.start();

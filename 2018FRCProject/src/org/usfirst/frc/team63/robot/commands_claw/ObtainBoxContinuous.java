@@ -8,50 +8,33 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class AutoBoxObtainAndLiftHold extends Command {
+public class ObtainBoxContinuous extends Command {
 
-    public AutoBoxObtainAndLiftHold() {
+    public ObtainBoxContinuous() {
         requires(Robot.claw);
-        requires(Robot.lift);
         setInterruptible(true);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.claw.clawToggle(false);
-    	Robot.claw.clawSetSpeed(0);
+    	Robot.claw.close();
+    	Robot.claw.setSpeed(0);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	if(Robot.claw.boxIsReallyClose()) 
     	{
-    		if(Robot.lift.getCurrentPosition() < RobotMap.BOX_HEIGHT_INCHES)
-    		{
-    			Robot.lift.setMotionMagicSetpoint(RobotMap.BOX_HEIGHT_INCHES);
-    		}
-        	Robot.claw.clawSetSpeed(0);
+        	Robot.claw.setSpeed(0);
     	} else {
-    		Robot.claw.clawSetSpeed(RobotMap.BOX_IN_SPEED);
+    		Robot.claw.setSpeed(RobotMap.BOX_IN_SPEED);
     		if (Robot.claw.boxIsClose())
     		{
-    			Robot.claw.clawToggle(false);
+    			Robot.claw.close();
     		}
     		else
     		{
-    			Robot.claw.clawToggle(true);
-    		}
-    	}
-    	
-    	if(Robot.lift.isMotionMagicNearTarget())
-    	{
-    		if(Robot.lift.getCurrentPosition() > 60)
-    		{
-    			Robot.lift.stop();
-    		}
-    		else
-    		{
-    			Robot.lift.hold();
+    			Robot.claw.open();
     		}
     	}
     }
@@ -63,15 +46,14 @@ public class AutoBoxObtainAndLiftHold extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	System.out.println("WTFahhhhhhh!?");
-    	Robot.claw.clawToggle(false);
-    	Robot.claw.clawSetSpeed(0);
+    	Robot.claw.close();
+    	Robot.claw.setSpeed(0);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.claw.clawToggle(false);
-    	Robot.claw.clawSetSpeed(0);
+    	Robot.claw.close();
+    	Robot.claw.setSpeed(0);
     }
 }

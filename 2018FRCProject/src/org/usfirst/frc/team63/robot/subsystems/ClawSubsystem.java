@@ -3,7 +3,7 @@ package org.usfirst.frc.team63.robot.subsystems;
 import org.usfirst.frc.team63.robot.InfraredSensor;
 import org.usfirst.frc.team63.robot.Robot;
 import org.usfirst.frc.team63.robot.RobotMap;
-import org.usfirst.frc.team63.robot.commands_claw.AutoBoxObtain;
+import org.usfirst.frc.team63.robot.commands_claw.ObtainBoxContinuous;
 
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Spark;
@@ -22,28 +22,31 @@ public class ClawSubsystem extends Subsystem {
 	private InfraredSensor sensor = new InfraredSensor(RobotMap.INFRARED_SENSOR_CHANNEL);
 	
 	public ClawSubsystem() {
-		clawToggle(false);
+		close();
 	}
 	
     public void initDefaultCommand() {
-    	setDefaultCommand(new AutoBoxObtain());
+    	setDefaultCommand(new ObtainBoxContinuous());
     }
     
-    public void clawToggle(boolean isOpen) {
-    	//true = open    	
-    	CLAW_OPEN.set(isOpen);
-    	CLAW_CLOSE.set(!isOpen);
+    public void open() {
+    	CLAW_OPEN.set(true);
+    	CLAW_CLOSE.set(false);
     }
     
-    public void clawSetSpeed(double speed) {
+    public void close() {
+    	CLAW_OPEN.set(false);
+    	CLAW_CLOSE.set(true);
+    }
+    
+    public void setSpeed(double pullSpeed) {
     	//positive left speed is pull
-    	leftMotor.set(speed);
-    	rightMotor.set(-speed);
+    	leftMotor.set(pullSpeed);
+    	rightMotor.set(-pullSpeed);
     }
     
     public boolean boxIsClose()
     {
-    	SmartDashboard.putNumber("infrared", Robot.claw.sensor.GetMedianVoltage());
     	return Robot.claw.sensor.GetMedianVoltage() > 0.6;
     }
     

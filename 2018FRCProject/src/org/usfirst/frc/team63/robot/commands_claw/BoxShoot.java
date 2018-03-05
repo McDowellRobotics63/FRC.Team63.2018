@@ -1,34 +1,41 @@
 package org.usfirst.frc.team63.robot.commands_claw;
 
 import org.usfirst.frc.team63.robot.Robot;
+import org.usfirst.frc.team63.robot.RobotMap;
 
-import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class BoxShoot extends CommandGroup {
+public class BoxShoot extends Command {
 
     public BoxShoot() {
-    	requires(Robot.claw);
-        // Add Commands here:
-        // e.g. addSequential(new Command1());
-        //      addSequential(new Command2());
-        // these will run in order.
-    	addSequential(new BoxPushCommand());
-    	addSequential(new ClawOpenCommand());
-        // To run multiple commands at the same time,
-        // use addParallel()
-        // e.g. addParallel(new Command1());
-        //      addSequential(new Command2());
-        // Command1 and Command2 will run in parallel.
-
-        // A command group will require all of the subsystems that each member
-        // would require.
-        // e.g. if Command1 requires chassis, and Command2 requires arm,
-        // a CommandGroup containing them would require both the chassis and the
-        // arm.
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
     }
 
-	
+    // Called just before this Command runs the first time
+    protected void initialize() {
+    }
+
+    // Called repeatedly when this Command is scheduled to run
+    protected void execute() {
+    	Robot.claw.setSpeed(RobotMap.BOX_OUT_SPEED);
+    	Robot.claw.open();
+    }
+
+    // Make this return true when this Command no longer needs to run execute()
+    protected boolean isFinished() {
+        return true;
+    }
+
+    // Called once after isFinished returns true
+    protected void end() {
+    }
+
+    // Called when another command which requires one or more of the same
+    // subsystems is scheduled to run
+    protected void interrupted() {
+    }
 }

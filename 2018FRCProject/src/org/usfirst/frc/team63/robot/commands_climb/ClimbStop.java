@@ -23,7 +23,7 @@ public class ClimbStop extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	Robot.climb.pullyclimb(0);
-    	Robot.claw.clawToggle(false);
+    	Robot.claw.close();
     }
 
     // Make this return true when this Command no longer needs to run execute()

@@ -1,17 +1,16 @@
 package org.usfirst.frc.team63.robot.commands_claw;
 
 import org.usfirst.frc.team63.robot.Robot;
-import org.usfirst.frc.team63.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class BoxStopCommand extends Command {
+public class ClawOpen extends Command {
 
-    public BoxStopCommand() {
-    requires(Robot.claw);
+    public ClawOpen() {
+       requires(Robot.claw);
     }
 
     // Called just before this Command runs the first time
@@ -20,7 +19,8 @@ public class BoxStopCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.claw.clawSetSpeed(0);
+    	Robot.claw.close();
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
