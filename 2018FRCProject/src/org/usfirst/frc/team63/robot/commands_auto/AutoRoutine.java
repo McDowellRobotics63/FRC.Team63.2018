@@ -20,6 +20,8 @@ public class AutoRoutine extends CommandGroup {
     //All inches
 	private static final double DEFAULT_HEIGHT = 17; //lift height for moving
 	private static final double SWITCH_HEIGHT = 30;
+	private static final double LINE = 120; //distance to auto line
+	private static final double SHAKE = 6;
     private static final double SCALE0 = 240;
     private static final double SCALE1 = 6; //diagonal bit
     private static final double SCALE2 = 8; //creep forward
@@ -29,12 +31,10 @@ public class AutoRoutine extends CommandGroup {
 	private static final double TWOCUBE2 = 32; //drive forward for cube
     private static final double SWITCH0 = 140; //distance from middle of robot to middle of switch
     private static final double SWITCH1 = 6; //left/right distance from switch
-    private static final double MIDDLE0 = 24;
-	private static final double MIDDLE1 = 50; //half of switch width
-	private static final double MIDDLE_FUDGE = 44; //amount to subtract from switch0 to go forward
+	private static final double MIDDLE1 = 54; //half of switch width
+	private static final double MIDDLE_FUDGE = 24; //amount to subtract from switch0 to go forward
 	private static final double MIDDLE_OFFSET = 16; //offcenteredness to correct when in middle
-    private static final double LINE = 120; //distance to auto line
-	private static final double SHAKE = 6;
+	private static final double MIDDLE_CREEP = 6;
 	
 	private char botPos = 'z'; //l, m, or r
 	private String m_fieldSetup;
@@ -62,30 +62,29 @@ public class AutoRoutine extends CommandGroup {
     }
     
     private void middle() {
-		drive(MIDDLE0-SHAKE);
+		double angle, sideDist;
+		double forwardDist = SWITCH0 - MIDDLE_FUDGE - MIDDLE_CREEP - SHAKE;
 		if(m_fieldSetup.charAt(0) == 'l'){
-			turn(-90);
-			drive(MIDDLE1 + MIDDLE_OFFSET);
+			sideDist = MIDDLE1 + MIDDLE_OFFSET;
+			angle = -Math.atan(sideDist/forwardDist);;
 		} else {
-			turn(90);
-			drive(MIDDLE1 - MIDDLE_OFFSET);
+			sideDist = MIDDLE1 - MIDDLE_OFFSET;
+			angle = Math.atan(sideDist/forwardDist);
 		}
-		if(m_fieldSetup.charAt(0) == 'l') {
-			turn(90);
-		} else {
-			turn(-90);
-		}
+		turn(angle);
 		parallelLift(SWITCH_HEIGHT);
-		drive(SWITCH0-MIDDLE0-MIDDLE_FUDGE);
+		drive(Math.sqrt(sideDist*sideDist + forwardDist*forwardDist));
+		turn(-angle);
+		drive(MIDDLE_CREEP);
 		shoot();
     }
     
     private void scale() {
 		drive(SCALE0-SHAKE);
 		turnCalc(SCALE_TURN);
-		parallelLift(SmartDashboard.getNumber("max_lift_inches", 79)-2);
 		drive(SCALE1);
-    	drive(SCALE2);
+		parallelLift(SmartDashboard.getNumber("max_lift_inches", 79)-2);
+		drive(SCALE2);
 		shoot();
 		drive(-SCALE2);
     }
@@ -93,7 +92,7 @@ public class AutoRoutine extends CommandGroup {
     private void switches() {
 		drive(SWITCH0-SHAKE);
 		turnCalc(90);
-		sequentialLift(SWITCH_HEIGHT);
+		parallelLift(SWITCH_HEIGHT);
 		drive(SWITCH1);
 		shoot();
 		drive(-SWITCH1);
@@ -123,10 +122,13 @@ public class AutoRoutine extends CommandGroup {
     //turns angle on left, -angle on right
     private void turnCalc(double angle) {
 		if(botPos == 'l') {
-			addSequential(new AutoRotate(angle));
+			turn(angle);
 		}
-		else{
-			addSequential(new AutoRotate(-angle));
+		else if (botPos == 'r'){
+			turn(-angle);
+		}
+		else {
+			System.out.println("BLAME JAKE");
 		}
     }
     private void drive(double dist) {
