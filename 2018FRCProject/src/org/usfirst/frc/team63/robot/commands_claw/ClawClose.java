@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class ClawClose extends Command {
 
     public ClawClose() {
-      requires(Robot.claw);
+    	requires(Robot.claw);
     }
 
     // Called just before this Command runs the first time
@@ -20,7 +20,6 @@ public class ClawClose extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	Robot.claw.close();
-   
     }
 
     // Make this return true when this Command no longer needs to run execute()

@@ -63,6 +63,96 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		m_oi = new OI();
+		dashboardOptions();
+		Robot.lift.configGains(
+    			SmartDashboard.getNumber("kF_lift_up", 0.0), 
+    			SmartDashboard.getNumber("kP_lift", 0.0), 
+    			SmartDashboard.getNumber("kI_lift", 0.0), 
+    			SmartDashboard.getNumber("kD_lift", 0.0),
+    			(int)SmartDashboard.getNumber("kiZone_lift", 0.0),
+    			(int)SmartDashboard.getNumber("kCruise_lift", 0.0),
+    			(int)SmartDashboard.getNumber("kAccel_lift", 0.0));
+	}
+
+	/**
+	 * This function is called once each time the robot enters Disabled mode.
+	 * You can use it to reset any subsystem information you want to clear when
+	 * the robot is disabled.
+	 */
+	@Override
+	public void disabledInit() {
+		teledrive.cancel();
+		drive.teleInit();
+	}
+
+	@Override
+	public void disabledPeriodic() {
+		Robot.lift.resetIntegrator();
+		Scheduler.getInstance().run();
+	}
+
+	/**
+	 * This autonomous (along with the chooser code above) shows how to select
+	 * between different autonomous modes using the dashboard. The sendable
+	 * chooser code works with the Java SmartDashboard. If you prefer the
+	 * LabVIEW Dashboard, remove all of the chooser code and uncomment the
+	 * getString code to get the auto name from the text box below the Gyro
+	 *
+	 * <p>You can add additional auto modes by adding additional commands to the
+	 * chooser code above (like the commented example) or additional comparisons
+	 * to the switch structure below with additional strings & commands.
+	 */
+	@Override
+	public void autonomousInit() {
+		climb.armRetract();
+		drive.autoInit();
+		lift.initSubsystemAuto();
+		//while (DriverStation.getInstance().getGameSpecificMessage().isEmpty());
+		int switches = (switch1.get()?4:0) + (switch2.get()?2:0) + (switch3.get()?1:0);
+		m_autonomousCommand = new AutoRoutine(DriverStation.getInstance().getGameSpecificMessage().toLowerCase(), switches);
+		if (m_autonomousCommand != null) {
+			m_autonomousCommand.start();
+		}
+	}
+
+	/**
+	 * This function is called periodically during autonomous.
+	 */
+	@Override
+	public void autonomousPeriodic() {
+		Scheduler.getInstance().run();
+		dashboardAuto();
+	}
+
+	@Override
+	public void teleopInit() {
+		m_oi.controller1.setAxisCurve();
+		m_oi.controller2.setAxisCurve();
+		climb.armRetract();
+		drive.teleInit();
+		if (m_autonomousCommand != null) {
+			m_autonomousCommand.cancel();
+		}
+		teledrive.start();
+	}
+
+	/**
+	 * This function is called periodically during operator control.
+	 */
+	@Override
+	public void teleopPeriodic() {
+		Scheduler.getInstance().run();
+		dashboardTele();
+	}
+
+	/**
+	 * This function is called periodically during test mode.
+	 */
+	@Override
+	public void testPeriodic() {
+	}
+	
+	private void dashboardOptions() {
 		SmartDashboard.putNumber("max_lift_inches", 81.5);
 		SmartDashboard.putNumber("creep_mult", 0.5);
 		
@@ -134,68 +224,9 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putData("SetAxis", new SetAxis());
 
 		SmartDashboard.putNumber("lift_cmd", 0);
-		Robot.lift.configGains(
-    			SmartDashboard.getNumber("kF_lift_up", 0.0), 
-    			SmartDashboard.getNumber("kP_lift", 0.0), 
-    			SmartDashboard.getNumber("kI_lift", 0.0), 
-    			SmartDashboard.getNumber("kD_lift", 0.0),
-    			(int)SmartDashboard.getNumber("kiZone_lift", 0.0),
-    			(int)SmartDashboard.getNumber("kCruise_lift", 0.0),
-    			(int)SmartDashboard.getNumber("kAccel_lift", 0.0));
 	}
-
-	/**
-	 * This function is called once each time the robot enters Disabled mode.
-	 * You can use it to reset any subsystem information you want to clear when
-	 * the robot is disabled.
-	 */
-	@Override
-	public void disabledInit() {
-		teledrive.cancel();
-		drive.teleInit();
-	}
-
-	@Override
-	public void disabledPeriodic() {
-		Robot.lift.resetIntegrator();
-		Scheduler.getInstance().run();
-	}
-
-	/**
-	 * This autonomous (along with the chooser code above) shows how to select
-	 * between different autonomous modes using the dashboard. The sendable
-	 * chooser code works with the Java SmartDashboard. If you prefer the
-	 * LabVIEW Dashboard, remove all of the chooser code and uncomment the
-	 * getString code to get the auto name from the text box below the Gyro
-	 *
-	 * <p>You can add additional auto modes by adding additional commands to the
-	 * chooser code above (like the commented example) or additional comparisons
-	 * to the switch structure below with additional strings & commands.
-	 */
-	@Override
-	public void autonomousInit() {
-		//m_autonomousCommand = m_chooser.getSelected();
-		//m_autonomousCommand =  new DownAndBack();
-
-		climb.armRetract();
-		drive.autoInit();
-		lift.initSubsystemAuto();
-		// schedule the autonomous command (example)
-		//while (DriverStation.getInstance().getGameSpecificMessage().isEmpty());
-		int switches = (switch1.get()?4:0) + (switch2.get()?2:0) + (switch3.get()?1:0);
-		m_autonomousCommand = new AutoRoutine(DriverStation.getInstance().getGameSpecificMessage().toLowerCase(), switches);
-		//m_autonomousCommand = new AutoDriveFixedDistance(120);
-		if (m_autonomousCommand != null) {
-			m_autonomousCommand.start();
-		}
-	}
-
-	/**
-	 * This function is called periodically during autonomous.
-	 */
-	@Override
-	public void autonomousPeriodic() {
-		Scheduler.getInstance().run();
+	
+	private void dashboardAuto() {
 		SmartDashboard.putNumber("left position", drive.getLeftPosition());	
 		SmartDashboard.putNumber("right position", drive.getRightPosition());
 		SmartDashboard.putNumber("lift_pos", lift.getCurrentPosition());
@@ -214,29 +245,8 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putBoolean("LiftBottom", lift.isBottomedOut());
 		SmartDashboard.putBoolean("HookPressed", climb.isHookPressed());
 	}
-
-	@Override
-	public void teleopInit() {
-		// This makes sure that the autonomous stops running when
-		// teleop starts running. If you want the autonomous to
-		// continue until interrupted by another command, remove
-		// this line or comment it out.
-		m_oi.controller1.setAxisCurve();
-		m_oi.controller2.setAxisCurve();
-		climb.armRetract();
-		drive.teleInit();
-		if (m_autonomousCommand != null) {
-			m_autonomousCommand.cancel();
-		}
-		teledrive.start();
-	}
-
-	/**
-	 * This function is called periodically during operator control.
-	 */
-	@Override
-	public void teleopPeriodic() {
-		Scheduler.getInstance().run();
+	
+	private void dashboardTele() {
 		SmartDashboard.putNumber("lift_pos", lift.getCurrentPosition());
 		SmartDashboard.putNumber("lift_volts", lift.liftMotor.getMotorOutputVoltage());
 		SmartDashboard.putNumber("Left_Wheels_Speed",drive.getLeftSpeed());
@@ -252,12 +262,5 @@ public class Robot extends TimedRobot {
 		
 		SmartDashboard.putBoolean("LiftBottom", lift.isBottomedOut());
 		SmartDashboard.putBoolean("HookPressed", climb.isHookPressed());
-	}
-
-	/**
-	 * This function is called periodically during test mode.
-	 */
-	@Override
-	public void testPeriodic() {
 	}
 }

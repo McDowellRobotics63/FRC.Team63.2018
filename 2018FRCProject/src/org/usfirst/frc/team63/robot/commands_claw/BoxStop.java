@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class BoxStop extends Command {
 
     public BoxStop() {
-    requires(Robot.claw);
+    	requires(Robot.claw);
     }
 
     // Called just before this Command runs the first time
