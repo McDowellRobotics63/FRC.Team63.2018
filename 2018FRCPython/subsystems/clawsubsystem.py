@@ -1,10 +1,9 @@
+import robotmap
 
-import wpilib
 from wpilib.command.subsystem import Subsystem
 from wpilib import Solenoid
 from wpilib import Spark
 
-import RobotMap
 from infraredsensor import InfraredSensor
 
 
@@ -13,16 +12,16 @@ class ClawSubsystem (Subsystem):
     def __init__(self):
         super().__init__("Claw")
 
-        self.leftMotor = Spark(RobotMap.CLAWLEFT)
-        self.rightMotor = Spark(RobotMap.CLAWRIGHT)
+        self.leftMotor = Spark(robotmap.CLAWLEFT)
+        self.rightMotor = Spark(robotmap.CLAWRIGHT)
 
-        self.CLAW_OPEN = Solenoid(RobotMap.PCM1_CANID,RobotMap.CLAW_OPEN_SOLENOID)
-        self.CLAW_CLOSE = Solenoid(RobotMap.PCM1_CANID,RobotMap.CLAW_CLOSE_SOLENOID)
+        self.CLAW_OPEN = Solenoid(robotmap.PCM1_CANID, robotmap.CLAW_OPEN_SOLENOID)
+        self.CLAW_CLOSE = Solenoid(robotmap.PCM1_CANID, robotmap.CLAW_CLOSE_SOLENOID)
 
-        self.sensor = InfraredSensor(RobotMap.INFRARED_SENSOR_CHANNEL)
+        self.sensor = InfraredSensor(robotmap.INFRARED_SENSOR_CHANNEL)
 
         self.close()
-	
+        
     #def initDefaultCommand(self):
         #self.setDefaultCommand(ObtainBoxContinuous())
     

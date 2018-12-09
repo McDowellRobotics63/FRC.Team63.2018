@@ -1,6 +1,4 @@
 
-import wpilib
-
 from wpilib import AnalogInput
 
 

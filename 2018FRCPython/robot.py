@@ -4,10 +4,8 @@ import wpilib
 from wpilib.command import Command
 from commandbased import CommandBasedRobot
 
-from subsystems import singlemotor
 from subsystems import clawsubsystem
 import oi
-from commands.autonomous import AutonomousProgram
 
 
 class ExampleBot(CommandBasedRobot):
@@ -26,10 +24,9 @@ class ExampleBot(CommandBasedRobot):
         """
 
         Command.getRobot = lambda x=0: self
-        self.motor = singlemotor.SingleMotor()
         self.claw = clawsubsystem.ClawSubsystem()
 
-        self.autonomousProgram = AutonomousProgram()
+        #self.autonomousProgram = AutonomousProgram()
 
         """
         Since OI instantiates commands and commands need access to subsystems,
@@ -45,7 +42,7 @@ class ExampleBot(CommandBasedRobot):
         program chosen from the SmartDashboard.
         """
 
-        self.autonomousProgram.start()
+        #self.autonomousProgram.start()
 
 
 if __name__ == "__main__":
