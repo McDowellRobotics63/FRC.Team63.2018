@@ -36,3 +36,7 @@ AUTO_SWITCH_2 = 1
 AUTO_SWITCH_3 = 2
 LIMIT_SWITCH_HOOK = 4
 LIMIT_SWITCH_LIFT = 3
+
+TIMOUT_MS = 10 #ms to wait for talon timeout, literally doesn't matter
+
+LIFT_INCHES_PER_UNIT = 0.000033

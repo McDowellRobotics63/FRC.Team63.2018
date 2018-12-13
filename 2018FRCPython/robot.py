@@ -5,6 +5,9 @@ from wpilib.command import Command
 from commandbased import CommandBasedRobot
 
 from subsystems import clawsubsystem
+from subsystems import climbsubsystem
+from subsystems import liftsubsystem
+
 import oi
 
 
@@ -25,6 +28,8 @@ class ExampleBot(CommandBasedRobot):
 
         Command.getRobot = lambda x=0: self
         self.claw = clawsubsystem.ClawSubsystem()
+        self.climb = climbsubsystem.ClimbSubsystem()
+        self.lift = liftsubsystem.LiftSubsystem()
 
         #self.autonomousProgram = AutonomousProgram()
 
