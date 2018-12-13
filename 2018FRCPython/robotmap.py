@@ -1,3 +1,6 @@
+
+import math
+
 #Talon CAN IDs
 DRIVELEFTMASTER = 3
 DRIVELEFTSLAVE = 4
@@ -40,3 +43,21 @@ LIMIT_SWITCH_LIFT = 3
 TIMEOUT_MS = 10 #ms to wait for talon timeout, literally doesn't matter
 
 LIFT_INCHES_PER_UNIT = 0.000033
+
+#Drive constants
+DRIVE_WHEEL_DIAMETER = 6
+DRIVE_WHEEL_CIRCUMFERENCE = DRIVE_WHEEL_DIAMETER*math.pi #inches
+DRIVE_TRACK = 25 #inches between centerlines of left and right wheels
+DRIVE_ENCODER_PPR = 4096 #native units per rotation
+TIMOUT_MS = 10 #ms to wait for talon timeout, literally doesn't matter
+VELOCITY_CONTROL_SLOT = 0
+DRIVE_F = 0.5683
+DRIVE_P = 0.5
+DRIVE_I = 0.003
+DRIVE_D = 35.0
+DRIVE_IZONE = 200
+DRIVE_CRUISE = 1600
+DRIVE_ACCEL = 1600
+DRIVE_RIZONE = 200
+DRIVE_RCRUISE = 800
+DRIVE_RACCEL = 1600
