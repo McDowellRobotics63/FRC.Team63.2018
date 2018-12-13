@@ -34,41 +34,41 @@ class LiftSubsystem(Subsystem):
         self.lift_motor.configSelectedFeedbackSensor(
             FeedbackDevice.CTRE_MagEncoder_Relative,
             0,
-            robotmap.TIMOUT_MS)
-        self.lift_motor.setSelectedSensorPosition(0, 0, robotmap.TIMOUT_MS)
+            robotmap.TIMEOUT_MS)
+        self.lift_motor.setSelectedSensorPosition(0, 0, robotmap.TIMEOUT_MS)
         self.lift_motor.setStatusFramePeriod(
             WPI_TalonSRX.StatusFrameEnhanced.Status_13_Base_PIDF0,
             10,
-            robotmap.TIMOUT_MS)
+            robotmap.TIMEOUT_MS)
         self.lift_motor.setStatusFramePeriod(
             WPI_TalonSRX.StatusFrameEnhanced.Status_10_MotionMagic,
             10,
-            robotmap.TIMOUT_MS)
+            robotmap.TIMEOUT_MS)
         self.lift_motor.setSensorPhase(False)
         self.lift_motor.setInverted(True)
         self.lift_motor.setNeutralMode(NeutralMode.Brake)
-        self.lift_motor.configNominalOutputForward(0, robotmap.TIMOUT_MS)
-        self.lift_motor.configNominalOutputReverse(0, robotmap.TIMOUT_MS)
-        self.lift_motor.configPeakOutputForward(1.0, robotmap.TIMOUT_MS)
-        self.lift_motor.configPeakOutputReverse(-1.0, robotmap.TIMOUT_MS)
+        self.lift_motor.configNominalOutputForward(0, robotmap.TIMEOUT_MS)
+        self.lift_motor.configNominalOutputReverse(0, robotmap.TIMEOUT_MS)
+        self.lift_motor.configPeakOutputForward(1.0, robotmap.TIMEOUT_MS)
+        self.lift_motor.configPeakOutputReverse(-1.0, robotmap.TIMEOUT_MS)
         self.lift_motor.setNeutralMode(NeutralMode.Brake)
-        self.lift_motor.configContinuousCurrentLimit(20, robotmap.TIMOUT_MS)
-        self.lift_motor.configPeakCurrentLimit(0, robotmap.TIMOUT_MS)
-        self.lift_motor.configPeakCurrentDuration(0, robotmap.TIMOUT_MS)
+        self.lift_motor.configContinuousCurrentLimit(20, robotmap.TIMEOUT_MS)
+        self.lift_motor.configPeakCurrentLimit(0, robotmap.TIMEOUT_MS)
+        self.lift_motor.configPeakCurrentDuration(0, robotmap.TIMEOUT_MS)
         self.lift_motor.enableCurrentLimit(False)
 
     def configGains(self, f, p, i, d, izone, accel, cruise):
         self.lift_motor.selectProfileSlot(0, 0)
-        self.lift_motor.config_kF(0, f, robotmap.TIMOUT_MS)
-        self.lift_motor.config_kP(0, p, robotmap.TIMOUT_MS)
-        self.lift_motor.config_kI(0, i, robotmap.TIMOUT_MS)
-        self.lift_motor.config_kD(0, d, robotmap.TIMOUT_MS)
-        self.lift_motor.config_IntegralZone(0, izone, robotmap.TIMOUT_MS)
-        self.lift_motor.configMotionCruiseVelocity(cruise, robotmap.TIMOUT_MS)
-        self.lift_motor.configMotionAcceleration(accel, robotmap.TIMOUT_MS)
+        self.lift_motor.config_kF(0, f, robotmap.TIMEOUT_MS)
+        self.lift_motor.config_kP(0, p, robotmap.TIMEOUT_MS)
+        self.lift_motor.config_kI(0, i, robotmap.TIMEOUT_MS)
+        self.lift_motor.config_kD(0, d, robotmap.TIMEOUT_MS)
+        self.lift_motor.config_IntegralZone(0, izone, robotmap.TIMEOUT_MS)
+        self.lift_motor.configMotionCruiseVelocity(cruise, robotmap.TIMEOUT_MS)
+        self.lift_motor.configMotionAcceleration(accel, robotmap.TIMEOUT_MS)
 
     def resetIntegrator(self):
-        self.lift_motor.setIntegralAccumulator(0, 0, robotmap.TIMOUT_MS)
+        self.lift_motor.setIntegralAccumulator(0, 0, robotmap.TIMEOUT_MS)
 
     def getCurrentSetpoint(self):
         return self.unitsToInches(self.lift_motor.getClosedLoopTarget(0))
@@ -87,7 +87,7 @@ class LiftSubsystem(Subsystem):
 
             self.lift_motor.config_kF(0,
                                       SmartDashboard.getNumber("kF_lift_down", 0.0),
-                                      robotmap.TIMOUT_MS)
+                                      robotmap.TIMEOUT_MS)
 
             self.applied_feed_forward = Direction.DOWN
         elif (setpoint_units > self.lift_motor.getClosedLoopTarget(0) and
@@ -95,7 +95,7 @@ class LiftSubsystem(Subsystem):
 
             self.lift_motor.config_kF(0,
                                       SmartDashboard.getNumber("kF_lift_up", 0.0),
-                                      robotmap.TIMOUT_MS)
+                                      robotmap.TIMEOUT_MS)
 
             self.applied_feed_forward = Direction.UP
 
@@ -133,8 +133,8 @@ class LiftSubsystem(Subsystem):
         return self.lift_motor.getSensorCollection().getPulseWidthRiseToRiseUs() != 0
 
     def resetEncoder(self):
-        self.lift_motor.setSelectedSensorPosition(0, 0, robotmap.TIMOUT_MS)
-        self.lift_motor.getSensorCollection().setQuadraturePosition(0, robotmap.TIMOUT_MS)
+        self.lift_motor.setSelectedSensorPosition(0, 0, robotmap.TIMEOUT_MS)
+        self.lift_motor.getSensorCollection().setQuadraturePosition(0, robotmap.TIMEOUT_MS)
 
     def unitsToInches(self, units):
         return units * robotmap.LIFT_INCHES_PER_UNIT
