@@ -1,7 +1,5 @@
 from wpilib.command import Command
 
-import robotmap
-
 class ClawOpen(Command):
     def __init__(self, robot):
         super().__init__()

@@ -1,7 +1,5 @@
 from wpilib.command import Command
 
-import robotmap
-
 class ClawClose(Command):
     def __init__(self, robot):
         super().__init__()
