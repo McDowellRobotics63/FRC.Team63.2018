@@ -18,8 +18,9 @@ class Direction(Enum):
 
 class LiftSubsystem(Subsystem):
 
-    def __init__(self):
+    def __init__(self, robot):
         super().__init__("Lift")
+        self.robot = robot
 
         self.lift_motor = WPI_TalonSRX(robotmap.LIFT)
         self.applied_feed_forward = Direction.UP

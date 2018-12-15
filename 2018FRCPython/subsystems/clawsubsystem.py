@@ -7,10 +7,11 @@ from wpilib import Spark
 from infraredsensor import InfraredSensor
 
 
-class ClawSubsystem (Subsystem):
+class ClawSubsystem(Subsystem):
 
-    def __init__(self):
+    def __init__(self, robot):
         super().__init__("Claw")
+        self.robot = robot
 
         self.leftMotor = Spark(robotmap.CLAWLEFT)
         self.rightMotor = Spark(robotmap.CLAWRIGHT)

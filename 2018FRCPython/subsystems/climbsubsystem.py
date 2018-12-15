@@ -7,8 +7,9 @@ from wpilib import Spark
 
 class ClimbSubsystem(Subsystem):
 
-    def __init__(self):
+    def __init__(self, robot):
         super().__init__("Climb")
+        self.robot = robot
 
         self.winchMotor = Spark(robotmap.CLIMBWINCH)
         self.armUpSolenoid = Solenoid(robotmap.CLIMBARM_UP)

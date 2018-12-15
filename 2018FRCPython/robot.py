@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 
 import wpilib
-from wpilib.command import Command
 from commandbased import CommandBasedRobot
 
 from subsystems import clawsubsystem
 from subsystems import climbsubsystem
 from subsystems import liftsubsystem
+from subsystems import drivesubsystem
 
-import oi
+from oi import OI
 
 
 class ExampleBot(CommandBasedRobot):
@@ -25,19 +25,19 @@ class ExampleBot(CommandBasedRobot):
         This is a good place to set up your subsystems and anything else that
         you will need to access later.
         """
+        self.claw = clawsubsystem.ClawSubsystem(self)
+        self.climb = climbsubsystem.ClimbSubsystem(self)
+        self.lift = liftsubsystem.LiftSubsystem(self)
+        self.drive = drivesubsystem.DriveSubsystem(self)
 
-        Command.getRobot = lambda x=0: self
-        self.claw = clawsubsystem.ClawSubsystem()
-        self.climb = climbsubsystem.ClimbSubsystem()
-        self.lift = liftsubsystem.LiftSubsystem()
+        # This MUST be here. If the OI creates Commands (which it very likely
+        # will), constructing it during the construction of CommandBase (from
+        # which commands extend), subsystems are not guaranteed to be
+        # yet. Thus, their requires() statements may grab null pointers. Bad
+        # news. Don't move it.
+        self.oi = OI(self)
 
         #self.autonomousProgram = AutonomousProgram()
-
-        """
-        Since OI instantiates commands and commands need access to subsystems,
-        OI must be initialized after subsystems.
-        """
-        self.joystick = oi.getJoystick()
 
     def autonomousInit(self):
         """

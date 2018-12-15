@@ -1,18 +1,16 @@
-from wpilib.joystick import Joystick
-from wpilib.buttons.joystickbutton import JoystickButton
 
-from commands.crash import Crash
+from xboxcontroller import XboxController
 
+class OI(object):
 
-def getJoystick():
-    """
-    Assign commands to button actions, and publish your joysticks so you
-    can read values from them later.
-    """
+    def __init__(self, robot):
+        self.robot = robot
 
-    joystick = Joystick(0)
+        self.controller1 = XboxController(0)
+        self.controller2 = XboxController(1)
 
-    trigger = JoystickButton(joystick, Joystick.ButtonType.kTrigger)
-    trigger.whenPressed(Crash())
+    def getController1(self):
+        return self.controller1
 
-    return joystick
+    def getController2(self):
+        return self.controller2
