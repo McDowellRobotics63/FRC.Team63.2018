@@ -16,11 +16,6 @@ from pyfrc.physics.units import units
 from wpilib import SmartDashboard
 
 class PhysicsEngine(object):
-    """
-        Simulates a motor moving something that strikes two limit switches,
-        one on each end of the track. Obviously, this is not particularly
-        realistic, but it's good enough to illustrate the point
-    """
 
     def __init__(self, physics_controller):
         """
@@ -29,7 +24,6 @@ class PhysicsEngine(object):
         """
 
         self.physics_controller = physics_controller
-        self.position = 0
 
         # Change these parameters to fit your robot!
         bumper_width = 3.25 * units.inch
@@ -61,32 +55,8 @@ class PhysicsEngine(object):
         l_motor = hal_data["CAN"][1]["value"]
         r_motor = hal_data["CAN"][3]["value"]
 
-        SmartDashboard.putNumber("CAN1", hal_data["CAN"][1]["value"])
-        SmartDashboard.putNumber("CAN2", hal_data["CAN"][2]["value"])
-        SmartDashboard.putNumber("CAN3", hal_data["CAN"][3]["value"])
-        SmartDashboard.putNumber("CAN4", hal_data["CAN"][4]["value"])
-        SmartDashboard.putNumber("CAN5", hal_data["CAN"][5]["value"])
+        # For infrared sensor, value of 1.0 makes box "close" but not "really close"
+        hal_data["analog_in"][0]["voltage"] = 1.0
 
         x, y, angle = self.drivetrain.get_distance(l_motor, r_motor, tm_diff)
         self.physics_controller.distance_drive(x, y, angle)
-
-        # update position (use tm_diff so the rate is constant)
-        self.position += hal_data["pwm"][4]["value"] * tm_diff * 3
-
-        # update limit switches based on position
-        if self.position <= 0:
-            switch1 = True
-            switch2 = False
-
-        elif self.position > 10:
-            switch1 = False
-            switch2 = True
-
-        else:
-            switch1 = False
-            switch2 = False
-
-        # set values here
-        hal_data["dio"][1]["value"] = switch1
-        hal_data["dio"][2]["value"] = switch2
-        hal_data["analog_in"][2]["voltage"] = self.position
