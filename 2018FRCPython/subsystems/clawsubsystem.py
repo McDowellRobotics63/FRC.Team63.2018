@@ -1,11 +1,11 @@
-import robotmap
-
 from wpilib.command.subsystem import Subsystem
 from wpilib import Solenoid
 from wpilib import Spark
+from commands_claw.obtain_box_continuous import ObtainBoxContinuous
 
 from infraredsensor import InfraredSensor
 
+import robotmap
 
 class ClawSubsystem(Subsystem):
 
@@ -22,25 +22,25 @@ class ClawSubsystem(Subsystem):
         self.sensor = InfraredSensor(robotmap.INFRARED_SENSOR_CHANNEL)
 
         self.close()
-        
-    #def initDefaultCommand(self):
-        #self.setDefaultCommand(ObtainBoxContinuous())
-    
+
+    def initDefaultCommand(self):
+        self.setDefaultCommand(ObtainBoxContinuous(self.robot))
+
     def open(self):
         self.CLAW_OPEN.set(True)
         self.CLAW_CLOSE.set(False)
-    
+
     def close(self):
         self.CLAW_OPEN.set(False)
         self.CLAW_CLOSE.set(True)
-    
+
     def setSpeed(self, pullSpeed):
         #positive left speed is pull
         self.leftMotor.set(pullSpeed)
         self.rightMotor.set(-pullSpeed)
-    
+
     def boxIsClose(self):
         return self.sensor.GetMedianVoltage() > 0.6
-    
+
     def boxIsReallyClose(self):
         return self.sensor.GetMedianVoltage() > 2.6

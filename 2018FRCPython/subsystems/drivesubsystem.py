@@ -22,7 +22,7 @@ class DriveSubsystem(Subsystem):
     def __init__(self, robot):
         super().__init__("Drive")
         self.robot = robot
-        
+
         self.left_master = WPI_TalonSRX(robotmap.DRIVELEFTMASTER)
         self.right_master = WPI_TalonSRX(robotmap.DRIVERIGHTMASTER)
         self.left_slave = WPI_TalonSRX(robotmap.DRIVELEFTSLAVE)
@@ -32,7 +32,7 @@ class DriveSubsystem(Subsystem):
         self.differential_drive = DifferentialDrive(self.left_master, self.right_master)
 
         self.TalonConfig()
-        self.shiftLow()        
+        self.shiftLow()
 
     def teleDrive(self, xSpeed, zRotation):
         if self.robot.oi.getController1().B().get():

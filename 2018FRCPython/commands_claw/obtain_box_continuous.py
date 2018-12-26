@@ -6,7 +6,7 @@ class ObtainBoxContinuous(Command):
     def __init__(self, robot):
         super().__init__()
         self.robot = robot
-        self.requires(self.robot.claw)
+        self.requires(robot.claw)
         self.setInterruptible(True)
 
     # Called just before this Command runs the first time

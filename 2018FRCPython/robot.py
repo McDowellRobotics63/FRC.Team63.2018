@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
 
 import wpilib
+from wpilib import SmartDashboard
 from commandbased import CommandBasedRobot
 
 from subsystems import clawsubsystem
 from subsystems import climbsubsystem
 from subsystems import liftsubsystem
 from subsystems import drivesubsystem
+from commands_drive.teleop_drive_low_command import TeleopDriveLowCommand
 
 from oi import OI
 
@@ -37,7 +39,14 @@ class ExampleBot(CommandBasedRobot):
         # news. Don't move it.
         self.oi = OI(self)
 
+        self.teleDrive = TeleopDriveLowCommand(self)
+
+        SmartDashboard.putNumber("creep_mult", 0.3)
+
         #self.autonomousProgram = AutonomousProgram()
+
+    def teleopInit(self):
+        self.teleDrive.start()
 
     def autonomousInit(self):
         """
@@ -49,6 +58,9 @@ class ExampleBot(CommandBasedRobot):
 
         #self.autonomousProgram.start()
 
+def disabledInit(self):
+    self.teleDrive.cancel()
+    self.drive.teleInit()
 
 if __name__ == "__main__":
     wpilib.run(ExampleBot)
